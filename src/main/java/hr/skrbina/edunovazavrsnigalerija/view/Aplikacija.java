@@ -13,14 +13,15 @@ import hr.skrbina.edunovazavrsnigalerija.model.Operater;
  */
 public class Aplikacija {
     
-    public static final String NASLOV_APP="Galerija \"Exclusive\"";
-    
+    public static final String NASLOV_APP = "Glavni izbornik";
+
     public static Operater operater;
-    
-    public static boolean isAdmin(){
-        if(operater==null || operater.getUloga()==null){
+
+    public static boolean isAdmin() {
+        if (operater == null || operater.getUloga() == null) {
             return false;
         }
-        return operater.getUloga().equals("admin");
+        return operater.getUloga().equals(Operater.Uloga.Administrator);
+
     }    
 }

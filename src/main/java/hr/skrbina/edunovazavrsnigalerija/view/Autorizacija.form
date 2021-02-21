@@ -46,11 +46,11 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="30" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="2" attributes="0">
-                  <Component id="jLabel2" alignment="2" min="-2" pref="500" max="-2" attributes="0"/>
-                  <Component id="jLabel1" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jPasswordField1" alignment="2" min="-2" pref="440" max="-2" attributes="0"/>
-                  <Component id="jTextField1" alignment="2" min="-2" pref="440" max="-2" attributes="0"/>
-                  <Component id="jButton2" alignment="2" min="-2" pref="254" max="-2" attributes="0"/>
+                  <Component id="imageLabel" alignment="2" min="-2" pref="500" max="-2" attributes="0"/>
+                  <Component id="textLabel" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="pswLozinka" alignment="2" min="-2" pref="440" max="-2" attributes="0"/>
+                  <Component id="txtEmail" alignment="2" min="-2" pref="440" max="-2" attributes="0"/>
+                  <Component id="btnPrijava" alignment="2" min="-2" pref="254" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
           </Group>
@@ -60,22 +60,22 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-              <Component id="jLabel2" min="-2" pref="250" max="-2" attributes="0"/>
+              <Component id="imageLabel" min="-2" pref="250" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" pref="40" max="-2" attributes="0"/>
+              <Component id="textLabel" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jTextField1" min="-2" pref="40" max="-2" attributes="0"/>
+              <Component id="txtEmail" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPasswordField1" min="-2" pref="40" max="-2" attributes="0"/>
+              <Component id="pswLozinka" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButton2" pref="48" max="32767" attributes="0"/>
+              <Component id="btnPrijava" pref="48" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="imageLabel">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -84,7 +84,7 @@
         <Property name="text" type="java.lang.String" value="jLabel2"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="textLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Georgia" size="22" style="1"/>
@@ -92,7 +92,7 @@
         <Property name="text" type="java.lang.String" value="DOBRODO&#x160;LI U &quot;EXCLUSIVE&quot; GALERIJU"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JPasswordField" name="jPasswordField1">
+    <Component class="javax.swing.JPasswordField" name="pswLozinka">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Georgia" size="14" style="0"/>
@@ -100,23 +100,32 @@
         <Property name="text" type="java.lang.String" value="Lozinka"/>
         <Property name="toolTipText" type="java.lang.String" value="Unesite korisni&#x10d;ku lozinku."/>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="pswLozinkaKeyReleased"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="txtEmail">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Georgia" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="E-Mail"/>
+        <Property name="text" type="java.lang.String" value="EMail"/>
         <Property name="toolTipText" type="java.lang.String" value="Unesite korisni&#x10d;ki e-mail."/>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtEmailKeyReleased"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="btnPrijava">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Georgia" size="14" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Ulogiraj se"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrijavaActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
