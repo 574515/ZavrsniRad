@@ -27,6 +27,5 @@ public abstract class Entitet {
     
     public void setId(Long id){
         this.id= id;
-    }
-    
+    }    
 }

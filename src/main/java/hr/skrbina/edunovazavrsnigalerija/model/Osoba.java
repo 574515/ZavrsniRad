@@ -6,10 +6,12 @@
 package hr.skrbina.edunovazavrsnigalerija.model;
 
 import java.util.Date;
+import javax.persistence.MappedSuperclass;
 /**
  *
  * @author Hrvoje
  */
+@MappedSuperclass
 public class Osoba extends Entitet {
  
     private String ime;
@@ -19,6 +21,7 @@ public class Osoba extends Entitet {
     private String mjesto_Rodjenja;
     private String IBAN;
     private String kontakt;
+    private String uloga;
     
     public String getIme() {
         return ime;
@@ -76,4 +79,20 @@ public class Osoba extends Entitet {
         this.kontakt = kontakt;
     }
     
+    public String getImePrezime() {
+        return getIme() + " " + getPrezime();
+    }
+    
+    public void setImePrezime(String ime, String prezime) {
+        this.ime = ime;
+        this.prezime = prezime;
+    }
+    
+    public String getUloga() {
+        return uloga;
+    }
+    
+    public void setUloga(String uloga) {
+        this.uloga = uloga;
+    }
 }

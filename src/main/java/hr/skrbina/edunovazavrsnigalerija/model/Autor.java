@@ -5,23 +5,24 @@
  */
 package hr.skrbina.edunovazavrsnigalerija.model;
 
+import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
 /**
  *
  * @author Hrvoje
  */
-public class Autor extends Entitet {
-    
-    @OneToOne
-    private Osoba autor;
+@Entity
+public class Autor extends Osoba {
 
-    public Osoba getAutor() {
-        return autor;
+    @OneToOne(mappedBy = "autor")
+    private Osoba osoba;
+
+    public Osoba getOsoba() {
+        return osoba;
     }
 
-    public void setAutor(Osoba autor) {
-        this.autor = autor;
+    public void setOsoba(Osoba osoba) {
+        this.osoba = osoba;
     }
-    
 }

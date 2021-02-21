@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
  *
  * @author Hrvoje
  */
-public class Korisnik extends Entitet {
+public class Korisnik extends Osoba {
     
     private Integer kup_Djelo;
     private Integer prod_Djelo;
