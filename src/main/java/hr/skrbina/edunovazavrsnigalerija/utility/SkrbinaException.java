@@ -9,20 +9,19 @@ package hr.skrbina.edunovazavrsnigalerija.utility;
  *
  * @author Hrvoje
  */
-public class SkrbinaException extends Exception{
-    
+public class SkrbinaException extends Exception {
+
     private String poruka;
-    
     private String komponenta;
 
     public SkrbinaException(String poruka) {
-        this.poruka=poruka;
-        this.komponenta="";
+        this.poruka = poruka;
+        this.komponenta = "";
     }
-    
-     public SkrbinaException(String komponenta, String poruka) {
+
+    public SkrbinaException(String komponenta, String poruka) {
         this(poruka);
-        this.komponenta=komponenta;
+        this.komponenta = komponenta;
     }
 
     public String getPoruka() {
@@ -35,6 +34,5 @@ public class SkrbinaException extends Exception{
 
     public void setKomponenta(String komponenta) {
         this.komponenta = komponenta;
-    }  
-    
+    }
 }

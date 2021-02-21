@@ -5,10 +5,10 @@
  */
 package hr.skrbina.edunovazavrsnigalerija.utility;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Scanner;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import us.codecraft.xsoup.Xsoup;
 
 /**
@@ -16,12 +16,12 @@ import us.codecraft.xsoup.Xsoup;
  * @author Hrvoje
  */
 public class Oib {
-    
-    public static boolean isValjan(String oib){
-        if (oib.length() != 11){
-              return false;
+
+    public static boolean isValjan(String oib) {
+
+        if (oib.length() != 11) {
+            return false;
         }
-          
 
         try {
             Long.parseLong(oib);
@@ -31,30 +31,28 @@ public class Oib {
 
         int a = 10;
         for (int i = 0; i < 10; i++) {
-            a = a + Integer.parseInt(oib.substring(i, i+1));
+            a = a + Integer.parseInt(oib.substring(i, i + 1));
             a = a % 10;
-            if (a == 0)
+            if (a == 0) {
                 a = 10;
+            }
             a *= 2;
             a = a % 11;
         }
         int kontrolni = 11 - a;
-        if (kontrolni == 10)
+        if (kontrolni == 10) {
             kontrolni = 0;
-
+        }
         return kontrolni == Integer.parseInt(oib.substring(10));
-    
     }
 
     public static String getOibIiCentrala() {
         try {
             String html = new Scanner(new URL("http://oib.itcentrala.com/oib-generator/").openStream(), "UTF-8").useDelimiter("\\A").next();
 
-            Document document = Jsoup.parse(html);
-
+            org.jsoup.nodes.Document document = Jsoup.parse(html);
             return Xsoup.compile("/html/body/div[1]/div[1]/text()").evaluate(document).get();
-
-        } catch (Exception e) {
+        } catch (IOException e) {
             return null;
         }
     }
