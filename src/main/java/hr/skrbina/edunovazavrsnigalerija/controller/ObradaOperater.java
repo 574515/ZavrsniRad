@@ -14,61 +14,85 @@ import org.mindrot.jbcrypt.BCrypt;
  *
  * @author Hrvoje
  */
-public class ObradaOperater extends Obrada <Operater>{
+public class ObradaOperater extends ObradaOsoba<Operater> {
 
     public Operater autoriziraj(String email, char[] lozinka) {
+
         Operater operater = (Operater) session.createQuery(
-                " from Operater o where o.email=:email")
+                "from Operater o where o.email=:email")
                 .setParameter("email", email).getSingleResult();
+
         if (operater == null) {
             return null;
         }
+
         return BCrypt.checkpw(new String(lozinka), operater.getLozinka())
                 ? operater : null;
-    }
-    
-    @Override
-    public List<Operater> getPodaci() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     protected void kontrolaCreate() throws SkrbinaException {
-        kontrolaIme();
-        kontrolaPrezime();
+        super.kontrolaCreate();
+        kontrolaUloga();
+        kontrolaOibBazaKreiraj();
+        kontrolaLozinka();
+        kontrolaUlogaOdabran();
     }
 
     @Override
     protected void kontrolaUpdate() throws SkrbinaException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        super.kontrolaUpdate();
+        kontrolaOibBazaPromjeni();
     }
 
     @Override
-    protected void kontrolaDelete() throws SkrbinaException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    protected void kontrolaDelete() throws SkrbinaException {}
+
+    @Override
+    public List<Operater> getPodaci() {
+        return session.createQuery("from Operater").list();
     }
 
-    private void kontrolaIme() throws SkrbinaException {
-        if(entitet.getIme() == null){
-            throw new SkrbinaException(" Ime nije definirano! ");
-        }
-        if(entitet.getIme().isEmpty()){
-            throw new SkrbinaException(" Unesite ime! ");
-        }
-        if(entitet.getIme().length() > 50){
-            throw new SkrbinaException(" Ime mora imati manje od 50 znakova! ");
+    private void kontrolaUloga() throws SkrbinaException {
+        if (entitet.getUloga() == null) {
+            throw new SkrbinaException("Uloga je obavezna, ne može biti prazna!");
         }
     }
 
-    private void kontrolaPrezime() throws SkrbinaException {
-        if(entitet.getPrezime() == null){
-            throw new SkrbinaException(" Prezime nije definirano! ");
+    private void kontrolaLozinka() throws SkrbinaException {
+        if (entitet.getLozinka().isEmpty() || entitet.getLozinka() == null) {
+            throw new SkrbinaException("Lozinka je obavezna, ne može biti prazna!");
         }
-        if(entitet.getPrezime().isEmpty()){
-            throw new SkrbinaException(" Unesite prezime! ");
+    }
+
+    private void kontrolaOibBazaKreiraj() throws SkrbinaException {
+        List<Operater> lista = session.createQuery(""
+                + " from Operater o "
+                + " where o.oib=:oib "
+        )
+                .setParameter("oib", entitet.getOib())
+                .list();
+        if (lista.size() > 0) {
+            throw new SkrbinaException("Oib je dodjeljen " + lista.get(0).getImePrezime() + ", unesite drugi OIB!");
         }
-        if(entitet.getPrezime().length() > 50){
-            throw new SkrbinaException(" Prezime mora imati manje od 50 znakova! ");
+    }
+
+    private void kontrolaOibBazaPromjeni() throws SkrbinaException {
+        List<Operater> lista = session.createQuery(""
+                + " from Operater o "
+                + " where o.oib=:oib and o.id!=:id"
+        )
+                .setParameter("oib", entitet.getOib())
+                .setParameter("id", entitet.getId())
+                .list();
+        if (lista.size() > 0) {
+            throw new SkrbinaException("Oib je dodjeljen " + lista.get(0).getImePrezime() + ", unesite drugi OIB!");
         }
-    }    
+    }
+
+    private void kontrolaUlogaOdabran() throws SkrbinaException {
+        if (entitet.getUloga() == null) {
+            throw new SkrbinaException("Potrebno je odabrati ulogu iz padajućeg izbornika!");
+        }
+    }
 }
