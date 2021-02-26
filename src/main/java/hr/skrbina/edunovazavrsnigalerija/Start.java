@@ -5,13 +5,7 @@
  */
 package hr.skrbina.edunovazavrsnigalerija;
 
-//import hr.skrbina.edunovazavrsnigalerija.view.Autorizacija;
 import hr.skrbina.edunovazavrsnigalerija.view.Izbornik;
-/*import java.time.Clock;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;*/
 
 /**
  *
@@ -19,12 +13,7 @@ import java.util.logging.Logger;*/
  */
 public class Start {
 
-    public static void main(String[] args) {
-        
-       /*Autorizacija aut = new Autorizacija();
-       aut.setLocationRelativeTo(null);
-       aut.setVisible(true);*/
-       
+    public static void main(String[] args) {       
        Izbornik izb = new Izbornik();
        izb.setVisible(true);
        izb.setLocationRelativeTo(null);
