@@ -16,9 +16,6 @@
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[525, 500]"/>
     </Property>
-    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[550, 500]"/>
-    </Property>
     <Property name="resizable" type="boolean" value="false"/>
     <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[550, 500]"/>
@@ -46,11 +43,11 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="30" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="2" attributes="0">
-                  <Component id="imageLabel" alignment="2" min="-2" pref="500" max="-2" attributes="0"/>
-                  <Component id="textLabel" alignment="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="pswLozinka" alignment="2" min="-2" pref="440" max="-2" attributes="0"/>
-                  <Component id="txtEmail" alignment="2" min="-2" pref="440" max="-2" attributes="0"/>
-                  <Component id="btnPrijava" alignment="2" min="-2" pref="254" max="-2" attributes="0"/>
+                  <Component id="imgLbl" alignment="2" min="-2" pref="500" max="-2" attributes="0"/>
+                  <Component id="textLbl" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="pswTxt" alignment="2" min="-2" pref="440" max="-2" attributes="0"/>
+                  <Component id="emailTxt" alignment="2" min="-2" pref="440" max="-2" attributes="0"/>
+                  <Component id="prijavaBttn" alignment="2" min="-2" pref="254" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
           </Group>
@@ -60,22 +57,22 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-              <Component id="imageLabel" min="-2" pref="250" max="-2" attributes="0"/>
+              <Component id="imgLbl" min="-2" pref="250" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="textLabel" min="-2" pref="40" max="-2" attributes="0"/>
+              <Component id="textLbl" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="txtEmail" min="-2" pref="40" max="-2" attributes="0"/>
+              <Component id="emailTxt" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pswLozinka" min="-2" pref="40" max="-2" attributes="0"/>
+              <Component id="pswTxt" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btnPrijava" pref="48" max="32767" attributes="0"/>
+              <Component id="prijavaBttn" pref="50" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="imageLabel">
+    <Component class="javax.swing.JLabel" name="imgLbl">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -84,7 +81,7 @@
         <Property name="text" type="java.lang.String" value="jLabel2"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="textLabel">
+    <Component class="javax.swing.JLabel" name="textLbl">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Georgia" size="22" style="1"/>
@@ -92,7 +89,7 @@
         <Property name="text" type="java.lang.String" value="DOBRODO&#x160;LI U &quot;EXCLUSIVE&quot; GALERIJU"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JPasswordField" name="pswLozinka">
+    <Component class="javax.swing.JPasswordField" name="pswTxt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Georgia" size="14" style="0"/>
@@ -101,10 +98,10 @@
         <Property name="toolTipText" type="java.lang.String" value="Unesite korisni&#x10d;ku lozinku."/>
       </Properties>
       <Events>
-        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="pswLozinkaKeyReleased"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="pswTxtKeyReleased"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtEmail">
+    <Component class="javax.swing.JTextField" name="emailTxt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Georgia" size="14" style="0"/>
@@ -113,10 +110,10 @@
         <Property name="toolTipText" type="java.lang.String" value="Unesite korisni&#x10d;ki e-mail."/>
       </Properties>
       <Events>
-        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtEmailKeyReleased"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="emailTxtKeyReleased"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnPrijava">
+    <Component class="javax.swing.JButton" name="prijavaBttn">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Georgia" size="14" style="1"/>
@@ -124,7 +121,7 @@
         <Property name="text" type="java.lang.String" value="Ulogiraj se"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrijavaActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="prijavaBttnActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

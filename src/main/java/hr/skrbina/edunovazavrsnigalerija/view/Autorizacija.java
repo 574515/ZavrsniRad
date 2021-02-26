@@ -23,11 +23,10 @@ public class Autorizacija extends javax.swing.JFrame {
      */
     public Autorizacija() {
         initComponents();
-        //this.setLocationRelativeTo(null);
-        //setTitle("Gallery Exclusive - Autorizacija");
-        txtEmail.requestFocus();
-        txtEmail.setText("admin@ge.com");
-        pswLozinka.setText("admin");
+        setTitle("Gallery Exclusive - Autorizacija");
+        emailTxt.requestFocus();
+        emailTxt.setText("admin@ge.com");
+        pswTxt.setText("admin");
     }
 
     /**
@@ -39,11 +38,11 @@ public class Autorizacija extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        imageLabel = new javax.swing.JLabel();
-        textLabel = new javax.swing.JLabel();
-        pswLozinka = new javax.swing.JPasswordField();
-        txtEmail = new javax.swing.JTextField();
-        btnPrijava = new javax.swing.JButton();
+        imgLbl = new javax.swing.JLabel();
+        textLbl = new javax.swing.JLabel();
+        pswTxt = new javax.swing.JPasswordField();
+        emailTxt = new javax.swing.JTextField();
+        prijavaBttn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 550, 500));
@@ -51,40 +50,39 @@ public class Autorizacija extends javax.swing.JFrame {
         setMaximizedBounds(new java.awt.Rectangle(0, 0, 550, 500));
         setMaximumSize(new java.awt.Dimension(550, 500));
         setMinimumSize(new java.awt.Dimension(525, 500));
-        setPreferredSize(new java.awt.Dimension(550, 500));
         setResizable(false);
         setSize(new java.awt.Dimension(550, 500));
 
-        imageLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        imageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login_art.png"))); // NOI18N
-        imageLabel.setText("jLabel2");
+        imgLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        imgLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login_art.png"))); // NOI18N
+        imgLbl.setText("jLabel2");
 
-        textLabel.setFont(new java.awt.Font("Georgia", 1, 22)); // NOI18N
-        textLabel.setText("DOBRODOŠLI U \"EXCLUSIVE\" GALERIJU");
+        textLbl.setFont(new java.awt.Font("Georgia", 1, 22)); // NOI18N
+        textLbl.setText("DOBRODOŠLI U \"EXCLUSIVE\" GALERIJU");
 
-        pswLozinka.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
-        pswLozinka.setText("Lozinka");
-        pswLozinka.setToolTipText("Unesite korisničku lozinku.");
-        pswLozinka.addKeyListener(new java.awt.event.KeyAdapter() {
+        pswTxt.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
+        pswTxt.setText("Lozinka");
+        pswTxt.setToolTipText("Unesite korisničku lozinku.");
+        pswTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                pswLozinkaKeyReleased(evt);
+                pswTxtKeyReleased(evt);
             }
         });
 
-        txtEmail.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
-        txtEmail.setText("EMail");
-        txtEmail.setToolTipText("Unesite korisnički e-mail.");
-        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+        emailTxt.setFont(new java.awt.Font("Georgia", 0, 14)); // NOI18N
+        emailTxt.setText("EMail");
+        emailTxt.setToolTipText("Unesite korisnički e-mail.");
+        emailTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtEmailKeyReleased(evt);
+                emailTxtKeyReleased(evt);
             }
         });
 
-        btnPrijava.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
-        btnPrijava.setText("Ulogiraj se");
-        btnPrijava.addActionListener(new java.awt.event.ActionListener() {
+        prijavaBttn.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        prijavaBttn.setText("Ulogiraj se");
+        prijavaBttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPrijavaActionPerformed(evt);
+                prijavaBttnActionPerformed(evt);
             }
         });
 
@@ -95,33 +93,33 @@ public class Autorizacija extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textLabel)
-                    .addComponent(pswLozinka, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPrijava, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(imgLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textLbl)
+                    .addComponent(pswTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(emailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(prijavaBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(imgLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(textLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(emailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pswLozinka, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pswTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnPrijava, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                .addComponent(prijavaBttn, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                 .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnPrijavaActionPerformed(java.awt.event.ActionEvent evt) {
+    private void prijavaBttnActionPerformed(java.awt.event.ActionEvent evt) {
         prijaviSe();
     }
 
@@ -157,63 +155,65 @@ public class Autorizacija extends javax.swing.JFrame {
             new Autorizacija().setVisible(true);
         });
     }
-    private void txtEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyReleased
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER && !txtEmail.getText().trim().isEmpty()) {
-            pswLozinka.requestFocus();
+    private void emailTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailTxtKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER && !emailTxt.getText().trim().isEmpty()) {
+            pswTxt.requestFocus();
         }
-    }//GEN-LAST:event_txtEmailKeyReleased
+    }//GEN-LAST:event_emailTxtKeyReleased
 
 
-    private void pswLozinkaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pswLozinkaKeyReleased
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER && pswLozinka.getPassword().length > 0) {
+    private void pswTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pswTxtKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER && pswTxt.getPassword().length > 0) {
             prijaviSe();
         }
-    }//GEN-LAST:event_pswLozinkaKeyReleased
+    }//GEN-LAST:event_pswTxtKeyReleased
 
     private void btnPrijava(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrijavaActionPerformed
         prijaviSe();
     }//GEN-LAST:event_btnPrijavaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnPrijava;
-    private javax.swing.JLabel imageLabel;
-    private javax.swing.JPasswordField pswLozinka;
-    private javax.swing.JLabel textLabel;
-    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField emailTxt;
+    private javax.swing.JLabel imgLbl;
+    private javax.swing.JButton prijavaBttn;
+    private javax.swing.JPasswordField pswTxt;
+    private javax.swing.JLabel textLbl;
     // End of variables declaration//GEN-END:variables
 
     private void prijaviSe() {
-        if (txtEmail.getText().trim().isEmpty()) {
-            txtEmail.requestFocus();
-            JOptionPane.showMessageDialog(rootPane, "Email je obavezan!");
+        if (emailTxt.getText().trim().isEmpty()) {
+            emailTxt.requestFocus();
+            JOptionPane.showMessageDialog(rootPane, "EMail je obavezan!");
             return;
         }
 
         try {
-            InternetAddress emailAddr = new InternetAddress(txtEmail.getText());
+            InternetAddress emailAddr = new InternetAddress(emailTxt.getText());
             emailAddr.validate();
         } catch (AddressException ex) {
-            txtEmail.requestFocus();
-            JOptionPane.showMessageDialog(rootPane, "Email nije valjan!");
+            emailTxt.requestFocus();
+            JOptionPane.showMessageDialog(rootPane, "EMail nije valjan!");
             return;
         }
 
-        if (pswLozinka.getPassword().length == 0) {
-            pswLozinka.requestFocus();
+        if (pswTxt.getPassword().length == 0) {
+            pswTxt.requestFocus();
             JOptionPane.showMessageDialog(rootPane, "Lozinka je obavezna!");
             return;
         }
 
         ObradaOperater obop = new ObradaOperater();
-        Operater operater = obop.autoriziraj(txtEmail.getText(), pswLozinka.getPassword());
+        Operater operater = obop.autoriziraj(emailTxt.getText(), pswTxt.getPassword());
         if (operater == null) {
-            JOptionPane.showMessageDialog(rootPane, "Nesipravna kombinacija emaila i lozinke!");
+            JOptionPane.showMessageDialog(rootPane, "Nesipravna kombinacija EMaila i lozinke!");
             return;
         }
 
         Aplikacija.operater = operater;
 
-        new Izbornik().setVisible(true);
+        Izbornik izb = new Izbornik();
+        izb.setVisible(true);
+        izb.setLocationRelativeTo(null);
         dispose();
 
     }

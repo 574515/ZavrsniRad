@@ -6,7 +6,6 @@
 package hr.skrbina.edunovazavrsnigalerija.view;
 
 import hr.skrbina.edunovazavrsnigalerija.utility.HibernateUtil;
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 
 /**
@@ -25,16 +24,14 @@ public class SplashScreen extends javax.swing.JFrame {
     }
     
     private class Ucitanje extends Thread{
-
         @Override
         public void run() {
             Session s = HibernateUtil.getSessionFactory().openSession();
-            if(s.getMetamodel().getEntities().size()>0){
+            if (s.getMetamodel().getEntities().size() > 0) {
                 new Autorizacija().setVisible(true);
                 dispose();
             }
-        }
-        
+        }        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,24 +42,24 @@ public class SplashScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        splashLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
         setType(java.awt.Window.Type.UTILITY);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/splash_gallery.png"))); // NOI18N
+        splashLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/splash_gallery.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1)
+            .addComponent(splashLbl)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1)
+            .addComponent(splashLbl)
         );
 
         pack();
@@ -104,6 +101,6 @@ public class SplashScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel splashLbl;
     // End of variables declaration//GEN-END:variables
 }

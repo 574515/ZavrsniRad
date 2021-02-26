@@ -5,10 +5,12 @@
  */
 package hr.skrbina.edunovazavrsnigalerija.view;
 
+import hr.skrbina.edunovazavrsnigalerija.controller.ObradaAutor;
 import hr.skrbina.edunovazavrsnigalerija.controller.ObradaDjelo;
 import hr.skrbina.edunovazavrsnigalerija.model.Autor;
 import hr.skrbina.edunovazavrsnigalerija.model.Djelo;
 import hr.skrbina.edunovazavrsnigalerija.utility.SkrbinaException;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.ImageIcon;
 import javax.swing.DefaultListModel;
@@ -21,21 +23,32 @@ public class Djela extends javax.swing.JFrame {
 
     private ObradaDjelo obrada;
     private Djelo entitet;
-    ImageIcon dflt = new ImageIcon(getClass().getResource("/default.jpg"));
+    private ImageIcon img;
 
     /**
      * Creates new form Djela
      */
     public Djela() {
         initComponents();
-        lstDjela.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
-        pregled.setIcon(dflt);
-        if (lstDjela.isSelectionEmpty()) {
+        //obrada = new ObradaDjelo();
+        setTitle("Gallery Exclusive - Djela");
+        //ucitajPodatke();
+        
+        checkAndEmpty();
+        
+        djelaLst.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
+        pregledLbl.setIcon(new ImageIcon(getClass().getResource("/default.jpg")));
+        if (djelaLst.isSelectionEmpty()) {
             izmijeniBttn.setEnabled(false);
             obrisiBttn.setEnabled(false);
         }
-        //obrada = new ObradaDjelo();
-        //ucitajPodatke();
+        
+        /*DefaultComboBoxModel<Autor> mr = new DefaultComboBoxModel<>();
+        new ObradaAutor().getPodaci().forEach(r -> {
+            mr.addElement(r);
+        });
+        autorCmb.setModel(mr);
+        autorCmb.setSelectedIndex(-1);*/
     }
 
     /**
@@ -48,59 +61,62 @@ public class Djela extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        lstDjela = new javax.swing.JList<>();
-        pregled = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        datum = new javax.swing.JFormattedTextField();
-        naziv = new javax.swing.JTextField();
-        opis = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        djelaLst = new javax.swing.JList<>();
+        pregledLbl = new javax.swing.JLabel();
+        naziv = new javax.swing.JLabel();
+        autor = new javax.swing.JLabel();
+        datum = new javax.swing.JLabel();
+        datumTxt = new javax.swing.JFormattedTextField();
+        nazivTxt = new javax.swing.JTextField();
+        opisTxt = new javax.swing.JTextField();
+        opis = new javax.swing.JLabel();
         dodajBttn = new javax.swing.JButton();
         izmijeniBttn = new javax.swing.JButton();
         obrisiBttn = new javax.swing.JButton();
         povratakBttn = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        autorCmb = new javax.swing.JComboBox<>();
+        porukaLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        lstDjela.setFont(new java.awt.Font("Georgia", 2, 14)); // NOI18N
-        lstDjela.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Vincent", "Dali", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        lstDjela.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        djelaLst.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        djelaLst.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                lstDjelaValueChanged(evt);
+                djelaLstValueChanged(evt);
             }
         });
-        jScrollPane1.setViewportView(lstDjela);
+        jScrollPane1.setViewportView(djelaLst);
 
-        jLabel2.setFont(new java.awt.Font("Georgia", 3, 14)); // NOI18N
-        jLabel2.setText("Naziv:");
+        pregledLbl.setMaximumSize(new java.awt.Dimension(536, 300));
+        pregledLbl.setMinimumSize(new java.awt.Dimension(536, 300));
+        pregledLbl.setName(""); // NOI18N
+        pregledLbl.setPreferredSize(new java.awt.Dimension(536, 300));
 
-        jLabel3.setFont(new java.awt.Font("Georgia", 3, 14)); // NOI18N
-        jLabel3.setText("Autor:");
+        naziv.setFont(new java.awt.Font("Georgia", 3, 14)); // NOI18N
+        naziv.setText("Naziv:");
 
-        jLabel4.setFont(new java.awt.Font("Georgia", 3, 14)); // NOI18N
-        jLabel4.setText("Datum:");
+        autor.setFont(new java.awt.Font("Georgia", 3, 14)); // NOI18N
+        autor.setText("Autor:");
 
-        datum.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd.MM.yyyy."))));
-        datum.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        datum.setFont(new java.awt.Font("Georgia", 3, 14)); // NOI18N
+        datum.setText("Datum:");
 
-        naziv.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
-        naziv.setText("Unesite naziv...");
+        datumTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd.MM.yyyy."))));
+        datumTxt.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
 
-        opis.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
-        opis.setText("Unesite opis...");
+        nazivTxt.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        nazivTxt.setText("Unesite naziv...");
 
-        jLabel5.setFont(new java.awt.Font("Georgia", 3, 14)); // NOI18N
-        jLabel5.setText("Opis:");
+        opisTxt.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        opisTxt.setText("Unesite opis...");
+
+        opis.setFont(new java.awt.Font("Georgia", 3, 14)); // NOI18N
+        opis.setText("Opis:");
 
         dodajBttn.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         dodajBttn.setText("Dodaj");
+        dodajBttn.setMaximumSize(new java.awt.Dimension(96, 40));
+        dodajBttn.setMinimumSize(new java.awt.Dimension(96, 40));
+        dodajBttn.setPreferredSize(new java.awt.Dimension(96, 40));
         dodajBttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dodajBttnActionPerformed(evt);
@@ -109,6 +125,9 @@ public class Djela extends javax.swing.JFrame {
 
         izmijeniBttn.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         izmijeniBttn.setText("Izmijeni");
+        izmijeniBttn.setMaximumSize(new java.awt.Dimension(96, 40));
+        izmijeniBttn.setMinimumSize(new java.awt.Dimension(96, 40));
+        izmijeniBttn.setPreferredSize(new java.awt.Dimension(96, 40));
         izmijeniBttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 izmijeniBttnActionPerformed(evt);
@@ -117,17 +136,30 @@ public class Djela extends javax.swing.JFrame {
 
         obrisiBttn.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         obrisiBttn.setText("Obriši");
+        obrisiBttn.setMaximumSize(new java.awt.Dimension(96, 40));
+        obrisiBttn.setMinimumSize(new java.awt.Dimension(96, 40));
+        obrisiBttn.setPreferredSize(new java.awt.Dimension(96, 40));
+        obrisiBttn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                obrisiBttnActionPerformed(evt);
+            }
+        });
 
         povratakBttn.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         povratakBttn.setText("Povratak");
+        povratakBttn.setMaximumSize(new java.awt.Dimension(96, 40));
+        povratakBttn.setMinimumSize(new java.awt.Dimension(96, 40));
+        povratakBttn.setPreferredSize(new java.awt.Dimension(96, 40));
         povratakBttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 povratakBttnActionPerformed(evt);
             }
         });
 
-        jComboBox1.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        autorCmb.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+
+        porukaLbl.setFont(new java.awt.Font("Georgia", 2, 14)); // NOI18N
+        porukaLbl.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,25 +171,29 @@ public class Djela extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pregled, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(pregledLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(datum)
-                            .addComponent(opis, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(naziv)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(porukaLbl)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(naziv)
+                                    .addComponent(autor)
+                                    .addComponent(datum)
+                                    .addComponent(opis))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(datumTxt)
+                                    .addComponent(opisTxt, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(nazivTxt)
+                                    .addComponent(autorCmb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(obrisiBttn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(povratakBttn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(izmijeniBttn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(dodajBttn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(obrisiBttn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(povratakBttn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(dodajBttn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(izmijeniBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -165,35 +201,37 @@ public class Djela extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                    .addComponent(pregled, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1)
+                    .addComponent(pregledLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(naziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                        .addComponent(porukaLbl)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(nazivTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(naziv))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(datum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
+                            .addComponent(autor)
+                            .addComponent(autorCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(opis)))
+                            .addComponent(datumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(datum))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(opis)
+                            .addComponent(opisTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(dodajBttn, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                        .addComponent(dodajBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(izmijeniBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(izmijeniBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(obrisiBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(obrisiBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(povratakBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(10, 10, 10))
+                        .addComponent(povratakBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -203,38 +241,43 @@ public class Djela extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_povratakBttnActionPerformed
 
-    private void lstDjelaValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstDjelaValueChanged
-        String slika = lstDjela.getSelectedValue();
-        ImageIcon image = new ImageIcon(
-                getClass().getResource(
-                        "/" + slika + ".jpg"));
-        if (image != null) {
-            pregled.setIcon(image);
-            pregled.setText("");
-            izmijeniBttn.setEnabled(true);
-            obrisiBttn.setEnabled(true);
-        } else {
-            pregled.setIcon(dflt);
-            pregled.setText("");
-            //izmijeniBttn.setEnabled(false);
+    private void djelaLstValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_djelaLstValueChanged
+        try {
+            String slika = djelaLst.getSelectedValue().getNaziv();
+            img = new ImageIcon(getClass().getResource("/" + slika + ".jpg"));
+            if (img != null) {
+                pregledLbl.setIcon(img);
+                pregledLbl.setText("");
+                izmijeniBttn.setEnabled(true);
+                obrisiBttn.setEnabled(true);
+            } else {
+                pregledLbl.setIcon(new ImageIcon(getClass().getResource("/default.jpg")));
+                pregledLbl.setText("");
+                izmijeniBttn.setEnabled(false);
+            }
+        } catch (java.lang.ClassCastException x) {
+            System.out.println("SKRTSKRT");
         }
-    }//GEN-LAST:event_lstDjelaValueChanged
+    }//GEN-LAST:event_djelaLstValueChanged
 
     private void dodajBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dodajBttnActionPerformed
+        porukaLbl.setText("");
         entitet = new Djelo();
+        
         postaviVrijednostiUEntitet();
+        
         obrada.setEntitet(entitet);
         try {
             obrada.create();
             ucitajPodatke();
             ocistiPolja();
         } catch (SkrbinaException ex) {
-            jLabel2.setText(ex.getPoruka()); //provjera
+            porukaLbl.setText(ex.getPoruka());
         }
     }//GEN-LAST:event_dodajBttnActionPerformed
 
     private void izmijeniBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_izmijeniBttnActionPerformed
-        //entitet = lstDjela.getSelectedValue();
+        entitet = djelaLst.getSelectedValue();
         if (entitet == null) {
             return;
         }
@@ -245,9 +288,26 @@ public class Djela extends javax.swing.JFrame {
             ucitajPodatke();
             ocistiPolja();
         } catch (SkrbinaException e) {
-            jLabel2.setText(e.getPoruka()); //provjera
+            porukaLbl.setText(e.getPoruka());
         }
     }//GEN-LAST:event_izmijeniBttnActionPerformed
+
+    private void obrisiBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_obrisiBttnActionPerformed
+        entitet = djelaLst.getSelectedValue();
+        if (entitet == null) {
+            return;
+        }
+
+        obrada.setEntitet(entitet);
+
+        try {
+            obrada.delete();
+            ucitajPodatke();
+            ocistiPolja();
+        } catch (SkrbinaException e) {
+            porukaLbl.setText(e.getPoruka());
+        }
+    }//GEN-LAST:event_obrisiBttnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -287,40 +347,50 @@ public class Djela extends javax.swing.JFrame {
     private void ucitajPodatke() {
         DefaultListModel<Djelo> d = new DefaultListModel<>();
         obrada.getPodaci().forEach(k -> d.addElement(k));
-        //lstDjela.setModel(d);
+        djelaLst.setModel(d);
     }
 
     private void ocistiPolja() {
-        naziv.setText("");
-        autorIme.setText("");
-        datum.setText("");
-        opis.setText("");
+        nazivTxt.setText("");
+        autorCmb.setSelectedIndex(-1);
+        datumTxt.setText("");
+        opisTxt.setText("");
     }
 
     private void postaviVrijednostiUEntitet() {
-        Autor a = new Autor();
-        a.setImePrezime(autorIme.getText(), autorPrez.getText());        
-        entitet.setAutor(a);
-        entitet.setNaziv(naziv.getText());
-        entitet.setOpis(opis.getText());
+        entitet.setNaziv(nazivTxt.getText());
+        entitet.setOpis(opisTxt.getText());
         obrada.setEntitet(entitet);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFormattedTextField datum;
+    private javax.swing.JLabel autor;
+    private javax.swing.JComboBox<Autor> autorCmb;
+    private javax.swing.JLabel datum;
+    private javax.swing.JFormattedTextField datumTxt;
+    private javax.swing.JList<Djelo> djelaLst;
     private javax.swing.JButton dodajBttn;
     private javax.swing.JButton izmijeniBttn;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<String> lstDjela;
-    private javax.swing.JTextField naziv;
+    private javax.swing.JLabel naziv;
+    private javax.swing.JTextField nazivTxt;
     private javax.swing.JButton obrisiBttn;
-    private javax.swing.JTextField opis;
+    private javax.swing.JLabel opis;
+    private javax.swing.JTextField opisTxt;
+    private javax.swing.JLabel porukaLbl;
     private javax.swing.JButton povratakBttn;
-    private javax.swing.JLabel pregled;
+    private javax.swing.JLabel pregledLbl;
     // End of variables declaration//GEN-END:variables
+
+    private void checkAndEmpty() {
+        if (djelaLst.isSelectionEmpty()) {
+            obrisiBttn.setEnabled(false);
+            izmijeniBttn.setEnabled(false);
+        }
+        nazivTxt.setText("");
+        datumTxt.setText("");
+        opisTxt.setText("");
+        autorCmb.setSelectedIndex(-1);
+        porukaLbl.setText("");
+    }
 }

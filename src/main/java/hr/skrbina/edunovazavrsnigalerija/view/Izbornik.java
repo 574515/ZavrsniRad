@@ -5,6 +5,8 @@
  */
 package hr.skrbina.edunovazavrsnigalerija.view;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Hrvoje
@@ -14,8 +16,12 @@ public class Izbornik extends javax.swing.JFrame {
     /**
      * Creates new form Izbornik
      */
-    public Izbornik() {    
-        initComponents();        
+    public Izbornik() {
+        initComponents();
+        /*int x = 1;
+        if(x != 0) {
+            adminMenu.setVisible(false);
+        }*/
     }
 
     /**
@@ -27,289 +33,207 @@ public class Izbornik extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        izbornik = new javax.swing.JTabbedPane();
-        galerija = new javax.swing.JPanel();
-        izlozbe_btn = new javax.swing.JButton();
-        djela_btn = new javax.swing.JButton();
-        logo = new javax.swing.JLabel();
-        izlazBtrn = new javax.swing.JButton();
-        administracija = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        logo1 = new javax.swing.JLabel();
-        osobeBttn = new javax.swing.JButton();
-        autoriBttn = new javax.swing.JButton();
-        izlazBttn = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        gallerMenu = new javax.swing.JMenu();
+        djelaMenu = new javax.swing.JMenuItem();
+        izlozbeMenu = new javax.swing.JMenuItem();
+        exitG = new javax.swing.JMenuItem();
+        adminMenu = new javax.swing.JMenu();
+        autoriMenu = new javax.swing.JMenuItem();
+        korisniciMenu = new javax.swing.JMenuItem();
+        kustosiMenu = new javax.swing.JMenuItem();
+        operateriMenu = new javax.swing.JMenuItem();
+        transakcijeMenu = new javax.swing.JMenuItem();
+        exitA = new javax.swing.JMenuItem();
+        helpMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Galerija Exclusive");
+        setMaximumSize(new java.awt.Dimension(500, 400));
+        setMinimumSize(new java.awt.Dimension(500, 400));
+        setPreferredSize(new java.awt.Dimension(500, 400));
+        setResizable(false);
 
-        izbornik.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        izbornik.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
-        izbornik.setMaximumSize(new java.awt.Dimension(678, 100));
-        izbornik.setMinimumSize(new java.awt.Dimension(678, 100));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        izlozbe_btn.setFont(new java.awt.Font("Georgia", 3, 18)); // NOI18N
-        izlozbe_btn.setText("Izložbe");
-        izlozbe_btn.setMaximumSize(new java.awt.Dimension(140, 66));
-        izlozbe_btn.setMinimumSize(new java.awt.Dimension(140, 66));
-        izlozbe_btn.setPreferredSize(new java.awt.Dimension(140, 66));
-        izlozbe_btn.addActionListener(new java.awt.event.ActionListener() {
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tenor.gif"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        gallerMenu.setText("Galerija");
+
+        djelaMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, 0));
+        djelaMenu.setText("Djela");
+        djelaMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                izlozbe_btnActionPerformed(evt);
+                djelaMenuActionPerformed(evt);
             }
         });
+        gallerMenu.add(djelaMenu);
 
-        djela_btn.setFont(new java.awt.Font("Georgia", 3, 18)); // NOI18N
-        djela_btn.setText("Djela");
-        djela_btn.setMaximumSize(new java.awt.Dimension(140, 66));
-        djela_btn.setMinimumSize(new java.awt.Dimension(140, 66));
-        djela_btn.setPreferredSize(new java.awt.Dimension(140, 66));
-        djela_btn.addActionListener(new java.awt.event.ActionListener() {
+        izlozbeMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, 0));
+        izlozbeMenu.setText("Izložbe");
+        izlozbeMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                djela_btnActionPerformed(evt);
+                izlozbeMenuActionPerformed(evt);
             }
         });
+        gallerMenu.add(izlozbeMenu);
 
-        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/splash_gallery.png"))); // NOI18N
-
-        izlazBtrn.setFont(new java.awt.Font("Georgia", 3, 18)); // NOI18N
-        izlazBtrn.setText("Izlaz");
-        izlazBtrn.setMaximumSize(new java.awt.Dimension(140, 66));
-        izlazBtrn.setMinimumSize(new java.awt.Dimension(140, 66));
-        izlazBtrn.setPreferredSize(new java.awt.Dimension(140, 66));
-        izlazBtrn.addActionListener(new java.awt.event.ActionListener() {
+        exitG.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
+        exitG.setText("Izlaz");
+        exitG.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                izlazBtrnActionPerformed(evt);
+                exitGActionPerformed(evt);
             }
         });
+        gallerMenu.add(exitG);
 
-        javax.swing.GroupLayout galerijaLayout = new javax.swing.GroupLayout(galerija);
-        galerija.setLayout(galerijaLayout);
-        galerijaLayout.setHorizontalGroup(
-            galerijaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(galerijaLayout.createSequentialGroup()
-                .addGroup(galerijaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(galerijaLayout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(djela_btn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(izlozbe_btn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(izlazBtrn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(galerijaLayout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(logo)))
-                .addContainerGap(42, Short.MAX_VALUE))
-        );
-        galerijaLayout.setVerticalGroup(
-            galerijaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(galerijaLayout.createSequentialGroup()
-                .addComponent(logo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(galerijaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(izlozbe_btn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(djela_btn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(izlazBtrn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
+        jMenuBar1.add(gallerMenu);
 
-        izbornik.addTab("Galerija", galerija);
+        adminMenu.setText("Administracija");
 
-        jButton4.setFont(new java.awt.Font("Georgia", 3, 18)); // NOI18N
-        jButton4.setText("Korisnici");
-        jButton4.setMaximumSize(new java.awt.Dimension(156, 30));
-        jButton4.setMinimumSize(new java.awt.Dimension(156, 30));
-        jButton4.setPreferredSize(new java.awt.Dimension(156, 30));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        autoriMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, 0));
+        autoriMenu.setText("Autori");
+        autoriMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                autoriMenuActionPerformed(evt);
             }
         });
+        adminMenu.add(autoriMenu);
 
-        jButton5.setFont(new java.awt.Font("Georgia", 3, 18)); // NOI18N
-        jButton5.setText("Transakcije");
-        jButton5.setMaximumSize(new java.awt.Dimension(156, 30));
-        jButton5.setMinimumSize(new java.awt.Dimension(156, 30));
-        jButton5.setPreferredSize(new java.awt.Dimension(156, 30));
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        korisniciMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, 0));
+        korisniciMenu.setText("Korisnici");
+        korisniciMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                korisniciMenuActionPerformed(evt);
             }
         });
+        adminMenu.add(korisniciMenu);
 
-        jButton3.setFont(new java.awt.Font("Georgia", 3, 18)); // NOI18N
-        jButton3.setText("Kustosi");
-        jButton3.setMaximumSize(new java.awt.Dimension(156, 30));
-        jButton3.setMinimumSize(new java.awt.Dimension(156, 30));
-        jButton3.setPreferredSize(new java.awt.Dimension(156, 30));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        kustosiMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, 0));
+        kustosiMenu.setText("Kustosi");
+        kustosiMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                kustosiMenuActionPerformed(evt);
             }
         });
+        adminMenu.add(kustosiMenu);
 
-        logo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/splash_gallery.png"))); // NOI18N
-
-        osobeBttn.setFont(new java.awt.Font("Georgia", 3, 18)); // NOI18N
-        osobeBttn.setText("Osobe");
-        osobeBttn.setMaximumSize(new java.awt.Dimension(156, 30));
-        osobeBttn.setMinimumSize(new java.awt.Dimension(156, 30));
-        osobeBttn.setPreferredSize(new java.awt.Dimension(156, 30));
-        osobeBttn.addActionListener(new java.awt.event.ActionListener() {
+        operateriMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, 0));
+        operateriMenu.setText("Operateri");
+        operateriMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                osobeBttnActionPerformed(evt);
+                operateriMenuActionPerformed(evt);
             }
         });
+        adminMenu.add(operateriMenu);
 
-        autoriBttn.setFont(new java.awt.Font("Georgia", 3, 18)); // NOI18N
-        autoriBttn.setText("Autori");
-        autoriBttn.setMaximumSize(new java.awt.Dimension(156, 30));
-        autoriBttn.setMinimumSize(new java.awt.Dimension(156, 30));
-        autoriBttn.setPreferredSize(new java.awt.Dimension(156, 30));
-        autoriBttn.addActionListener(new java.awt.event.ActionListener() {
+        transakcijeMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, 0));
+        transakcijeMenu.setText("Transakcije");
+        transakcijeMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                autoriBttnActionPerformed(evt);
+                transakcijeMenuActionPerformed(evt);
             }
         });
+        adminMenu.add(transakcijeMenu);
 
-        izlazBttn.setFont(new java.awt.Font("Georgia", 3, 18)); // NOI18N
-        izlazBttn.setText("Izlaz");
-        izlazBttn.setMaximumSize(new java.awt.Dimension(156, 30));
-        izlazBttn.setMinimumSize(new java.awt.Dimension(156, 30));
-        izlazBttn.setPreferredSize(new java.awt.Dimension(156, 30));
-        izlazBttn.addActionListener(new java.awt.event.ActionListener() {
+        exitA.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
+        exitA.setText("Izlaz");
+        exitA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                izlazBttnActionPerformed(evt);
+                exitAActionPerformed(evt);
             }
         });
+        adminMenu.add(exitA);
 
-        javax.swing.GroupLayout administracijaLayout = new javax.swing.GroupLayout(administracija);
-        administracija.setLayout(administracijaLayout);
-        administracijaLayout.setHorizontalGroup(
-            administracijaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(administracijaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(administracijaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(administracijaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(osobeBttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(administracijaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(izlazBttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(autoriBttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(63, 63, 63))
-            .addGroup(administracijaLayout.createSequentialGroup()
-                .addGap(76, 76, 76)
-                .addComponent(logo1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        administracijaLayout.setVerticalGroup(
-            administracijaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(administracijaLayout.createSequentialGroup()
-                .addComponent(logo1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(administracijaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(administracijaLayout.createSequentialGroup()
-                        .addGroup(administracijaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(autoriBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(administracijaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(osobeBttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(izlazBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
+        jMenuBar1.add(adminMenu);
 
-        izbornik.addTab("Administracija", administracija);
+        helpMenu.setText("Pomoć");
+        jMenuBar1.add(helpMenu);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(izbornik, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(izbornik, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void djela_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_djela_btnActionPerformed
+    private void korisniciMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_korisniciMenuActionPerformed
+        Korisnici kor = new Korisnici();
+        kor.setVisible(true);
+        kor.setLocationRelativeTo(null);
+    }//GEN-LAST:event_korisniciMenuActionPerformed
+
+    private void izlozbeMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_izlozbeMenuActionPerformed
+        Izlozbe izl = new Izlozbe();
+        izl.setVisible(true);
+        izl.setLocationRelativeTo(null);
+    }//GEN-LAST:event_izlozbeMenuActionPerformed
+
+    private void exitAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitAActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_exitAActionPerformed
+
+    private void djelaMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_djelaMenuActionPerformed
         Djela dj = new Djela();
         dj.setVisible(true);
         dj.setLocationRelativeTo(null);
-    }//GEN-LAST:event_djela_btnActionPerformed
+    }//GEN-LAST:event_djelaMenuActionPerformed
 
-    private void izlozbe_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_izlozbe_btnActionPerformed
-        Izlozbe iz = new Izlozbe();
-        iz.setVisible(true);
-        iz.setLocationRelativeTo(null);   
-    }//GEN-LAST:event_izlozbe_btnActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        Korisnici korisnici = new Korisnici();
-        korisnici.setVisible(true);
-        korisnici.setLocationRelativeTo(null);
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void osobeBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_osobeBttnActionPerformed
-        Osobe osb = new Osobe();
-        osb.setVisible(true);
-        osb.setLocationRelativeTo(null);
-    }//GEN-LAST:event_osobeBttnActionPerformed
-
-    private void izlazBtrnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_izlazBtrnActionPerformed
+    private void exitGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitGActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_izlazBtrnActionPerformed
+    }//GEN-LAST:event_exitGActionPerformed
 
-    private void izlazBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_izlazBttnActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_izlazBttnActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void kustosiMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kustosiMenuActionPerformed
         Kustosi kust = new Kustosi();
         kust.setVisible(true);
         kust.setLocationRelativeTo(null);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_kustosiMenuActionPerformed
 
-    private void autoriBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autoriBttnActionPerformed
+    private void autoriMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autoriMenuActionPerformed
         Autori aut = new Autori();
         aut.setVisible(true);
         aut.setLocationRelativeTo(null);
-    }//GEN-LAST:event_autoriBttnActionPerformed
+    }//GEN-LAST:event_autoriMenuActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void transakcijeMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transakcijeMenuActionPerformed
         Transakcije trs = new Transakcije();
         trs.setVisible(true);
         trs.setLocationRelativeTo(null);
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_transakcijeMenuActionPerformed
+
+    private void operateriMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_operateriMenuActionPerformed
+        Operateri oper = new Operateri();
+        oper.setVisible(true);
+        oper.setLocationRelativeTo(null);
+    }//GEN-LAST:event_operateriMenuActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel administracija;
-    private javax.swing.JButton autoriBttn;
-    private javax.swing.JButton djela_btn;
-    private javax.swing.JPanel galerija;
-    private javax.swing.JTabbedPane izbornik;
-    private javax.swing.JButton izlazBtrn;
-    private javax.swing.JButton izlazBttn;
-    private javax.swing.JButton izlozbe_btn;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JLabel logo;
-    private javax.swing.JLabel logo1;
-    private javax.swing.JButton osobeBttn;
+    private javax.swing.JMenu adminMenu;
+    private javax.swing.JMenuItem autoriMenu;
+    private javax.swing.JMenuItem djelaMenu;
+    private javax.swing.JMenuItem exitA;
+    private javax.swing.JMenuItem exitG;
+    private javax.swing.JMenu gallerMenu;
+    private javax.swing.JMenu helpMenu;
+    private javax.swing.JMenuItem izlozbeMenu;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem korisniciMenu;
+    private javax.swing.JMenuItem kustosiMenu;
+    private javax.swing.JMenuItem operateriMenu;
+    private javax.swing.JMenuItem transakcijeMenu;
     // End of variables declaration//GEN-END:variables
 }
