@@ -33,7 +33,7 @@ public class ObradaKorisnik extends ObradaOsoba<Korisnik> {
 
     @Override
     protected void kontrolaDelete() throws SkrbinaException {
-        if (entitet.getKup_Djelo() > 0 || entitet.getProd_Djelo() > 0) {
+        if (entitet.getKup_Djelo().length() > 0 || entitet.getProd_Djelo().length() > 0) {
             throw new SkrbinaException("Korisnik se ne može obrisati jer ima jedno ili više kupljenih / prodanih djela!");
         }
     }
@@ -72,7 +72,7 @@ public class ObradaKorisnik extends ObradaOsoba<Korisnik> {
                 + " from Korisnik k "
                 + " where k.oib=:oib "
         )
-                .setParameter("oib", entitet.getOsoba().getOib())
+                .setParameter("oib", entitet.getOib())
                 .list();
         if (lista.size() > 0) {
             throw new SkrbinaException("Oib je dodjeljen " + lista.get(0).getImePrezime() + ", unesite drugi OIB!");

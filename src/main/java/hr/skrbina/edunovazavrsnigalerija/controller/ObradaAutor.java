@@ -69,7 +69,7 @@ public class ObradaAutor extends ObradaOsoba<Autor> {
                 + " from Autor k "
                 + " where k.oib=:oib "
         )
-                .setParameter("oib", entitet.getOsoba().getOib())
+                .setParameter("oib", entitet.getOib())
                 .list();
         if (lista.size() > 0) {
             throw new SkrbinaException("Oib je dodjeljen " + lista.get(0).getImePrezime() + ", unesite drugi OIB!");

@@ -17,7 +17,7 @@ import org.hibernate.Session;
  */
 public abstract class Obrada<T> {
 
-     protected T entitet;
+    protected T entitet;
     protected Session session;
 
     public abstract List<T> getPodaci();

@@ -37,6 +37,7 @@ public class ObradaOperater extends ObradaOsoba<Operater> {
         kontrolaOibBazaKreiraj();
         kontrolaLozinka();
         kontrolaUlogaOdabran();
+
     }
 
     @Override
@@ -46,7 +47,9 @@ public class ObradaOperater extends ObradaOsoba<Operater> {
     }
 
     @Override
-    protected void kontrolaDelete() throws SkrbinaException {}
+    protected void kontrolaDelete() throws SkrbinaException {
+
+    }
 
     @Override
     public List<Operater> getPodaci() {
@@ -57,6 +60,7 @@ public class ObradaOperater extends ObradaOsoba<Operater> {
         if (entitet.getUloga() == null) {
             throw new SkrbinaException("Uloga je obavezna, ne može biti prazna!");
         }
+
     }
 
     private void kontrolaLozinka() throws SkrbinaException {
@@ -75,6 +79,7 @@ public class ObradaOperater extends ObradaOsoba<Operater> {
         if (lista.size() > 0) {
             throw new SkrbinaException("Oib je dodjeljen " + lista.get(0).getImePrezime() + ", unesite drugi OIB!");
         }
+
     }
 
     private void kontrolaOibBazaPromjeni() throws SkrbinaException {
@@ -88,6 +93,7 @@ public class ObradaOperater extends ObradaOsoba<Operater> {
         if (lista.size() > 0) {
             throw new SkrbinaException("Oib je dodjeljen " + lista.get(0).getImePrezime() + ", unesite drugi OIB!");
         }
+
     }
 
     private void kontrolaUlogaOdabran() throws SkrbinaException {
