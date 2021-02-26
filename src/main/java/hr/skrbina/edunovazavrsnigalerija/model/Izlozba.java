@@ -5,7 +5,6 @@
  */
 package hr.skrbina.edunovazavrsnigalerija.model;
 
-import java.util.Date;
 import javax.persistence.OneToOne;
 
 /**
@@ -14,26 +13,26 @@ import javax.persistence.OneToOne;
  */
 public class Izlozba extends Entitet {
     
-    private Date datum_Pocetka;
-    private Date datum_Zavrsetka;
+    private String datum_Pocetka;
+    private String datum_Zavrsetka;
     private String tema;
     
     @OneToOne
     private Kustos kustos;
 
-    public Date getDatum_Pocetka() {
+    public String getDatum_Pocetka() {
         return datum_Pocetka;
     }
 
-    public void setDatum_Pocetka(Date datum_Pocetka) {
+    public void setDatum_Pocetka(String datum_Pocetka) {
         this.datum_Pocetka = datum_Pocetka;
     }
 
-    public Date getDatum_Zavrsetka() {
+    public String getDatum_Zavrsetka() {
         return datum_Zavrsetka;
     }
 
-    public void setDatum_Zavrsetka(Date datum_Zavrsetka) {
+    public void setDatum_Zavrsetka(String datum_Zavrsetka) {
         this.datum_Zavrsetka = datum_Zavrsetka;
     }
 
@@ -51,6 +50,5 @@ public class Izlozba extends Entitet {
 
     public void setKustos(Kustos kustos) {
         this.kustos = kustos;
-    }
-    
+    }    
 }

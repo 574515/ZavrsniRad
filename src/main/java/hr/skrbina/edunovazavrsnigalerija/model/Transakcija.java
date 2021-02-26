@@ -17,7 +17,7 @@ public class Transakcija extends Entitet {
     private String status;
     
     @OneToOne
-    private Djelo djelo;
+    private String djelo;
 
     public Integer getCijena() {
         return cijena;
@@ -35,11 +35,11 @@ public class Transakcija extends Entitet {
         this.status = status;
     }
 
-    public Djelo getDjelo() {
+    public String getDjelo() {
         return djelo;
     }
 
-    public void setDjelo(Djelo djelo) {
+    public void setDjelo(String djelo) {
         this.djelo = djelo;
     }
     

@@ -5,22 +5,10 @@
  */
 package hr.skrbina.edunovazavrsnigalerija.model;
 
-import javax.persistence.OneToOne;
-
 /**
  *
  * @author Hrvoje
  */
-public class Kustos extends Entitet {
+public class Kustos extends Osoba {
     
-    @OneToOne
-    private Osoba osoba;
-
-    public Osoba getOsoba() {
-        return osoba;
-    }
-
-    public void setOsoba(Osoba osoba) {
-        this.osoba = osoba;
-    }
 }

@@ -5,7 +5,6 @@
  */
 package hr.skrbina.edunovazavrsnigalerija.model;
 
-import java.util.Date;
 import javax.persistence.MappedSuperclass;
 /**
  *
@@ -16,12 +15,12 @@ public class Osoba extends Entitet {
  
     private String ime;
     private String prezime;
-    private Date rodjendan;
+    private String rodjendan;
     private String oib;
     private String mjesto_Rodjenja;
     private String IBAN;
     private String kontakt;
-    private String uloga;
+    private String ulogaGalerija;
     
     public String getIme() {
         return ime;
@@ -39,11 +38,11 @@ public class Osoba extends Entitet {
         this.prezime = prezime;
     }
 
-    public Date getRodjendan() {
+    public String getRodjendan() {
         return rodjendan;
     }
 
-    public void setRodjendan(Date rodjendan) {
+    public void setRodjendan(String rodjendan) {
         this.rodjendan = rodjendan;
     }
 
@@ -88,11 +87,11 @@ public class Osoba extends Entitet {
         this.prezime = prezime;
     }
     
-    public String getUloga() {
-        return uloga;
+    public String getUlogaGalerija() {
+        return ulogaGalerija;
     }
     
-    public void setUloga(String uloga) {
-        this.uloga = uloga;
+    public void setUlogaGalerija(String ulg) {
+        this.ulogaGalerija = ulg;
     }
 }

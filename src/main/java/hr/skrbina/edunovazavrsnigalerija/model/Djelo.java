@@ -5,7 +5,6 @@
  */
 package hr.skrbina.edunovazavrsnigalerija.model;
 
-import java.util.Date;
 import javax.persistence.ManyToOne;
 
 /**
@@ -15,7 +14,7 @@ import javax.persistence.ManyToOne;
 public class Djelo extends Entitet {
     
     private String naziv;
-    private Date datum;
+    private String datum;
     private String opis;
     
     @ManyToOne
@@ -29,11 +28,11 @@ public class Djelo extends Entitet {
         this.naziv = naziv;
     }
 
-    public Date getDatum() {
+    public String getDatum() {
         return datum;
     }
 
-    public void setDatum(Date datum) {
+    public void setDatum(String datum) {
         this.datum = datum;
     }
 

@@ -13,28 +13,25 @@ import javax.persistence.OneToOne;
  */
 public class Korisnik extends Osoba {
     
-    private Integer kup_Djelo;
-    private Integer prod_Djelo;
+    private String kup_Djelo;
+    private String prod_Djelo;
     
     @OneToOne
     private Transakcija trans;
     
-    @OneToOne
-    private Osoba osoba;
-
-    public Integer getKup_Djelo() {
+    public String getKup_Djelo() {
         return kup_Djelo;
     }
 
-    public void setKup_Djelo(Integer kup_Djelo) {
+    public void setKup_Djelo(String kup_Djelo) {
         this.kup_Djelo = kup_Djelo;
     }
 
-    public Integer getProd_Djelo() {
+    public String getProd_Djelo() {
         return prod_Djelo;
     }
 
-    public void setProd_Djelo(Integer prod_Djelo) {
+    public void setProd_Djelo(String prod_Djelo) {
         this.prod_Djelo = prod_Djelo;
     }
 
@@ -44,14 +41,5 @@ public class Korisnik extends Osoba {
 
     public void setTrans(Transakcija trans) {
         this.trans = trans;
-    }
-
-    public Osoba getOsoba() {
-        return osoba;
-    }
-
-    public void setOsoba(Osoba osoba) {
-        this.osoba = osoba;
-    }
-    
+    }    
 }
