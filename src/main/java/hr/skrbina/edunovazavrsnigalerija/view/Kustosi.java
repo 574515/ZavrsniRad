@@ -26,9 +26,9 @@ public class Kustosi extends javax.swing.JFrame {
      */
     public Kustosi() {
         initComponents();
-        //obrada = new ObradaAutor();
+        obrada = new ObradaKustos();
         setTitle("Gallery Exclusive - Kustosi");
-        //ucitajPodatke();
+        ucitajPodatke();
         
         kustosLst.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
         if (kustosLst.isSelectionEmpty()) {

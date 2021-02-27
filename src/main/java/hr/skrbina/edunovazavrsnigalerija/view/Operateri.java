@@ -7,7 +7,6 @@ package hr.skrbina.edunovazavrsnigalerija.view;
 
 import hr.skrbina.edunovazavrsnigalerija.controller.ObradaOperater;
 import hr.skrbina.edunovazavrsnigalerija.model.Operater;
-import hr.skrbina.edunovazavrsnigalerija.model.Operater.Uloga;
 import hr.skrbina.edunovazavrsnigalerija.utility.SkrbinaException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -19,7 +18,7 @@ import org.mindrot.jbcrypt.BCrypt;
  */
 public class Operateri extends javax.swing.JFrame {
     
-    private ObradaOperater obrada;
+    private final ObradaOperater obrada;
     private Operater entitet;
     /**
      * Creates new form Operater
@@ -27,10 +26,10 @@ public class Operateri extends javax.swing.JFrame {
     public Operateri() {
         initComponents();
         clearFields();
-        //obrada = new ObradaOperater();        
+        obrada = new ObradaOperater();        
         setTitle("Gallery Exclusive - Operateri");
-        //ucitajPodatke();
-        ulogaCmb.setModel(new DefaultComboBoxModel(Operater.Uloga.values()));
+        ucitajPodatke();
+        ulogaCmb.setModel(new DefaultComboBoxModel());
         ulogaCmb.setSelectedIndex(-1);
     }
 
@@ -369,10 +368,8 @@ public class Operateri extends javax.swing.JFrame {
         entitet.setPrezime(prezimeTxt.getText());
         entitet.setOib(oibTxt.getText());
         entitet.setKontakt(kontaktTxt.getText());
-        entitet.setUloga((Uloga) ulogaCmb.getSelectedItem());
-        entitet.setLozinka(BCrypt.hashpw(pwdTxt.getText(), BCrypt.gensalt()));
-        
+        entitet.setUloga(ulogaCmb.getSelectedItem().toString());
+        entitet.setLozinka(BCrypt.hashpw(pwdTxt.getText(), BCrypt.gensalt()));        
         obrada.setEntitet(entitet);
-    }
-    
+    }    
 }

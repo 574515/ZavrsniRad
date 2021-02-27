@@ -24,9 +24,9 @@ public class Autori extends javax.swing.JFrame {
     /* Creates new form Autori */
     public Autori() {
         initComponents();
-        //obrada = new ObradaAutor();
+        obrada = new ObradaAutor();
         setTitle("Gallery Exclusive - Autori");
-        //ucitajPodatke();
+        ucitajPodatke();
         
         autoriLst.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
         if (autoriLst.isSelectionEmpty()) {
@@ -481,8 +481,7 @@ public class Autori extends javax.swing.JFrame {
         entitet.setMjesto_Rodjenja(mrTxt.getText());
         entitet.setIBAN(ibanTxt.getText());
         entitet.setKontakt(kontaktTxt.getText());
-        entitet.setUlogaGalerija("autor");
-        
+        entitet.setUlogaGalerija("autor");        
 
         obrada.setEntitet(entitet);
     }

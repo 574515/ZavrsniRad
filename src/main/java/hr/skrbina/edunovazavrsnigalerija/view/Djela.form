@@ -27,28 +27,26 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="200" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="pregledLbl" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="porukaLbl" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="naziv" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="autor" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="datum" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="opis" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="datumTxt" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="opisTxt" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="nazivTxt" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="autorCmb" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="naziv" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="autor" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="datum" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="opis" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="cijena" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="datumTxt" alignment="0" max="32767" attributes="0"/>
+                          <Component id="opisTxt" alignment="1" max="32767" attributes="0"/>
+                          <Component id="nazivTxt" alignment="0" max="32767" attributes="0"/>
+                          <Component id="autorCmb" alignment="0" max="32767" attributes="0"/>
+                          <Component id="cijenaTxt" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
@@ -60,6 +58,7 @@
                           <Component id="izmijeniBttn" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <Component id="porukaLbl" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -74,10 +73,10 @@
                   <Component id="pregledLbl" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Component id="porukaLbl" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="porukaLbl" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="nazivTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="naziv" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -96,6 +95,11 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="opis" min="-2" max="-2" attributes="0"/>
                           <Component id="opisTxt" min="-2" pref="72" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="cijenaTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cijena" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
@@ -314,6 +318,22 @@
           <Font name="Georgia" size="14" style="2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="cijenaTxt">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Georgia" size="12" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="jTextField1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="cijena">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Georgia" size="14" style="3"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Cijena:"/>
       </Properties>
     </Component>
   </SubComponents>

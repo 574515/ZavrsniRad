@@ -24,9 +24,9 @@ public class Korisnici extends javax.swing.JFrame {
     
     public Korisnici() {        
         initComponents();
-        //obrada = new ObradaAutor();
+        obrada = new ObradaKorisnik();
         setTitle("Gallery Exclusive - Korisnici");
-        //ucitajPodatke();
+        ucitajPodatke();
         
         korisniciLst.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
         if (korisniciLst.isSelectionEmpty()) {
@@ -479,10 +479,8 @@ public class Korisnici extends javax.swing.JFrame {
         entitet.setMjesto_Rodjenja(mjestoTxt.getText());
         entitet.setIBAN(ibanTxt.getText());
         entitet.setKontakt(kontaktTxt.getText());
-        entitet.setUlogaGalerija("korisnik");
-        
+        entitet.setUlogaGalerija("korisnik");        
 
         obrada.setEntitet(entitet);
-    }
-    
+    }    
 }

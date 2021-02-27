@@ -12,16 +12,14 @@ import hr.skrbina.edunovazavrsnigalerija.model.Operater;
  * @author Hrvoje
  */
 public class Aplikacija {
-    
-    public static final String NASLOV_APP = "Glavni izbornik";
 
+    public static final String NASLOV_APP = "Glavni izbornik";
     public static Operater operater;
 
     public static boolean isAdmin() {
         if (operater == null || operater.getUloga() == null) {
             return false;
         }
-        return operater.getUloga().equals(Operater.Uloga.Administrator);
-
-    }    
+        return operater.getUloga().equals("admin");
+    }
 }

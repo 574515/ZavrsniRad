@@ -5,8 +5,6 @@
  */
 package hr.skrbina.edunovazavrsnigalerija.view;
 
-import javax.swing.ImageIcon;
-
 /**
  *
  * @author Hrvoje
@@ -18,10 +16,6 @@ public class Izbornik extends javax.swing.JFrame {
      */
     public Izbornik() {
         initComponents();
-        /*int x = 1;
-        if(x != 0) {
-            adminMenu.setVisible(false);
-        }*/
     }
 
     /**

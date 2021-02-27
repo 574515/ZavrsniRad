@@ -6,9 +6,11 @@
 package hr.skrbina.edunovazavrsnigalerija.view;
 
 import hr.skrbina.edunovazavrsnigalerija.controller.ObradaIzlozba;
+import hr.skrbina.edunovazavrsnigalerija.controller.ObradaKustos;
 import hr.skrbina.edunovazavrsnigalerija.model.Izlozba;
 import hr.skrbina.edunovazavrsnigalerija.model.Kustos;
 import hr.skrbina.edunovazavrsnigalerija.utility.SkrbinaException;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
 
@@ -18,16 +20,17 @@ import javax.swing.DefaultListSelectionModel;
  */
 public class Izlozbe extends javax.swing.JFrame {
     
-    private ObradaIzlozba obrada;
+    private final ObradaIzlozba obrada;
     private Izlozba entitet;
+    private ObradaKustos obradaK;
     /**
      * Creates new form Izlozbe
      */
     public Izlozbe() {
         initComponents();   
-        //obrada = new ObradaDjelo();
+        obrada = new ObradaIzlozba();
         setTitle("Gallery Exclusive - Izložbe");
-        //ucitajPodatke();
+        ucitajPodatke();
         
         checkAndEmpty();
         
@@ -37,12 +40,10 @@ public class Izlozbe extends javax.swing.JFrame {
             obrisiBttn.setEnabled(false);
         }
         
-        /*DefaultComboBoxModel<Kustos> mr = new DefaultComboBoxModel<>();
-        new ObradaKustos().getPodaci().forEach(r -> {
-            mr.addElement(r);
-        });
+        DefaultComboBoxModel<Kustos> mr = new DefaultComboBoxModel<>();
+        obradaK.getPodaci().forEach(r -> {mr.addElement(r);});
         kustosCmb.setModel(mr);
-        kustosCmb.setSelectedIndex(-1);*/
+        kustosCmb.setSelectedIndex(-1);
     }
 
     /**

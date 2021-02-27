@@ -10,6 +10,7 @@ import hr.skrbina.edunovazavrsnigalerija.controller.ObradaKorisnik;
 import hr.skrbina.edunovazavrsnigalerija.model.Autor;
 import hr.skrbina.edunovazavrsnigalerija.model.Djelo;
 import hr.skrbina.edunovazavrsnigalerija.model.Korisnik;
+import hr.skrbina.edunovazavrsnigalerija.utility.SkrbinaException;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -20,25 +21,24 @@ import javax.swing.JOptionPane;
  */
 public class Transakcije extends javax.swing.JFrame {
 
-    private ObradaKorisnik obradaK;
-    private ObradaDjelo obradaD;
+    private final ObradaKorisnik obradaK;
     private Korisnik entitetK;
+    private ObradaDjelo obradaD;
     private Djelo entitetD;
-    
+
     /**
      * Creates new form Transakcije
      */
     public Transakcije() {
         initComponents();
         setTitle("Gallery Exclusive - Transakcije");
-        /*obrada = new ObradaAutor();        
-        ucitajPodatke();*/
+        obradaK = new ObradaKorisnik();
         if (korisniciLst.isSelectionEmpty()) {
             setFirstDefault();
         }
         emptyFields();
         ucitajKorisnike();
-        
+
         noEdit();
         prodajDflt.setIcon(new ImageIcon(getClass().getResource("/degasDflt.png")));
     }
@@ -78,6 +78,8 @@ public class Transakcije extends javax.swing.JFrame {
         kupiBttn = new javax.swing.JButton();
         povratakKBttn = new javax.swing.JButton();
         autorKTxt = new javax.swing.JTextField();
+        cijenaKTxt = new javax.swing.JTextField();
+        cijenaK = new javax.swing.JLabel();
         prodajaTab = new javax.swing.JPanel();
         nazivP = new javax.swing.JLabel();
         nazivPTxt = new javax.swing.JTextField();
@@ -91,10 +93,13 @@ public class Transakcije extends javax.swing.JFrame {
         ocistiBttn = new javax.swing.JButton();
         prodajDflt = new javax.swing.JLabel();
         povratakPBttn = new javax.swing.JButton();
+        porukaLbl = new javax.swing.JLabel();
+        cijenaPTxt = new javax.swing.JTextField();
+        cijenaP = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(759, 730));
-        setMinimumSize(new java.awt.Dimension(759, 730));
+        setMaximumSize(new java.awt.Dimension(759, 709));
+        setMinimumSize(new java.awt.Dimension(759, 709));
         setResizable(false);
 
         jScrollPane1.setMaximumSize(new java.awt.Dimension(245, 170));
@@ -183,6 +188,11 @@ public class Transakcije extends javax.swing.JFrame {
         kupiBttn.setMaximumSize(new java.awt.Dimension(98, 20));
         kupiBttn.setMinimumSize(new java.awt.Dimension(98, 20));
         kupiBttn.setPreferredSize(new java.awt.Dimension(98, 20));
+        kupiBttn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kupiBttnActionPerformed(evt);
+            }
+        });
 
         povratakKBttn.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         povratakKBttn.setText("Povratak");
@@ -198,6 +208,12 @@ public class Transakcije extends javax.swing.JFrame {
         autorKTxt.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         autorKTxt.setText("jTextField1");
 
+        cijenaKTxt.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        cijenaKTxt.setText("jTextField1");
+
+        cijenaK.setFont(new java.awt.Font("Georgia", 3, 14)); // NOI18N
+        cijenaK.setText("Cijena:");
+
         javax.swing.GroupLayout kupnjaTabLayout = new javax.swing.GroupLayout(kupnjaTab);
         kupnjaTab.setLayout(kupnjaTabLayout);
         kupnjaTabLayout.setHorizontalGroup(
@@ -205,35 +221,37 @@ public class Transakcije extends javax.swing.JFrame {
             .addGroup(kupnjaTabLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(kupnjaTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(kupnjaTabLayout.createSequentialGroup()
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kupnjaTabLayout.createSequentialGroup()
                         .addGroup(kupnjaTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(autorK)
                             .addComponent(nazivK)
                             .addComponent(datumK)
-                            .addComponent(opisK))
+                            .addComponent(opisK)
+                            .addComponent(cijenaK))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(kupnjaTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cijenaKTxt)
                             .addComponent(datumKTxt, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(nazivKTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
                             .addComponent(opisKTxt)
-                            .addComponent(autorKTxt)))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(autorKTxt))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(kupnjaTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(traziKTxt, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(traziKBttn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, kupnjaTabLayout.createSequentialGroup()
                         .addComponent(povratakKBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(kupiBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addComponent(kupiBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(578, 578, 578))
         );
         kupnjaTabLayout.setVerticalGroup(
             kupnjaTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kupnjaTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(kupnjaTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(kupnjaTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(kupnjaTabLayout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -252,18 +270,20 @@ public class Transakcije extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(kupnjaTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(opisK)
-                            .addComponent(opisKTxt)))
+                            .addComponent(opisKTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(kupnjaTabLayout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(traziKTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(traziKBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(kupnjaTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(kupiBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(povratakKBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(17, 17, 17))
+                        .addComponent(traziKBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(kupnjaTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cijenaKTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cijenaK)
+                    .addComponent(povratakKBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(kupiBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         transakcijaTabs.addTab("Kupnja", kupnjaTab);
@@ -296,12 +316,22 @@ public class Transakcije extends javax.swing.JFrame {
         prodajBttn.setMaximumSize(new java.awt.Dimension(77, 45));
         prodajBttn.setMinimumSize(new java.awt.Dimension(77, 45));
         prodajBttn.setPreferredSize(new java.awt.Dimension(77, 45));
+        prodajBttn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                prodajBttnActionPerformed(evt);
+            }
+        });
 
         ocistiBttn.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         ocistiBttn.setText("Očisti");
         ocistiBttn.setMaximumSize(new java.awt.Dimension(77, 45));
         ocistiBttn.setMinimumSize(new java.awt.Dimension(77, 45));
         ocistiBttn.setPreferredSize(new java.awt.Dimension(77, 45));
+        ocistiBttn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ocistiBttnActionPerformed(evt);
+            }
+        });
 
         prodajDflt.setMaximumSize(new java.awt.Dimension(640, 277));
         prodajDflt.setMinimumSize(new java.awt.Dimension(640, 277));
@@ -323,6 +353,14 @@ public class Transakcije extends javax.swing.JFrame {
             }
         });
 
+        porukaLbl.setFont(new java.awt.Font("Georgia", 2, 14)); // NOI18N
+        porukaLbl.setText("jLabel3");
+
+        cijenaPTxt.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+
+        cijenaP.setFont(new java.awt.Font("Georgia", 3, 14)); // NOI18N
+        cijenaP.setText("Cijena:");
+
         javax.swing.GroupLayout prodajaTabLayout = new javax.swing.GroupLayout(prodajaTab);
         prodajaTab.setLayout(prodajaTabLayout);
         prodajaTabLayout.setHorizontalGroup(
@@ -333,24 +371,28 @@ public class Transakcije extends javax.swing.JFrame {
                     .addComponent(nazivP)
                     .addComponent(datumP)
                     .addComponent(autorP)
-                    .addComponent(opisP))
+                    .addComponent(opisP)
+                    .addComponent(cijenaP))
                 .addGap(16, 16, 16)
                 .addGroup(prodajaTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(prodajaTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(datumPTxt)
-                        .addComponent(autorPCmb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(nazivPTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE))
-                    .addComponent(opisPTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(prodajaTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(prodajBttn, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(ocistiBttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(povratakPBttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(9, Short.MAX_VALUE))
+                    .addComponent(porukaLbl)
+                    .addGroup(prodajaTabLayout.createSequentialGroup()
+                        .addGroup(prodajaTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cijenaPTxt)
+                            .addComponent(datumPTxt, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(autorPCmb, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(nazivPTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+                            .addComponent(opisPTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(prodajaTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(prodajBttn, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(ocistiBttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(povratakPBttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, prodajaTabLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(61, Short.MAX_VALUE)
                 .addComponent(prodajDflt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52))
+                .addGap(58, 58, 58))
         );
         prodajaTabLayout.setVerticalGroup(
             prodajaTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -379,9 +421,15 @@ public class Transakcije extends javax.swing.JFrame {
                         .addGroup(prodajaTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(opisPTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(opisP))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(prodajaTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cijenaPTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cijenaP))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(porukaLbl)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(prodajDflt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         transakcijaTabs.addTab("Prodaja", prodajaTab);
@@ -408,8 +456,8 @@ public class Transakcije extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(kupljena)
@@ -420,7 +468,7 @@ public class Transakcije extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(transakcijaTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(transakcijaTabs, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE))
         );
 
         pack();
@@ -447,15 +495,54 @@ public class Transakcije extends javax.swing.JFrame {
         DefaultListModel<String> m = new DefaultListModel<>();
         obradaK.getPodaci(entitetK.getKup_Djelo()).forEach(y -> m.addElement(entitetK.getKup_Djelo()));
         kupLst.setModel(m);
-        
+
         DefaultListModel<String> n = new DefaultListModel<>();
         obradaK.getPodaci(entitetK.getProd_Djelo()).forEach(x -> n.addElement(entitetK.getProd_Djelo()));
         prodLst.setModel(n);
-                
+
         DefaultListModel<Djelo> d = new DefaultListModel<>();
         obradaD.getPodaci().forEach(z -> d.addElement(z));
         djelaLst.setModel(d);
     }//GEN-LAST:event_korisniciLstValueChanged
+
+    private void kupiBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kupiBttnActionPerformed
+        entitetK = korisniciLst.getSelectedValue();
+        entitetK.setKup_Djelo(djelaLst.getSelectedValue().getNaziv());
+        
+        obradaD.setEntitet(entitetD);
+
+        try {
+            obradaD.create();
+            ucitajKupljeno();
+            clearFields();
+        } catch (SkrbinaException ex) {
+            porukaLbl.setText(ex.getPoruka());
+        }
+    }//GEN-LAST:event_kupiBttnActionPerformed
+
+    private void ocistiBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ocistiBttnActionPerformed
+        clearFields();
+    }//GEN-LAST:event_ocistiBttnActionPerformed
+
+    private void prodajBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prodajBttnActionPerformed
+        entitetK = korisniciLst.getSelectedValue();
+        entitetD = new Djelo();
+
+        entitetD.setNaziv(nazivPTxt.getText());
+        entitetD.setDatum(datumPTxt.getText());
+        entitetD.setAutor((Autor) autorPCmb.getSelectedItem());
+        entitetD.setOpis(opisPTxt.getText());
+
+        obradaD.setEntitet(entitetD);
+
+        try {
+            obradaD.create();
+            ucitajProdano();
+            clearFields();
+        } catch (SkrbinaException ex) {
+            porukaLbl.setText(ex.getPoruka());
+        }
+    }//GEN-LAST:event_prodajBttnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -497,6 +584,10 @@ public class Transakcije extends javax.swing.JFrame {
     private javax.swing.JTextField autorKTxt;
     private javax.swing.JLabel autorP;
     private javax.swing.JComboBox<Autor> autorPCmb;
+    private javax.swing.JLabel cijenaK;
+    private javax.swing.JTextField cijenaKTxt;
+    private javax.swing.JLabel cijenaP;
+    private javax.swing.JTextField cijenaPTxt;
     private javax.swing.JLabel datumK;
     private javax.swing.JFormattedTextField datumKTxt;
     private javax.swing.JLabel datumP;
@@ -522,6 +613,7 @@ public class Transakcije extends javax.swing.JFrame {
     private javax.swing.JTextField opisKTxt;
     private javax.swing.JLabel opisP;
     private javax.swing.JTextField opisPTxt;
+    private javax.swing.JLabel porukaLbl;
     private javax.swing.JButton povratakKBttn;
     private javax.swing.JButton povratakPBttn;
     private javax.swing.JList<String> prodLst;
@@ -534,15 +626,25 @@ public class Transakcije extends javax.swing.JFrame {
     private javax.swing.JTextField traziKTxt;
     // End of variables declaration//GEN-END:variables
 
+    private void clearFields() {
+        nazivPTxt.setText("");
+        datumPTxt.setText("");
+        autorPCmb.setSelectedIndex(-1);
+        opisPTxt.setText("");
+        porukaLbl.setText("");
+    }
+
     private void setFirstDefault() {
         nazivKTxt.setEnabled(false);
         datumKTxt.setEnabled(false);
         autorKTxt.setEnabled(false);
         opisKTxt.setEnabled(false);
+        cijenaKTxt.setEnabled(false);
         nazivPTxt.setEnabled(false);
         datumPTxt.setEnabled(false);
         autorPCmb.setEnabled(false);
         opisPTxt.setEnabled(false);
+        cijenaPTxt.setEnabled(false);
         djelaLst.setEnabled(false);
         traziKTxt.setEnabled(false);
         traziKBttn.setEnabled(false);
@@ -550,29 +652,45 @@ public class Transakcije extends javax.swing.JFrame {
         prodajBttn.setEnabled(false);
         ocistiBttn.setEnabled(false);
     }
-    
+
     private void noEdit() {
         nazivKTxt.setEditable(false);
         datumKTxt.setEditable(false);
         autorKTxt.setEditable(false);
         opisKTxt.setEditable(false);
+        cijenaKTxt.setEditable(false);
     }
-    
+
     private void emptyFields() {
         nazivKTxt.setText("");
         datumKTxt.setText("");
         autorKTxt.setText("");
         opisKTxt.setText("");
+        cijenaKTxt.setText("");
         nazivPTxt.setText("");
         datumPTxt.setText("");
         autorPCmb.setSelectedIndex(-1);
         opisPTxt.setText("");
+        cijenaPTxt.setText("");
         traziKTxt.setText("");
+        porukaLbl.setText("");
     }
-    
+
     private void ucitajKorisnike() {
         DefaultListModel<Korisnik> m = new DefaultListModel<>();
         obradaK.getPodaci().forEach(r -> m.addElement(r));
         korisniciLst.setModel(m);
+    }
+
+    private void ucitajKupljeno() {
+        DefaultListModel<String> m = new DefaultListModel<>();
+        m.addElement(obradaK.getEntitet().getKup_Djelo());
+        kupLst.setModel(m); // ???
+    }
+
+    private void ucitajProdano() {
+        DefaultListModel<String> m = new DefaultListModel<>();
+        m.addElement(obradaK.getEntitet().getProd_Djelo());
+        prodLst.setModel(m); // ???
     }
 }

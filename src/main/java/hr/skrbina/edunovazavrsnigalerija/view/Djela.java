@@ -10,6 +10,8 @@ import hr.skrbina.edunovazavrsnigalerija.controller.ObradaDjelo;
 import hr.skrbina.edunovazavrsnigalerija.model.Autor;
 import hr.skrbina.edunovazavrsnigalerija.model.Djelo;
 import hr.skrbina.edunovazavrsnigalerija.utility.SkrbinaException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.ImageIcon;
@@ -30,11 +32,18 @@ public class Djela extends javax.swing.JFrame {
      */
     public Djela() {
         initComponents();
-        //obrada = new ObradaDjelo();
+        obrada = new ObradaDjelo();
         setTitle("Gallery Exclusive - Djela");
-        //ucitajPodatke();
-        
+        ucitajPodatke();
         checkAndEmpty();
+        
+        /*ActionListener actionListener = new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                System.out.println("Selected: " + autorCmb.getSelectedItem());
+                System.out.println(", Position: " + autorCmb.getSelectedIndex());
+            }
+        };
+        autorCmb.addActionListener(actionListener);*/
         
         djelaLst.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
         pregledLbl.setIcon(new ImageIcon(getClass().getResource("/default.jpg")));
@@ -42,13 +51,13 @@ public class Djela extends javax.swing.JFrame {
             izmijeniBttn.setEnabled(false);
             obrisiBttn.setEnabled(false);
         }
-        
-        /*DefaultComboBoxModel<Autor> mr = new DefaultComboBoxModel<>();
+
+        DefaultComboBoxModel<Autor> mr = new DefaultComboBoxModel<>();
         new ObradaAutor().getPodaci().forEach(r -> {
             mr.addElement(r);
         });
         autorCmb.setModel(mr);
-        autorCmb.setSelectedIndex(-1);*/
+        autorCmb.setSelectedIndex(-1);
     }
 
     /**
@@ -76,8 +85,12 @@ public class Djela extends javax.swing.JFrame {
         povratakBttn = new javax.swing.JButton();
         autorCmb = new javax.swing.JComboBox<>();
         porukaLbl = new javax.swing.JLabel();
+        cijenaTxt = new javax.swing.JTextField();
+        cijena = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        djelaLst.setFont(new java.awt.Font("Georgia", 2, 14)); // NOI18N        
         djelaLst.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         djelaLst.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -161,6 +174,12 @@ public class Djela extends javax.swing.JFrame {
         porukaLbl.setFont(new java.awt.Font("Georgia", 2, 14)); // NOI18N
         porukaLbl.setText("jLabel1");
 
+        cijenaTxt.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        cijenaTxt.setText("jTextField1");
+
+        cijena.setFont(new java.awt.Font("Georgia", 3, 14)); // NOI18N
+        cijena.setText("Cijena:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -169,31 +188,32 @@ public class Djela extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pregledLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(porukaLbl)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(naziv)
-                                    .addComponent(autor)
-                                    .addComponent(datum)
-                                    .addComponent(opis))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(datumTxt)
-                                    .addComponent(opisTxt, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(nazivTxt)
-                                    .addComponent(autorCmb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(naziv)
+                            .addComponent(autor)
+                            .addComponent(datum)
+                            .addComponent(opis)
+                            .addComponent(cijena))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(datumTxt)
+                            .addComponent(opisTxt, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(nazivTxt)
+                            .addComponent(autorCmb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cijenaTxt))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(obrisiBttn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(povratakBttn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(dodajBttn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(izmijeniBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(izmijeniBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(porukaLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -204,10 +224,10 @@ public class Djela extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addComponent(pregledLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(porukaLbl)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(porukaLbl)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(nazivTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(naziv))
@@ -222,7 +242,11 @@ public class Djela extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(opis)
-                            .addComponent(opisTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(opisTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cijenaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cijena)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(dodajBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -263,9 +287,9 @@ public class Djela extends javax.swing.JFrame {
     private void dodajBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dodajBttnActionPerformed
         porukaLbl.setText("");
         entitet = new Djelo();
-        
+
         postaviVrijednostiUEntitet();
-        
+
         obrada.setEntitet(entitet);
         try {
             obrada.create();
@@ -355,17 +379,24 @@ public class Djela extends javax.swing.JFrame {
         autorCmb.setSelectedIndex(-1);
         datumTxt.setText("");
         opisTxt.setText("");
+        cijenaTxt.setText("");
     }
 
     private void postaviVrijednostiUEntitet() {
         entitet.setNaziv(nazivTxt.getText());
+        // set autor
+        entitet.setAutor((Autor)autorCmb.getSelectedItem()); // ???
+        entitet.setDatum(datumTxt.getText());
         entitet.setOpis(opisTxt.getText());
+        entitet.setCijena(Double.parseDouble(cijenaTxt.getText()));
         obrada.setEntitet(entitet);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel autor;
     private javax.swing.JComboBox<Autor> autorCmb;
+    private javax.swing.JLabel cijena;
+    private javax.swing.JTextField cijenaTxt;
     private javax.swing.JLabel datum;
     private javax.swing.JFormattedTextField datumTxt;
     private javax.swing.JList<Djelo> djelaLst;
@@ -392,5 +423,6 @@ public class Djela extends javax.swing.JFrame {
         opisTxt.setText("");
         autorCmb.setSelectedIndex(-1);
         porukaLbl.setText("");
+        cijenaTxt.setText("");
     }
 }

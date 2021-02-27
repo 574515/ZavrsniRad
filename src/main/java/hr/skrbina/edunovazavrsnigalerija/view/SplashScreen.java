@@ -23,7 +23,7 @@ public class SplashScreen extends javax.swing.JFrame {
         ucitanje.start();
     }
     
-    private class Ucitanje extends Thread{
+    private class Ucitanje extends Thread {
         @Override
         public void run() {
             Session s = HibernateUtil.getSessionFactory().openSession();
@@ -93,10 +93,8 @@ public class SplashScreen extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SplashScreen().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new SplashScreen().setVisible(true);
         });
     }
 

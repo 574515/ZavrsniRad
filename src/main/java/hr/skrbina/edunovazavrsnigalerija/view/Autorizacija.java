@@ -25,8 +25,8 @@ public class Autorizacija extends javax.swing.JFrame {
         initComponents();
         setTitle("Gallery Exclusive - Autorizacija");
         emailTxt.requestFocus();
-        emailTxt.setText("admin@ge.com");
-        pswTxt.setText("admin");
+        emailTxt.setText("oper@ge.hr");
+        pswTxt.setText("e");
     }
 
     /**
@@ -215,6 +215,5 @@ public class Autorizacija extends javax.swing.JFrame {
         izb.setVisible(true);
         izb.setLocationRelativeTo(null);
         dispose();
-
     }
 }
