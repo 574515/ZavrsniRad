@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Scanner;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import us.codecraft.xsoup.Xsoup;
 
 /**
@@ -18,17 +19,14 @@ import us.codecraft.xsoup.Xsoup;
 public class Oib {
 
     public static boolean isValjan(String oib) {
-
         if (oib.length() != 11) {
             return false;
         }
-
         try {
             Long.parseLong(oib);
         } catch (NumberFormatException e) {
             return false;
         }
-
         int a = 10;
         for (int i = 0; i < 10; i++) {
             a = a + Integer.parseInt(oib.substring(i, i + 1));
@@ -49,8 +47,7 @@ public class Oib {
     public static String getOibIiCentrala() {
         try {
             String html = new Scanner(new URL("http://oib.itcentrala.com/oib-generator/").openStream(), "UTF-8").useDelimiter("\\A").next();
-
-            org.jsoup.nodes.Document document = Jsoup.parse(html);
+            Document document = Jsoup.parse(html);
             return Xsoup.compile("/html/body/div[1]/div[1]/text()").evaluate(document).get();
         } catch (IOException e) {
             return null;
