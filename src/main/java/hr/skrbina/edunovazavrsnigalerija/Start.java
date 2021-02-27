@@ -5,7 +5,8 @@
  */
 package hr.skrbina.edunovazavrsnigalerija;
 
-import hr.skrbina.edunovazavrsnigalerija.view.Izbornik;
+import hr.skrbina.edunovazavrsnigalerija.utility.PocetniInsert;
+import hr.skrbina.edunovazavrsnigalerija.view.SplashScreen;
 
 /**
  *
@@ -13,9 +14,11 @@ import hr.skrbina.edunovazavrsnigalerija.view.Izbornik;
  */
 public class Start {
 
-    public static void main(String[] args) {       
-       Izbornik izb = new Izbornik();
-       izb.setVisible(true);
-       izb.setLocationRelativeTo(null);
+    public static void main(String[] args) {
+        SplashScreen ss = new SplashScreen();
+        ss.setVisible(true);
+        ss.setLocationRelativeTo(null);
+        PocetniInsert.izvedi();
+        PocetniInsert.adminOperater();
     }
 }
