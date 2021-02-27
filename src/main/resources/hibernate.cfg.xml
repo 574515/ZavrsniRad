@@ -1,12 +1,17 @@
 <!DOCTYPE hibernate-configuration PUBLIC
         "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
-                
+        
+       <!-- 
+        Potrebno je ručno kreirati bazu
+            drop database edunovajp22_hib;
+            create database edunovajp22_hib default character set utf8mb4;
+        -->        
 <hibernate-configuration>
     <session-factory>
         <!-- JDBC Database connection settings -->
         <property name="connection.driver_class">org.mariadb.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mariadb://localhost:3306/galerija_exclusive?useSSL=false</property>
+        <property name="connection.url">jdbc:mariadb://localhost:3306/edunovajp22_hib?useSSL=false</property>
         <property name="connection.username">edunova</property>
         <property name="connection.password">edunova</property>
         <!-- JDBC connection pool settings ... using built-in test pool -->
@@ -33,19 +38,15 @@
         <property name="hibernate.dbcp.maxIdle">10</property>
         <property name="hibernate.dbcp.minIdle">5</property>
         <property name="hibernate.dbcp.maxWaitMillis">-1</property>
-        
-        
+                
         <!-- Ovdje navodimo naše mapirane klase -->
-        <mapping class="hr.skrbina.edunovazavrsnigalerija.model.Autor" />
-        <mapping class="hr.skrbina.edunovazavrsnigalerija.model.Djelo" />
-        <mapping class="hr.skrbina.edunovazavrsnigalerija.model.Entitet" />
-        <mapping class="hr.skrbina.edunovazavrsnigalerija.model.Izlozba" />
-        <mapping class="hr.skrbina.edunovazavrsnigalerija.model.Korisnik" />
-        <mapping class="hr.skrbina.edunovazavrsnigalerija.model.Kustos" />
-        <mapping class="hr.skrbina.edunovazavrsnigalerija.model.Operater" />
-        <mapping class="hr.skrbina.edunovazavrsnigalerija.model.Osoba" />
-        <mapping class="hr.skrbina.edunovazavrsnigalerija.model.Transakcija" />
-        
-        
+         <mapping class="hr.skrbina.edunovazavrsnigalerija.model.Autor" />
+         <mapping class="hr.skrbina.edunovazavrsnigalerija.model.Djelo" />
+         <mapping class="hr.skrbina.edunovazavrsnigalerija.model.Izlozba" />
+         <mapping class="hr.skrbina.edunovazavrsnigalerija.model.Korisnik" />
+         <mapping class="hr.skrbina.edunovazavrsnigalerija.model.Kustos" />
+         <mapping class="hr.skrbina.edunovazavrsnigalerija.model.Operater" />
+         <mapping class="hr.skrbina.edunovazavrsnigalerija.model.Transakcija" />
+                
     </session-factory>
 </hibernate-configuration>
