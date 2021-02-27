@@ -12,11 +12,10 @@ import java.io.File;
  * @author Hrvoje
  */
 public class Test {
-    
+
     public static void main(String[] args) {
-      
-      File jarDir = new File(ClassLoader.getSystemClassLoader().getResource(".").getPath()
-                    + File.separator + "hibernate.cfg.xml");
-        System.out.println(jarDir);       
-    }    
+        File jarDir = new File(ClassLoader.getSystemClassLoader().getResource(".").getPath()
+                + File.separator + "hibernate.cfg.xml");
+        System.out.println(jarDir);
+    }
 }
