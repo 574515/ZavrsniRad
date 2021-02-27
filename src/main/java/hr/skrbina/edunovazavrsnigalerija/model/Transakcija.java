@@ -41,6 +41,5 @@ public class Transakcija extends Entitet {
 
     public void setDjelo(String djelo) {
         this.djelo = djelo;
-    }
-    
+    }    
 }

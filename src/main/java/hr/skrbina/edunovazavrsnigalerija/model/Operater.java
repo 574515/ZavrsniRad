@@ -5,26 +5,14 @@
  */
 package hr.skrbina.edunovazavrsnigalerija.model;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-
 /**
  *
  * @author Hrvoje
  */
-@Entity
 public class Operater extends Osoba {
 
     private String lozinka;
-
-    @Enumerated(EnumType.STRING)
-    private Uloga uloga;
-
-    public static enum Uloga {
-        Operater,
-        Administrator
-    }
+    private String uloga;
 
     public String getLozinka() {
         return lozinka;
@@ -34,11 +22,11 @@ public class Operater extends Osoba {
         this.lozinka = lozinka;
     }
 
-    public Uloga getUloga() {
+    public String getUloga() {
         return uloga;
     }
 
-    public void setUloga(Uloga uloga) {
+    public void setUloga(String uloga) {
         this.uloga = uloga;
     }
 

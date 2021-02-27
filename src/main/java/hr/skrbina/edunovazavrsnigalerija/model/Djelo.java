@@ -5,17 +5,20 @@
  */
 package hr.skrbina.edunovazavrsnigalerija.model;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 /**
  *
  * @author Hrvoje
  */
+@Entity
 public class Djelo extends Entitet {
     
     private String naziv;
     private String datum;
     private String opis;
+    private Double cijena;
     
     @ManyToOne
     private Autor autor;
@@ -42,6 +45,14 @@ public class Djelo extends Entitet {
 
     public void setOpis(String opis) {
         this.opis = opis;
+    }
+    
+    public Double getCijena() {
+        return cijena;
+    }
+    
+    public void setCijena(Double cijena) {
+        this.cijena = cijena;
     }
 
     public Autor getAutor() {
