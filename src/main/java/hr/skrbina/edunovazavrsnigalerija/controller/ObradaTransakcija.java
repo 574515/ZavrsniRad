@@ -5,10 +5,48 @@
  */
 package hr.skrbina.edunovazavrsnigalerija.controller;
 
+import hr.skrbina.edunovazavrsnigalerija.model.Transakcija;
+import hr.skrbina.edunovazavrsnigalerija.utility.SkrbinaException;
+import java.util.List;
+
 /**
  *
  * @author Hrvoje
  */
-public class ObradaTransakcija {
+public class ObradaTransakcija extends Obrada<Transakcija>  {
     
+    public ObradaTransakcija(Transakcija transakcija){
+        super(transakcija);
+    }
+    
+    public ObradaTransakcija(){
+        super();
+    }
+
+    @Override
+    public List<Transakcija> getPodaci() {
+        return session.createQuery("from Transakcija").list();
+    }
+
+    @Override
+    protected void kontrolaCreate() throws SkrbinaException {
+        kontrolaDjelo();
+    }
+
+    @Override
+    protected void kontrolaUpdate() throws SkrbinaException {
+        kontrolaDjelo();
+    }
+
+    @Override
+    protected void kontrolaDelete() throws SkrbinaException {}
+    
+    protected void kontrolaDjelo() throws SkrbinaException {
+        if (entitet.getDjelo() == null) {
+            throw new SkrbinaException("Djelo nije definirano!");
+        }
+        if (entitet.getDjelo().isEmpty()) {
+            throw new SkrbinaException("Djelo ne smije biti prazno!");
+        }
+    }
 }

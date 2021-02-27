@@ -17,7 +17,6 @@ import org.mindrot.jbcrypt.BCrypt;
 public class ObradaOperater extends ObradaOsoba<Operater> {
 
     public Operater autoriziraj(String email, char[] lozinka) {
-
         Operater operater = (Operater) session.createQuery(
                 "from Operater o where o.email=:email")
                 .setParameter("email", email).getSingleResult();
@@ -37,7 +36,6 @@ public class ObradaOperater extends ObradaOsoba<Operater> {
         kontrolaOibBazaKreiraj();
         kontrolaLozinka();
         kontrolaUlogaOdabran();
-
     }
 
     @Override
@@ -48,7 +46,6 @@ public class ObradaOperater extends ObradaOsoba<Operater> {
 
     @Override
     protected void kontrolaDelete() throws SkrbinaException {
-
     }
 
     @Override
@@ -60,7 +57,6 @@ public class ObradaOperater extends ObradaOsoba<Operater> {
         if (entitet.getUloga() == null) {
             throw new SkrbinaException("Uloga je obavezna, ne može biti prazna!");
         }
-
     }
 
     private void kontrolaLozinka() throws SkrbinaException {
@@ -79,7 +75,6 @@ public class ObradaOperater extends ObradaOsoba<Operater> {
         if (lista.size() > 0) {
             throw new SkrbinaException("Oib je dodjeljen " + lista.get(0).getImePrezime() + ", unesite drugi OIB!");
         }
-
     }
 
     private void kontrolaOibBazaPromjeni() throws SkrbinaException {
@@ -93,7 +88,6 @@ public class ObradaOperater extends ObradaOsoba<Operater> {
         if (lista.size() > 0) {
             throw new SkrbinaException("Oib je dodjeljen " + lista.get(0).getImePrezime() + ", unesite drugi OIB!");
         }
-
     }
 
     private void kontrolaUlogaOdabran() throws SkrbinaException {

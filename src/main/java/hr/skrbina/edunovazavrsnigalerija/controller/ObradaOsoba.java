@@ -8,7 +8,6 @@ package hr.skrbina.edunovazavrsnigalerija.controller;
 import hr.skrbina.edunovazavrsnigalerija.model.Osoba;
 import hr.skrbina.edunovazavrsnigalerija.utility.SkrbinaException;
 import hr.skrbina.edunovazavrsnigalerija.utility.Oib;
-import javax.mail.internet.InternetAddress;
 
 /**
  *
@@ -21,21 +20,24 @@ public abstract class ObradaOsoba<T extends Osoba> extends Obrada<T> {
     protected void kontrolaCreate() throws SkrbinaException {
         kontrolaIme();
         kontrolaPrezime();
+        kontrolaRodjendan();
         kontrolaOib();
         kontrolaKontakt();
+        kontrolUloge();
     }
 
     @Override
     protected void kontrolaUpdate() throws SkrbinaException {
         kontrolaIme();
         kontrolaPrezime();
+        kontrolaRodjendan();
         kontrolaOib();
         kontrolaKontakt();
+        kontrolUloge();
     }
 
     @Override
-    protected void kontrolaDelete() throws SkrbinaException {
-    }
+    protected void kontrolaDelete() throws SkrbinaException {}
 
     protected void kontrolaIme() throws SkrbinaException {
         if (entitet.getIme().isEmpty() || entitet.getIme() == null) {
@@ -53,7 +55,12 @@ public abstract class ObradaOsoba<T extends Osoba> extends Obrada<T> {
         if (!entitet.getPrezime().matches(("^[a-zA-ZÆÐƎƏƐƔĲŊŒẞÞǷȜæðǝəɛɣĳŋœĸſßþƿȝĄƁÇĐƊĘĦĮƘŁØƠŞȘŢȚŦŲƯY̨Ƴąɓçđɗęħįƙłøơşșţțŧųưy̨ƴÁÀÂÄǍĂĀÃÅǺĄÆǼǢƁĆĊĈČÇĎḌĐƊÐÉÈĖÊËĚĔĒĘẸƎƏƐĠĜǦĞĢƔáàâäǎăāãåǻąæǽǣɓćċĉčçďḍđɗðéèėêëěĕēęẹǝəɛġĝǧğģɣĤḤĦIÍÌİÎÏǏĬĪĨĮỊĲĴĶƘĹĻŁĽĿʼNŃN̈ŇÑŅŊÓÒÔÖǑŎŌÕŐỌØǾƠŒĥḥħıíìiîïǐĭīĩįịĳĵķƙĸĺļłľŀŉńn̈ňñņŋóòôöǒŏōõőọøǿơœŔŘŖŚŜŠŞȘṢẞŤŢṬŦÞÚÙÛÜǓŬŪŨŰŮŲỤƯẂẀŴẄǷÝỲŶŸȲỸƳŹŻŽẒŕřŗſśŝšşșṣßťţṭŧþúùûüǔŭūũűůųụưẃẁŵẅƿýỳŷÿȳỹƴźżžẓ\\s-,.\\']+$"))) {
             throw new SkrbinaException("Prezime nije ispravno! Dozvoljen je unos samo slova.");
         }
-
+    }
+    
+    protected void kontrolaRodjendan() throws SkrbinaException {
+        if (entitet.getRodjendan() == null) {
+            throw new SkrbinaException("Datum rođenja ne smije biti prazan!");
+        }
     }
 
     protected void kontrolaOib() throws SkrbinaException {
@@ -66,18 +73,20 @@ public abstract class ObradaOsoba<T extends Osoba> extends Obrada<T> {
     }
 
     protected void kontrolaKontakt() throws SkrbinaException {
-
         if (entitet.getKontakt().isEmpty()) {
-            throw new SkrbinaException("Email ne smije biti prazan!");
+            throw new SkrbinaException("Kontakt ne smije biti prazan!");
         }
-        if (entitet.getKontakt().length() >= 50) {
-            throw new SkrbinaException("Email je predugačak!");
+        if (entitet.getKontakt().length() >= 100) {
+            throw new SkrbinaException("Kontakt je predugačak!");
         }
-        try {
-            InternetAddress emailAddr = new InternetAddress(entitet.getKontakt());
-            emailAddr.validate();
-        } catch (Exception e) {
-            throw new SkrbinaException("Email nije u ispravnom formatu!");
+    }
+    
+    protected void kontrolUloge() throws SkrbinaException {
+        if (entitet.getUlogaGalerija().isEmpty()) {
+            throw new SkrbinaException("Uloga mora biti postavljena");
+        }
+        if (!entitet.getUlogaGalerija().equals("autor") || !entitet.getUlogaGalerija().equals("korisnik") || !entitet.getUlogaGalerija().equals("kustos")) {
+            throw new SkrbinaException("Nepoznata uloga. Dozvoljene uloge: \"autor\", \"korisnik\", \"kustos\".");
         }
     }
 }

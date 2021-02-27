@@ -14,43 +14,70 @@ import java.util.List;
  * @author Hrvoje
  */
 public class ObradaIzlozba extends Obrada<Izlozba> {
-    public ObradaIzlozba(Izlozba izlozba){
+
+    public ObradaIzlozba(Izlozba izlozba) {
         super(izlozba);
     }
-    
-    public ObradaIzlozba(){
+
+    public ObradaIzlozba() {
         super();
     }
-    
+
     @Override
     public List<Izlozba> getPodaci() {
-       return session.createQuery("from Izlozba").list();
+        return session.createQuery("from Izlozba").list();
     }
 
     @Override
     protected void kontrolaCreate() throws SkrbinaException {
-       kontrolaNaziv();
+        kontrolaDatumPocetka();
+        kontrolaDatumZavrsetka();
+        kontrolaTema();
+        kontrolaKustos();
     }
 
     @Override
     protected void kontrolaUpdate() throws SkrbinaException {
-        
+        kontrolaDatumPocetka();
+        kontrolaDatumZavrsetka();
+        kontrolaTema();
+        kontrolaKustos();
     }
 
     @Override
     protected void kontrolaDelete() throws SkrbinaException {
-        
     }
 
-    private void kontrolaNaziv() throws SkrbinaException {
-       if (entitet.getDatum_Pocetka() == null) {
+    private void kontrolaDatumPocetka() throws SkrbinaException {
+        if (entitet.getDatum_Pocetka() == null) {
             throw new SkrbinaException("Datum početka nije definiran! ");
         }
         if (entitet.getDatum_Pocetka().isEmpty()) {
-            throw new SkrbinaException(" Morate unijeti naziv! ");
+            throw new SkrbinaException("Morate unijeti datum početka!");
         }
-        if (entitet.getDatum_Pocetka().length() > 50) {
-            throw new SkrbinaException(" Naziv ne smije sadržavati više od 50 znakova. ");
+    }
+
+    private void kontrolaDatumZavrsetka() throws SkrbinaException {
+        if (entitet.getDatum_Pocetka() == null) {
+            throw new SkrbinaException("Datum završetka nije definiran!");
         }
-    } 
+        if (entitet.getDatum_Pocetka().isEmpty()) {
+            throw new SkrbinaException("Morate unijeti datum završetka!");
+        }
+    }
+
+    private void kontrolaTema() throws SkrbinaException {
+        if (entitet.getTema() == null) {
+            throw new SkrbinaException("Tema nije definirana!");
+        }
+        if (entitet.getTema().isEmpty()) {
+            throw new SkrbinaException("Morate unijeti temu!");
+        }
+    }
+
+    private void kontrolaKustos() throws SkrbinaException {
+        if (entitet.getKustos() == null) {
+            throw new SkrbinaException("Kustos nije definiran / dodijeljen!");
+        }
+    }
 }

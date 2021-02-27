@@ -14,78 +14,43 @@ import java.util.List;
  * @author Hrvoje
  */
 public class ObradaAutor extends ObradaOsoba<Autor> {
-    
-    public ObradaAutor() {}
-    
+
+    public ObradaAutor() {
+        super();
+    }
+
     @Override
     protected void kontrolaCreate() throws SkrbinaException {
         super.kontrolaCreate();
-        kontrolaOibBazaKreiraj();
-        kontrolaKontaktBroj();
+        kontrolaIme();
+        kontrolaPrezime();
+        kontrolaRodjendan();
+        kontrolUloge();
     }
 
     @Override
     protected void kontrolaUpdate() throws SkrbinaException {
         super.kontrolaUpdate();
-        kontrolaOibBazaPromjeni();
-        kontrolaKontaktBroj();
+        kontrolaIme();
+        kontrolaPrezime();
+        kontrolaRodjendan();
+        kontrolUloge();
     }
 
     @Override
     protected void kontrolaDelete() throws SkrbinaException {
     }
 
-    private void kontrolaKontaktBroj() throws SkrbinaException {
-        if (entitet.getKontakt().isEmpty()) {
-            throw new SkrbinaException("Kontakt broj ne smije biti prazan!");
-        }
-        if (!entitet.getKontakt().matches("[0-9]+")) {
-            throw new SkrbinaException("Kontakt broj nije valjan!");
-        }
-        if (entitet.getKontakt().length()> 14) {
-            throw new SkrbinaException("Kontakt broj nije valjan!");
-        }
-        if (entitet.getKontakt().length()< 9) {
-            throw new SkrbinaException("Kontakt broj nije valjan!");
-        }
-    }
-
     @Override
     public List<Autor> getPodaci() {
-        return session.createQuery("from Korisnik").list();
+        return session.createQuery("from Autor").list();
     }
 
     public List<Autor> getPodaci(String uvjet) {
-        return session.createQuery("from Autor k "
-                + " where author(k.ime, ' ', k.prezime, ' ', k.oib) "
+        return session.createQuery("from Autor a where author(a.ime, ' ', a.prezime, ' ', a.oib) "
                 + " like :uvjet ")
                 .setParameter("uvjet", "%" + uvjet + "%")
                 .setMaxResults(20)
                 .list();
-    }
-
-    private void kontrolaOibBazaKreiraj() throws SkrbinaException {
-        List<Autor> lista = session.createQuery(""
-                + " from Autor k "
-                + " where k.oib=:oib "
-        )
-                .setParameter("oib", entitet.getOib())
-                .list();
-        if (lista.size() > 0) {
-            throw new SkrbinaException("Oib je dodjeljen " + lista.get(0).getImePrezime() + ", unesite drugi OIB!");
-        }
-    }
-
-    private void kontrolaOibBazaPromjeni() throws SkrbinaException {
-        List<Autor> lista = session.createQuery(""
-                + " from Autor k "
-                + " where k.oib=:oib and k.id!=:id"
-        )
-                .setParameter("oib", entitet.getOib())
-                .setParameter("id", entitet.getId())
-                .list();
-        if (lista.size() > 0) {
-            throw new SkrbinaException("Oib je dodjeljen " + lista.get(0).getImePrezime() + ", unesite drugi OIB!");
-        }
     }
 }

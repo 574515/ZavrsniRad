@@ -13,46 +13,69 @@ import java.util.List;
  *
  * @author Hrvoje
  */
-public class ObradaDjelo extends Obrada<Djelo>{
-    
-    public ObradaDjelo(Djelo djelo){
+public class ObradaDjelo extends Obrada<Djelo> {
+
+    public ObradaDjelo(Djelo djelo) {
         super(djelo);
     }
-    
-    public ObradaDjelo(){
+
+    public ObradaDjelo() {
         super();
     }
-    
+
     @Override
     public List<Djelo> getPodaci() {
-       return session.createQuery("from Djelo").list();
+        return session.createQuery("from Djelo").list();
     }
 
     @Override
     protected void kontrolaCreate() throws SkrbinaException {
-       kontrolaNaziv();
+        kontrolaNaziv();
+        kontrolaDatum();
+        kontrolaOpis();
     }
 
     @Override
     protected void kontrolaUpdate() throws SkrbinaException {
-        
+        kontrolaNaziv();
+        kontrolaDatum();
+        kontrolaOpis();
     }
 
     @Override
     protected void kontrolaDelete() throws SkrbinaException {
-        
     }
 
     private void kontrolaNaziv() throws SkrbinaException {
-       if (entitet.getNaziv() == null) {
-            throw new SkrbinaException(" Naziv nije definiran! ");
+        if (entitet.getNaziv() == null) {
+            throw new SkrbinaException("Naziv nije definiran!");
         }
         if (entitet.getNaziv().isEmpty()) {
-            throw new SkrbinaException(" Morate unijeti naziv! ");
+            throw new SkrbinaException("Morate unijeti naziv!");
         }
         if (entitet.getNaziv().length() > 50) {
-            throw new SkrbinaException(" Naziv ne smije sadržavati više od 50 znakova. ");
+            throw new SkrbinaException("Naziv ne smije sadržavati više od 50 znakova.");
         }
-    } 
-    
+    }
+
+    private void kontrolaDatum() throws SkrbinaException {
+        if (entitet.getDatum() == null) {
+            throw new SkrbinaException("Datum nije definiran!");
+        }
+        if (entitet.getDatum().isEmpty()) {
+            throw new SkrbinaException("Morate unijeti datum!");
+        }
+    }
+
+    private void kontrolaOpis() throws SkrbinaException {
+        if (entitet.getOpis() == null) {
+            throw new SkrbinaException("Opis nije definiran!");
+        }
+        if (entitet.getOpis().isEmpty()) {
+            throw new SkrbinaException("Morate unijeti opis!");
+        }
+        if (entitet.getOpis().length() > 350) {
+            throw new SkrbinaException("Opis ne smije sadržavati više od 350 znakova.");
+        }
+    }
 }
