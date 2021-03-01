@@ -13,9 +13,7 @@ import hr.skrbina.edunovazavrsnigalerija.model.Izlozba;
 import hr.skrbina.edunovazavrsnigalerija.model.Korisnik;
 import hr.skrbina.edunovazavrsnigalerija.model.Kustos;
 import hr.skrbina.edunovazavrsnigalerija.model.Operater;
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import org.hibernate.Session;
 import org.mindrot.jbcrypt.BCrypt;
@@ -24,7 +22,7 @@ import org.mindrot.jbcrypt.BCrypt;
  *
  * @author Hrvoje
  */
-public class PocetniInsert {
+public class PocetniInsert {    
 
     public static void izvedi() {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -44,11 +42,11 @@ public class PocetniInsert {
         } catch (SkrbinaException ex) {
         }
 
-        Autor autor1 = kreirajAutora("Vincent", "van Gogh", "Zundert, Netherlands", "30 March 1853");
-        Autor autor2 = kreirajAutora("Pablo", "Picasso", "Malaga, Spain", "25 October 1881");
-        Autor autor3 = kreirajAutora("Tiziano", "Vecelli / Vecellio", "Pieve di Cadore, Republic of Venice", "c.  1488/1490");
-        Autor autor4 = kreirajAutora("Raffaello", "Sanzio da Urbino", "Urbino, Duchy of Urbino", "March 28 / April 6, 1483");
-        Autor autor5 = kreirajAutora("Michelangelo", "Merisi da Caravaggio", "Milan, Duchy of Milan, Spanish Empire", "29 September 1571");
+        Autor autor1 = kreirajAutora("Vincent", "van Gogh", "Zundert, Netherlands", "30 March 1853", "vvg@gallery.hr");
+        Autor autor2 = kreirajAutora("Pablo", "Picasso", "Malaga, Spain", "25 October 1881", "pp@gallery.hr");
+        Autor autor3 = kreirajAutora("Tiziano", "Vecelli / Vecellio", "Pieve di Cadore, Republic of Venice", "c.  1488/1490", "tizi@gallery.hr");
+        Autor autor4 = kreirajAutora("Raffaello", "Sanzio da Urbino", "Urbino, Duchy of Urbino", "March 28 / April 6, 1483", "rsdu@gallery.hr");
+        Autor autor5 = kreirajAutora("Michelangelo", "Merisi da Caravaggio", "Milan, Duchy of Milan, Spanish Empire", "29 September 1571", "mmdc@gallery.hr");
 
         Djelo poppyFlowers = kreirajDjelo("Poppy Flowers", "1887", "It was stolen from Cairo's Mohamed Mahmoud Khalil Museum in August 2010 and has yet to be "
                 + "found.", 43488705.75, autor1);
@@ -110,7 +108,7 @@ public class PocetniInsert {
         Operater operater = new Operater();
         operater.setIme("Exclusive");
         operater.setPrezime("Operater");
-        operater.setUloga("admin");
+        operater.setUloga("oper");
         operater.setKontakt("oper@ge.hr");
         operater.setOib(Oib.getOibIiCentrala());
         operater.setLozinka(BCrypt.hashpw("e", BCrypt.gensalt()));
@@ -134,12 +132,15 @@ public class PocetniInsert {
         return djelo;
     }
 
-    private static Autor kreirajAutora(String ime, String prezime, String mjestoRodenja, String rodjendan) {
+    private static Autor kreirajAutora(String ime, String prezime, String mjestoRodenja, String rodjendan, String email) {
         Autor autor = new Autor();
         autor.setIme(ime);
         autor.setPrezime(prezime);
         autor.setMjesto_Rodjenja(mjestoRodenja);
         autor.setRodjendan(rodjendan);
+        autor.setIBAN(Iban.getIbanIiCentrala());
+        autor.setKontakt(email);
+        autor.setOib(Oib.getOibIiCentrala());
         autor.setUlogaGalerija("autor");
         return autor;
     }

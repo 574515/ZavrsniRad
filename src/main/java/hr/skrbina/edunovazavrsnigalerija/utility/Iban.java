@@ -5,6 +5,7 @@
  */
 package hr.skrbina.edunovazavrsnigalerija.utility;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Scanner;
 import org.jsoup.Jsoup;
@@ -50,12 +51,9 @@ public class Iban {
     public static String getIbanIiCentrala() {
         try {
             String html = new Scanner(new URL("http://randomiban.com/?country=Croatia").openStream(), "UTF-8").useDelimiter("\\A").next();
-
             Document document = Jsoup.parse(html);
-
             return Xsoup.compile("/html/body/div[1]/div[1]/text()").evaluate(document).get();
-
-        } catch (Exception e) {
+        } catch (IOException e) {
             return null;
         }
 
