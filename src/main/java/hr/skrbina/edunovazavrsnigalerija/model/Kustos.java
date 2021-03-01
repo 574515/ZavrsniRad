@@ -5,10 +5,11 @@
  */
 package hr.skrbina.edunovazavrsnigalerija.model;
 
+import javax.persistence.Entity;
+
 /**
  *
  * @author Hrvoje
  */
-public class Kustos extends Osoba {
-    
-}
+@Entity
+public class Kustos extends Osoba {}

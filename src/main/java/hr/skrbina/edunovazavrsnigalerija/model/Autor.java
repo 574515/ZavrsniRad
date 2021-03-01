@@ -5,8 +5,11 @@
  */
 package hr.skrbina.edunovazavrsnigalerija.model;
 
+import javax.persistence.Entity;
+
 /**
  *
  * @author Hrvoje
  */
+@Entity
 public class Autor extends Osoba {}

@@ -5,18 +5,17 @@
  */
 package hr.skrbina.edunovazavrsnigalerija.model;
 
-import javax.persistence.OneToOne;
+import javax.persistence.Entity;
 
 /**
  *
  * @author Hrvoje
  */
+@Entity
 public class Transakcija extends Entitet {
     
     private Integer cijena;
     private String status;
-    
-    @OneToOne
     private String djelo;
 
     public Integer getCijena() {

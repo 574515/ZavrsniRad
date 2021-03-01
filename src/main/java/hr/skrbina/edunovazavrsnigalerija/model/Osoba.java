@@ -11,7 +11,7 @@ import javax.persistence.MappedSuperclass;
  * @author Hrvoje
  */
 @MappedSuperclass
-public class Osoba extends Entitet {
+public abstract class Osoba extends Entitet {
  
     private String ime;
     private String prezime;
@@ -19,7 +19,7 @@ public class Osoba extends Entitet {
     private String oib;
     private String mjesto_Rodjenja;
     private String IBAN;
-    private String kontakt;
+    private String email;
     private String ulogaGalerija;
     
     public String getIme() {
@@ -71,11 +71,11 @@ public class Osoba extends Entitet {
     }
 
     public String getKontakt() {
-        return kontakt;
+        return email;
     }
 
-    public void setKontakt(String kontakt) {
-        this.kontakt = kontakt;
+    public void setKontakt(String email) {
+        this.email = email;
     }
     
     public String getImePrezime() {

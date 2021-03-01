@@ -5,12 +5,15 @@
  */
 package hr.skrbina.edunovazavrsnigalerija.model;
 
+import javax.persistence.Entity;
+
 /**
  *
  * @author Hrvoje
  */
-public class Operater extends Osoba {
-
+@Entity
+public class Operater extends Osoba{
+    
     private String lozinka;
     private String uloga;
 
@@ -28,10 +31,5 @@ public class Operater extends Osoba {
 
     public void setUloga(String uloga) {
         this.uloga = uloga;
-    }
-
-    @Override
-    public String toString() {
-        return getImePrezime() + " (" + getUloga() + ")";
     }
 }

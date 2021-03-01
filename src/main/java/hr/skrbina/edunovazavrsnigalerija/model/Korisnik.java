@@ -5,12 +5,14 @@
  */
 package hr.skrbina.edunovazavrsnigalerija.model;
 
+import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
 /**
  *
  * @author Hrvoje
  */
+@Entity
 public class Korisnik extends Osoba {
     
     private String kup_Djelo;
