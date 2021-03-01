@@ -13,6 +13,7 @@ import org.hibernate.Session;
 /**
  *
  * @author Hrvoje
+ * @param <T>
  */
 public abstract class Obrada<T> {
 

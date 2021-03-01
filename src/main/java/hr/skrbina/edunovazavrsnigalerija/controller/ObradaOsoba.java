@@ -85,7 +85,8 @@ public abstract class ObradaOsoba<T extends Osoba> extends Obrada<T> {
         if (entitet.getUlogaGalerija().isEmpty()) {
             throw new SkrbinaException("Uloga mora biti postavljena");
         }
-        if (!entitet.getUlogaGalerija().equals("autor") || !entitet.getUlogaGalerija().equals("korisnik") || !entitet.getUlogaGalerija().equals("kustos")) {
+        if (entitet.getUlogaGalerija().contains("autor") == false || !entitet.getUlogaGalerija().contains("korisnik") == false
+                || entitet.getUlogaGalerija().contains("kustos") == false) {
             throw new SkrbinaException("Nepoznata uloga. Dozvoljene uloge: \"autor\", \"korisnik\", \"kustos\".");
         }
     }

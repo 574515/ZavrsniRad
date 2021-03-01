@@ -47,7 +47,7 @@ public class ObradaAutor extends ObradaOsoba<Autor> {
     }
 
     public List<Autor> getPodaci(String uvjet) {
-        return session.createQuery("from Autor a where author(a.ime, ' ', a.prezime, ' ', a.oib) "
+        return session.createQuery("from Autor a where author(a.ime, ' '  , a.prezime, ' ', a.oib) "
                 + " like :uvjet ")
                 .setParameter("uvjet", "%" + uvjet + "%")
                 .setMaxResults(20)
