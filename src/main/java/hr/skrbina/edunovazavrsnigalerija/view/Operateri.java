@@ -131,6 +131,8 @@ public class Operateri extends javax.swing.JFrame {
 
         kontaktTxt.setText("jTextField4");
 
+        ulogaCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(none)", "Operater", "Administrator" }));
+
         pwdTxt.setText("jPasswordField1");
 
         porukaLbl.setFont(new java.awt.Font("Georgia", 2, 14)); // NOI18N
