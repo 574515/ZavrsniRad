@@ -5,7 +5,10 @@
  */
 package hr.skrbina.edunovazavrsnigalerija.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -14,27 +17,30 @@ import javax.persistence.OneToOne;
  */
 @Entity
 public class Korisnik extends Osoba {
-    
-    private String kup_Djelo;
-    private String prod_Djelo;
-    
+
     @OneToOne
     private Transakcija trans;
+
+    @OneToMany
+    private final List<Djelo> kup_Djela = new ArrayList<>();
+
+    @OneToMany
+    private final List<Djelo> prod_Djelo = new ArrayList<>();
+
+    public List<Djelo> getKupDjela() {
+        return kup_Djela;
+    }
+        
+    public void setKupDjelo(Djelo djelo) {
+        this.kup_Djela.add(djelo);
+    }
+
+    public void setProdDjelo(Djelo djelo) {
+        this.prod_Djelo.add(djelo);
+    }
     
-    public String getKup_Djelo() {
-        return kup_Djelo;
-    }
-
-    public void setKup_Djelo(String kup_Djelo) {
-        this.kup_Djelo = kup_Djelo;
-    }
-
-    public String getProd_Djelo() {
+    public List<Djelo> getProdDjela() {
         return prod_Djelo;
-    }
-
-    public void setProd_Djelo(String prod_Djelo) {
-        this.prod_Djelo = prod_Djelo;
     }
 
     public Transakcija getTrans() {
@@ -43,5 +49,5 @@ public class Korisnik extends Osoba {
 
     public void setTrans(Transakcija trans) {
         this.trans = trans;
-    }    
+    }
 }

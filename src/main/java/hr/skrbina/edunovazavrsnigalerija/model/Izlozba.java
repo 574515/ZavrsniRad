@@ -5,6 +5,7 @@
  */
 package hr.skrbina.edunovazavrsnigalerija.model;
 
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
@@ -15,6 +16,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class Izlozba extends Entitet {
     
+    private String naziv;
     private String datum_Pocetka;
     private String datum_Zavrsetka;
     private String tema;
@@ -22,6 +24,14 @@ public class Izlozba extends Entitet {
     @OneToOne
     private Kustos kustos;
 
+    public String getNaziv() {
+        return naziv;
+    }
+    
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
+    }
+    
     public String getDatum_Pocetka() {
         return datum_Pocetka;
     }

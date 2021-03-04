@@ -7,6 +7,7 @@ package hr.skrbina.edunovazavrsnigalerija.model;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -22,6 +23,9 @@ public class Djelo extends Entitet {
     
     @ManyToOne
     private Autor autor;
+    
+    @OneToOne
+    private Korisnik korisnik;
     
     public String getNaziv() {
         return naziv;
@@ -61,5 +65,13 @@ public class Djelo extends Entitet {
 
     public void setAutor(Autor autor) {
         this.autor = autor;
-    }    
+    }
+    
+    public Korisnik getKorisnik() {
+        return korisnik;
+    }
+    
+    public void setKorisnik(Korisnik korisnik) {
+        this.korisnik = korisnik;
+    }
 }
