@@ -19,7 +19,7 @@ public class Start {
         SplashScreen s = new SplashScreen();
         s.setVisible(true);
         s.setLocationRelativeTo(null);
-        
+
         HibernateUtil.getSessionFactory().openSession();
         PocetniInsert.izvedi();
         PocetniInsert.adminOperater();
