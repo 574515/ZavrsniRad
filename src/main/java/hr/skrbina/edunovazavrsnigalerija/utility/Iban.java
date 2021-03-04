@@ -56,7 +56,6 @@ public class Iban {
         } catch (IOException e) {
             return null;
         }
-
     }
 
 }

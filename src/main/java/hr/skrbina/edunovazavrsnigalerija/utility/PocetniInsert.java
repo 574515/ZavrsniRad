@@ -22,7 +22,7 @@ import org.mindrot.jbcrypt.BCrypt;
  *
  * @author Hrvoje
  */
-public class PocetniInsert {    
+public class PocetniInsert {
 
     public static void izvedi() {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -41,7 +41,7 @@ public class PocetniInsert {
             oo.create();
         } catch (SkrbinaException ex) {
         }
-
+        
         Autor autor1 = kreirajAutora("Vincent", "van Gogh", "Zundert, Netherlands", "30 March 1853", "vvg@gallery.hr");
         Autor autor2 = kreirajAutora("Pablo", "Picasso", "Malaga, Spain", "25 October 1881", "pp@gallery.hr");
         Autor autor3 = kreirajAutora("Tiziano", "Vecelli / Vecellio", "Pieve di Cadore, Republic of Venice", "c.  1488/1490", "tizi@gallery.hr");
@@ -60,6 +60,12 @@ public class PocetniInsert {
                 + "Saint Lawrence in Palermo. Investigators believe the painting changed hands among the Sicilian Mafia in the decades following the robbery and may "
                 + "still be hidden.", 19818416.19, autor5);
 
+        autor1.setDodajDjela(poppyFlowers);
+        autor2.setDodajDjela(pigeon);
+        autor3.setDodajDjela(dAC);
+        autor4.setDodajDjela(georgeDragon);
+        autor5.setDodajDjela(nativity);
+        
         session.beginTransaction();
         session.save(poppyFlowers);
         session.save(pigeon);
@@ -71,6 +77,7 @@ public class PocetniInsert {
         session.save(autor3);
         session.save(autor4);
         session.save(autor5);
+        session.save(operater);
 
         Faker faker = new Faker();
 
@@ -89,13 +96,16 @@ public class PocetniInsert {
             session.save(korisnik);
             prviKorisnici.add(korisnik);
         }
+        
         session.getTransaction().commit();
 
         session.beginTransaction();
         Kustos kustos1 = kreirajKustos();
         Kustos kustos2 = kreirajKustos();
-        Izlozba izlozba1 = kreirajIzlozba("25 March 2021", "25 April 2021", "First One", kustos1);
-        Izlozba izlozba2 = kreirajIzlozba("02 July 2021", "02 August 2021", "Second One", kustos2);
+        Izlozba izlozba1 = kreirajIzlozba("Prva izložba", "22.03.2021.", "22.04.2021.", "First One", kustos1);
+        Izlozba izlozba2 = kreirajIzlozba("Druga izložba", "02.06.2022.", "02.08.2022.", "Second One", kustos2);
+        kustos1.setIzlozba(izlozba1);
+        kustos2.setIzlozba(izlozba2);
         session.save(kustos1);
         session.save(kustos2);
         session.save(izlozba1);
@@ -141,14 +151,14 @@ public class PocetniInsert {
         autor.setIBAN(Iban.getIbanIiCentrala());
         autor.setKontakt(email);
         autor.setOib(Oib.getOibIiCentrala());
-        autor.setUlogaGalerija("autor");
         return autor;
     }
 
-    private static Izlozba kreirajIzlozba(String datumPocetka, String datumZavrsetka, String tema, Kustos kustos) {
+    private static Izlozba kreirajIzlozba(String naziv, String dp, String dz, String tema, Kustos kustos) {
         Izlozba izlozba = new Izlozba();
-        izlozba.setDatum_Pocetka(datumPocetka);
-        izlozba.setDatum_Zavrsetka(datumZavrsetka);
+        izlozba.setNaziv(naziv);
+        izlozba.setDatum_Pocetka(dp);
+        izlozba.setDatum_Zavrsetka(dz);
         izlozba.setTema(tema);
         izlozba.setKustos(kustos);
         return izlozba;
@@ -164,7 +174,6 @@ public class PocetniInsert {
         kustos.setKontakt(faker.phoneNumber().phoneNumber());
         kustos.setOib(Oib.getOibIiCentrala());
         kustos.setIBAN(Iban.getIbanIiCentrala());
-        kustos.setUlogaGalerija("kustos");
         return kustos;
     }
 }
