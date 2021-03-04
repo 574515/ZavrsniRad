@@ -5,39 +5,43 @@
  */
 package hr.skrbina.edunovazavrsnigalerija.view;
 
+import com.github.javafaker.Faker;
 import hr.skrbina.edunovazavrsnigalerija.controller.ObradaKorisnik;
 import hr.skrbina.edunovazavrsnigalerija.model.Korisnik;
+import hr.skrbina.edunovazavrsnigalerija.utility.Iban;
+import hr.skrbina.edunovazavrsnigalerija.utility.Oib;
 import hr.skrbina.edunovazavrsnigalerija.utility.SkrbinaException;
+import hr.skrbina.edunovazavrsnigalerija.utility.DatumIVrijeme;
+import java.awt.event.ActionEvent;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import javax.swing.DefaultListModel;
-import javax.swing.DefaultListSelectionModel;
-import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 /**
  *
  * @author Hrvoje
  */
 public class Korisnici extends javax.swing.JFrame {
+
     /* Creates new form Korisnici */
-        
-    private ObradaKorisnik obrada;
+    private final ObradaKorisnik obrada;
     private Korisnik entitet;
-    
-    public Korisnici() {        
+
+    public Korisnici() {
         initComponents();
         obrada = new ObradaKorisnik();
-        setTitle("Gallery Exclusive - Korisnici");
+        setTitle(Aplikacija.NASLOV_APP + " - Korisnici");
         ucitajPodatke();
-        
-        korisniciLst.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
-        if (korisniciLst.isSelectionEmpty()) {
-            obrisiBttn.setEnabled(false);
-            izmijeniBttn.setEnabled(false);
-        }
-        
-        slikaLbl.setIcon(new ImageIcon(getClass().getResource("/osoba_def.jpg")));
-        traziTxt.requestFocus();
-        
-        emptyFields();
+        defaultStart();
+        korisniciLst.setCellRenderer(new OsobaCellRenderer());
+        SimpleDateFormat myTime = new SimpleDateFormat("HH:mm:ss" + "    " + "dd.MM.YYYY.");
+        Timer SimpleTimer = new Timer(1000, (ActionEvent e) -> {
+            vrijemeLbl.setText(myTime.format(new Date()));
+        });
+        SimpleTimer.start();
+        generirajBttn.setToolTipText("<html>Generiranje informacija<br>korištenjem Java Faker.</html>");
     }
 
     /**
@@ -62,7 +66,6 @@ public class Korisnici extends javax.swing.JFrame {
         oibTxt = new javax.swing.JTextField();
         prezimeTxt = new javax.swing.JTextField();
         imeTxt = new javax.swing.JTextField();
-        slikaLbl = new javax.swing.JLabel();
         dodajBttn = new javax.swing.JButton();
         obrisiBttn = new javax.swing.JButton();
         izmijeniBttn = new javax.swing.JButton();
@@ -73,6 +76,11 @@ public class Korisnici extends javax.swing.JFrame {
         porukaLbl = new javax.swing.JLabel();
         traziTxt = new javax.swing.JTextField();
         traziBttn = new javax.swing.JButton();
+        vrijemeLbl = new javax.swing.JLabel();
+        generirajOib = new javax.swing.JButton();
+        generirajIban = new javax.swing.JButton();
+        ocistiBttn = new javax.swing.JButton();
+        generirajBttn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -99,49 +107,45 @@ public class Korisnici extends javax.swing.JFrame {
 
         kontaktTxt.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         kontaktTxt.setText("kntkt");
-        kontaktTxt.setMaximumSize(new java.awt.Dimension(81, 22));
-        kontaktTxt.setMinimumSize(new java.awt.Dimension(81, 22));
-        kontaktTxt.setPreferredSize(new java.awt.Dimension(81, 22));
+        kontaktTxt.setMaximumSize(new java.awt.Dimension(445, 30));
+        kontaktTxt.setMinimumSize(new java.awt.Dimension(445, 30));
+        kontaktTxt.setPreferredSize(new java.awt.Dimension(445, 30));
 
         ibanTxt.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         ibanTxt.setText("iban");
-        ibanTxt.setMaximumSize(new java.awt.Dimension(81, 22));
-        ibanTxt.setMinimumSize(new java.awt.Dimension(81, 22));
-        ibanTxt.setPreferredSize(new java.awt.Dimension(81, 22));
+        ibanTxt.setMaximumSize(new java.awt.Dimension(293, 30));
+        ibanTxt.setMinimumSize(new java.awt.Dimension(293, 30));
+        ibanTxt.setPreferredSize(new java.awt.Dimension(293, 30));
 
         mjestoTxt.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         mjestoTxt.setText("mr");
-        mjestoTxt.setMaximumSize(new java.awt.Dimension(81, 22));
-        mjestoTxt.setMinimumSize(new java.awt.Dimension(81, 22));
-        mjestoTxt.setPreferredSize(new java.awt.Dimension(81, 22));
+        mjestoTxt.setMaximumSize(new java.awt.Dimension(445, 30));
+        mjestoTxt.setMinimumSize(new java.awt.Dimension(445, 30));
+        mjestoTxt.setPreferredSize(new java.awt.Dimension(445, 30));
 
         oibTxt.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         oibTxt.setText("oib");
-        oibTxt.setMaximumSize(new java.awt.Dimension(81, 22));
-        oibTxt.setMinimumSize(new java.awt.Dimension(81, 22));
-        oibTxt.setPreferredSize(new java.awt.Dimension(81, 22));
+        oibTxt.setMaximumSize(new java.awt.Dimension(293, 30));
+        oibTxt.setMinimumSize(new java.awt.Dimension(293, 30));
+        oibTxt.setPreferredSize(new java.awt.Dimension(293, 30));
 
         prezimeTxt.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         prezimeTxt.setText("prezime");
-        prezimeTxt.setMaximumSize(new java.awt.Dimension(81, 22));
-        prezimeTxt.setMinimumSize(new java.awt.Dimension(81, 22));
-        prezimeTxt.setPreferredSize(new java.awt.Dimension(81, 22));
+        prezimeTxt.setMaximumSize(new java.awt.Dimension(445, 30));
+        prezimeTxt.setMinimumSize(new java.awt.Dimension(445, 30));
+        prezimeTxt.setPreferredSize(new java.awt.Dimension(445, 30));
 
         imeTxt.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         imeTxt.setText("ime");
-        imeTxt.setMaximumSize(new java.awt.Dimension(81, 22));
-        imeTxt.setMinimumSize(new java.awt.Dimension(81, 22));
-        imeTxt.setPreferredSize(new java.awt.Dimension(81, 22));
-
-        slikaLbl.setMaximumSize(new java.awt.Dimension(150, 150));
-        slikaLbl.setMinimumSize(new java.awt.Dimension(150, 150));
-        slikaLbl.setPreferredSize(new java.awt.Dimension(150, 150));
+        imeTxt.setMaximumSize(new java.awt.Dimension(445, 30));
+        imeTxt.setMinimumSize(new java.awt.Dimension(445, 30));
+        imeTxt.setPreferredSize(new java.awt.Dimension(445, 30));
 
         dodajBttn.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         dodajBttn.setText("Dodaj");
-        dodajBttn.setMaximumSize(new java.awt.Dimension(127, 24));
-        dodajBttn.setMinimumSize(new java.awt.Dimension(127, 24));
-        dodajBttn.setPreferredSize(new java.awt.Dimension(127, 24));
+        dodajBttn.setMaximumSize(new java.awt.Dimension(108, 30));
+        dodajBttn.setMinimumSize(new java.awt.Dimension(108, 30));
+        dodajBttn.setPreferredSize(new java.awt.Dimension(108, 30));
         dodajBttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dodajBttnActionPerformed(evt);
@@ -150,9 +154,9 @@ public class Korisnici extends javax.swing.JFrame {
 
         obrisiBttn.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         obrisiBttn.setText("Obriši");
-        obrisiBttn.setMaximumSize(new java.awt.Dimension(127, 24));
-        obrisiBttn.setMinimumSize(new java.awt.Dimension(127, 24));
-        obrisiBttn.setPreferredSize(new java.awt.Dimension(127, 24));
+        obrisiBttn.setMaximumSize(new java.awt.Dimension(108, 30));
+        obrisiBttn.setMinimumSize(new java.awt.Dimension(108, 30));
+        obrisiBttn.setPreferredSize(new java.awt.Dimension(108, 30));
         obrisiBttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 obrisiBttnActionPerformed(evt);
@@ -161,9 +165,9 @@ public class Korisnici extends javax.swing.JFrame {
 
         izmijeniBttn.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         izmijeniBttn.setText("Izmijeni");
-        izmijeniBttn.setMaximumSize(new java.awt.Dimension(127, 24));
-        izmijeniBttn.setMinimumSize(new java.awt.Dimension(127, 24));
-        izmijeniBttn.setPreferredSize(new java.awt.Dimension(127, 24));
+        izmijeniBttn.setMaximumSize(new java.awt.Dimension(108, 30));
+        izmijeniBttn.setMinimumSize(new java.awt.Dimension(108, 30));
+        izmijeniBttn.setPreferredSize(new java.awt.Dimension(108, 30));
         izmijeniBttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 izmijeniBttnActionPerformed(evt);
@@ -172,9 +176,9 @@ public class Korisnici extends javax.swing.JFrame {
 
         povratakBttn.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         povratakBttn.setText("Povratak");
-        povratakBttn.setMaximumSize(new java.awt.Dimension(127, 50));
-        povratakBttn.setMinimumSize(new java.awt.Dimension(127, 50));
-        povratakBttn.setPreferredSize(new java.awt.Dimension(127, 50));
+        povratakBttn.setMaximumSize(new java.awt.Dimension(108, 30));
+        povratakBttn.setMinimumSize(new java.awt.Dimension(108, 30));
+        povratakBttn.setPreferredSize(new java.awt.Dimension(108, 30));
         povratakBttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 povratakBttnActionPerformed(evt);
@@ -182,6 +186,9 @@ public class Korisnici extends javax.swing.JFrame {
         });
 
         datumTxt.setText("datum");
+        datumTxt.setMaximumSize(new java.awt.Dimension(445, 30));
+        datumTxt.setMinimumSize(new java.awt.Dimension(445, 30));
+        datumTxt.setPreferredSize(new java.awt.Dimension(445, 30));
 
         korisniciLst.setFont(new java.awt.Font("Georgia", 2, 14)); // NOI18N
         korisniciLst.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -197,12 +204,64 @@ public class Korisnici extends javax.swing.JFrame {
 
         traziTxt.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         traziTxt.setText("jTextField1");
+        traziTxt.setMaximumSize(new java.awt.Dimension(162, 30));
+        traziTxt.setMinimumSize(new java.awt.Dimension(162, 30));
+        traziTxt.setPreferredSize(new java.awt.Dimension(162, 30));
 
         traziBttn.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         traziBttn.setText("Traži");
+        traziBttn.setMaximumSize(new java.awt.Dimension(72, 30));
+        traziBttn.setMinimumSize(new java.awt.Dimension(72, 30));
+        traziBttn.setPreferredSize(new java.awt.Dimension(72, 30));
         traziBttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 traziBttnActionPerformed(evt);
+            }
+        });
+
+        vrijemeLbl.setFont(new java.awt.Font("Georgia", 2, 14)); // NOI18N
+
+        generirajOib.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        generirajOib.setText("Generiraj OIB");
+        generirajOib.setMaximumSize(new java.awt.Dimension(144, 30));
+        generirajOib.setMinimumSize(new java.awt.Dimension(144, 30));
+        generirajOib.setPreferredSize(new java.awt.Dimension(144, 30));
+        generirajOib.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generirajOibActionPerformed(evt);
+            }
+        });
+
+        generirajIban.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        generirajIban.setText("Generiraj IBAN");
+        generirajIban.setMaximumSize(new java.awt.Dimension(144, 30));
+        generirajIban.setMinimumSize(new java.awt.Dimension(144, 30));
+        generirajIban.setPreferredSize(new java.awt.Dimension(144, 30));
+        generirajIban.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generirajIbanActionPerformed(evt);
+            }
+        });
+
+        ocistiBttn.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        ocistiBttn.setText("Očisti");
+        ocistiBttn.setMaximumSize(new java.awt.Dimension(108, 30));
+        ocistiBttn.setMinimumSize(new java.awt.Dimension(108, 30));
+        ocistiBttn.setPreferredSize(new java.awt.Dimension(108, 30));
+        ocistiBttn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ocistiBttnActionPerformed(evt);
+            }
+        });
+
+        generirajBttn.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        generirajBttn.setText("Generiraj");
+        generirajBttn.setMaximumSize(new java.awt.Dimension(108, 30));
+        generirajBttn.setMinimumSize(new java.awt.Dimension(108, 30));
+        generirajBttn.setPreferredSize(new java.awt.Dimension(108, 30));
+        generirajBttn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generirajBttnActionPerformed(evt);
             }
         });
 
@@ -213,97 +272,129 @@ public class Korisnici extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(slikaLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(porukaLbl))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(dodajBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(izmijeniBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(obrisiBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(povratakBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(traziBttn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(traziTxt))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ime)
-                                    .addComponent(prezime)
-                                    .addComponent(oib)
-                                    .addComponent(mjesto)
-                                    .addComponent(iban)
-                                    .addComponent(kontakt)
-                                    .addComponent(datum))
-                                .addGap(25, 25, 25)
+                                    .addComponent(datum)
+                                    .addComponent(oib))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(mjestoTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(imeTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(prezimeTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(ibanTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(kontaktTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(oibTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(datumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(oibTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(generirajOib, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(datumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(kontakt)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(porukaLbl)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addComponent(dodajBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(izmijeniBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(obrisiBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(ocistiBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addComponent(generirajBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(povratakBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(mjesto)
+                                        .addComponent(iban))
+                                    .addGap(8, 8, 8)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(ibanTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(generirajIban, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(mjestoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(kontaktTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap(10, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(vrijemeLbl))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(traziTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(traziBttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(ime))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(246, 246, 246)
+                                        .addComponent(prezime)))
+                                .addGap(58, 58, 58)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(prezimeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(imeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(slikaLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(49, 49, 49)
-                                .addComponent(porukaLbl))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(imeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ime))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(prezimeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(prezime))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(datum)
-                                    .addComponent(datumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(7, 7, 7)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(oibTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(oib))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(mjestoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(mjesto))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(ibanTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(iban))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(kontaktTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(kontakt))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(povratakBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(obrisiBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(izmijeniBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(dodajBttn, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(traziTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(traziBttn)))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(traziBttn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(imeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ime))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(prezimeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(prezime))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(datumTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(datum))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(generirajOib, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(oibTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(oib))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(mjestoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(mjesto))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(generirajIban, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ibanTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(iban))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(kontaktTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(kontakt))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ocistiBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(obrisiBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(izmijeniBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dodajBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(povratakBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(generirajBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(porukaLbl)
+                    .addComponent(vrijemeLbl))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -324,10 +415,10 @@ public class Korisnici extends javax.swing.JFrame {
         try {
             obrada.create();
             ucitajPodatke();
-            emptyFields();
+            defaultStart();
         } catch (SkrbinaException ex) {
             porukaLbl.setText(ex.getPoruka());
-        }       
+        }
     }//GEN-LAST:event_dodajBttnActionPerformed
 
     private void obrisiBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_obrisiBttnActionPerformed
@@ -341,7 +432,7 @@ public class Korisnici extends javax.swing.JFrame {
         try {
             obrada.delete();
             ucitajPodatke();
-            emptyFields();
+            defaultStart();
         } catch (SkrbinaException e) {
             porukaLbl.setText(e.getPoruka());
         }
@@ -357,7 +448,7 @@ public class Korisnici extends javax.swing.JFrame {
         try {
             obrada.update();
             ucitajPodatke();
-            emptyFields();
+            defaultStart();
         } catch (SkrbinaException e) {
             porukaLbl.setText(e.getPoruka());
         }
@@ -376,6 +467,12 @@ public class Korisnici extends javax.swing.JFrame {
         if (entitet == null) {
             return;
         }
+
+        if (!korisniciLst.isSelectionEmpty()) {
+            obrisiBttn.setEnabled(true);
+            izmijeniBttn.setEnabled(true);
+        }
+
         imeTxt.setText(entitet.getIme());
         prezimeTxt.setText(entitet.getPrezime());
         datumTxt.setText(entitet.getRodjendan());
@@ -384,6 +481,22 @@ public class Korisnici extends javax.swing.JFrame {
         ibanTxt.setText(entitet.getIBAN());
         kontaktTxt.setText(entitet.getKontakt());
     }//GEN-LAST:event_korisniciLstValueChanged
+
+    private void ocistiBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ocistiBttnActionPerformed
+        defaultStart();
+    }//GEN-LAST:event_ocistiBttnActionPerformed
+
+    private void generirajOibActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generirajOibActionPerformed
+        oibTxt.setText(Oib.getOibIiCentrala());
+    }//GEN-LAST:event_generirajOibActionPerformed
+
+    private void generirajIbanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generirajIbanActionPerformed
+        ibanTxt.setText(Iban.getIbanIiCentrala());
+    }//GEN-LAST:event_generirajIbanActionPerformed
+
+    private void generirajBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generirajBttnActionPerformed
+        generirajPodatke();
+    }//GEN-LAST:event_generirajBttnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -413,10 +526,8 @@ public class Korisnici extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Korisnici().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Korisnici().setVisible(true);
         });
     }
 
@@ -424,6 +535,9 @@ public class Korisnici extends javax.swing.JFrame {
     private javax.swing.JLabel datum;
     private javax.swing.JTextField datumTxt;
     private javax.swing.JButton dodajBttn;
+    private javax.swing.JButton generirajBttn;
+    private javax.swing.JButton generirajIban;
+    private javax.swing.JButton generirajOib;
     private javax.swing.JLabel iban;
     private javax.swing.JTextField ibanTxt;
     private javax.swing.JLabel ime;
@@ -436,18 +550,20 @@ public class Korisnici extends javax.swing.JFrame {
     private javax.swing.JLabel mjesto;
     private javax.swing.JTextField mjestoTxt;
     private javax.swing.JButton obrisiBttn;
+    private javax.swing.JButton ocistiBttn;
     private javax.swing.JLabel oib;
     private javax.swing.JTextField oibTxt;
     private javax.swing.JLabel porukaLbl;
     private javax.swing.JButton povratakBttn;
     private javax.swing.JLabel prezime;
     private javax.swing.JTextField prezimeTxt;
-    private javax.swing.JLabel slikaLbl;
     private javax.swing.JButton traziBttn;
     private javax.swing.JTextField traziTxt;
+    private javax.swing.JLabel vrijemeLbl;
     // End of variables declaration//GEN-END:variables
 
-    private void emptyFields() {
+    private void defaultStart() {
+        korisniciLst.clearSelection();
         traziTxt.setText("");
         imeTxt.setText("");
         prezimeTxt.setText("");
@@ -457,6 +573,11 @@ public class Korisnici extends javax.swing.JFrame {
         ibanTxt.setText("");
         kontaktTxt.setText("");
         porukaLbl.setText("");
+        traziTxt.requestFocus();
+        if (korisniciLst.isSelectionEmpty()) {
+            izmijeniBttn.setEnabled(false);
+            obrisiBttn.setEnabled(false);
+        }
     }
 
     private void ucitajPodatke() {
@@ -479,8 +600,27 @@ public class Korisnici extends javax.swing.JFrame {
         entitet.setMjesto_Rodjenja(mjestoTxt.getText());
         entitet.setIBAN(ibanTxt.getText());
         entitet.setKontakt(kontaktTxt.getText());
-        entitet.setUlogaGalerija("korisnik");        
-
+        entitet.setUlogaGalerija("korisnik");
         obrada.setEntitet(entitet);
-    }    
+    }
+
+    private void generirajPodatke() {
+        Faker faker = new Faker();
+        korisniciLst.clearSelection();
+        imeTxt.setText(faker.name().firstName());
+        prezimeTxt.setText(faker.name().lastName());
+        datumTxt.setText(DatumIVrijeme.generirajDatum().format(DateTimeFormatter.ofPattern("dd.MM.yyyy.")) +
+                " " + DatumIVrijeme.generirajVrijeme());
+        oibTxt.setText(Oib.getOibIiCentrala());
+        mjestoTxt.setText(faker.address().fullAddress());
+        ibanTxt.setText(Iban.getIbanIiCentrala());
+        kontaktTxt.setText(imeTxt.getText().toLowerCase().charAt(0) + prezimeTxt.getText().toLowerCase() +
+                "@" + faker.internet().domainName());
+        porukaLbl.setText("");
+        dodajBttn.requestFocus();
+        if (korisniciLst.isSelectionEmpty()) {
+            izmijeniBttn.setEnabled(false);
+            obrisiBttn.setEnabled(false);
+        }
+    }
 }

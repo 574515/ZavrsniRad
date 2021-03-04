@@ -5,6 +5,12 @@
  */
 package hr.skrbina.edunovazavrsnigalerija.view;
 
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.Timer;
+
 /**
  *
  * @author Hrvoje
@@ -16,6 +22,13 @@ public class Izbornik extends javax.swing.JFrame {
      */
     public Izbornik() {
         initComponents();
+        setTitle(Aplikacija.NASLOV_APP + " - Izbornik");
+        vrijemeLbl.setForeground(Color.white);
+        SimpleDateFormat myTime = new SimpleDateFormat("HH:mm:ss" + "    " + "dd.MM.YYYY.");
+        Timer SimpleTimer = new Timer(1000, (ActionEvent e) -> {
+            vrijemeLbl.setText(myTime.format(new Date()));
+        });
+        SimpleTimer.start();        
     }
 
     /**
@@ -28,11 +41,13 @@ public class Izbornik extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        vrijemeLbl = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         gallerMenu = new javax.swing.JMenu();
         djelaMenu = new javax.swing.JMenuItem();
         izlozbeMenu = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
         exitG = new javax.swing.JMenuItem();
         adminMenu = new javax.swing.JMenu();
         autoriMenu = new javax.swing.JMenuItem();
@@ -40,6 +55,7 @@ public class Izbornik extends javax.swing.JFrame {
         kustosiMenu = new javax.swing.JMenuItem();
         operateriMenu = new javax.swing.JMenuItem();
         transakcijeMenu = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         exitA = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
 
@@ -51,6 +67,9 @@ public class Izbornik extends javax.swing.JFrame {
         setResizable(false);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        vrijemeLbl.setFont(new java.awt.Font("Georgia", 2, 14)); // NOI18N
+        jPanel1.add(vrijemeLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tenor.gif"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -74,6 +93,7 @@ public class Izbornik extends javax.swing.JFrame {
             }
         });
         gallerMenu.add(izlozbeMenu);
+        gallerMenu.add(jSeparator2);
 
         exitG.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
         exitG.setText("Izlaz");
@@ -132,6 +152,7 @@ public class Izbornik extends javax.swing.JFrame {
             }
         });
         adminMenu.add(transakcijeMenu);
+        adminMenu.add(jSeparator1);
 
         exitA.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
         exitA.setText("Izlaz");
@@ -163,6 +184,39 @@ public class Izbornik extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Izbornik.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Izbornik.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Izbornik.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Izbornik.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> {
+            new Izbornik().setVisible(true);
+        });
+    }
+    
     private void korisniciMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_korisniciMenuActionPerformed
         Korisnici kor = new Korisnici();
         kor.setVisible(true);
@@ -225,9 +279,12 @@ public class Izbornik extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JMenuItem korisniciMenu;
     private javax.swing.JMenuItem kustosiMenu;
     private javax.swing.JMenuItem operateriMenu;
     private javax.swing.JMenuItem transakcijeMenu;
+    private javax.swing.JLabel vrijemeLbl;
     // End of variables declaration//GEN-END:variables
 }

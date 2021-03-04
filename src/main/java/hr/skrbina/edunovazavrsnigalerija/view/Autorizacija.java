@@ -23,7 +23,7 @@ public class Autorizacija extends javax.swing.JFrame {
      */
     public Autorizacija() {
         initComponents();
-        setTitle("Gallery Exclusive - Autorizacija");
+        setTitle(Aplikacija.NASLOV_APP + " - Autorizacija");
         emailTxt.requestFocus();
         emailTxt.setText("hskrbina@egallery.hr");
         pswTxt.setText("t");
@@ -181,36 +181,36 @@ public class Autorizacija extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void prijaviSe() {
-        if (emailTxt.getText().trim().isEmpty()) {
+        if(emailTxt.getText().trim().isEmpty()){
             emailTxt.requestFocus();
-            JOptionPane.showMessageDialog(rootPane, "EMail je obavezan!");
+            JOptionPane.showMessageDialog(rootPane, "Email obavezno");
             return;
-        }
-
+        }        
+        
         try {
             InternetAddress emailAddr = new InternetAddress(emailTxt.getText());
             emailAddr.validate();
-        } catch (AddressException ex) {
-            emailTxt.requestFocus();
-            JOptionPane.showMessageDialog(rootPane, "EMail nije valjan!");
-            return;
-        }
-
-        if (pswTxt.getPassword().length == 0) {
+         } catch (AddressException ex) {
+             emailTxt.requestFocus();
+                JOptionPane.showMessageDialog(rootPane, "Email nije ispravan");
+                  return;
+         }
+        
+        if(pswTxt.getPassword().length==0){
             pswTxt.requestFocus();
-            JOptionPane.showMessageDialog(rootPane, "Lozinka je obavezna!");
+            JOptionPane.showMessageDialog(rootPane, "Lozinka obavezno");
             return;
         }
-
-        ObradaOperater obop = new ObradaOperater();
-        Operater operater = obop.autoriziraj(emailTxt.getText(), pswTxt.getPassword());
-        if (operater == null) {
-            JOptionPane.showMessageDialog(rootPane, "Nesipravna kombinacija EMaila i lozinke!");
-            return;
+        
+        ObradaOperater oo = new ObradaOperater();
+        Operater operater = oo.autoriziraj(emailTxt.getText(), pswTxt.getPassword());
+        if(operater == null){
+           JOptionPane.showMessageDialog(rootPane, "Ne ispravna kombinacija email i lozinka");
+            return; 
         }
-
+        
         Aplikacija.operater = operater;
-
+        
         Izbornik izb = new Izbornik();
         izb.setVisible(true);
         izb.setLocationRelativeTo(null);

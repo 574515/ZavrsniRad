@@ -13,7 +13,7 @@ import hr.skrbina.edunovazavrsnigalerija.model.Operater;
  */
 public class Aplikacija {
 
-    public static final String NASLOV_APP = "Glavni izbornik";
+    public static final String NASLOV_APP = "Galerija Exclusive";
     public static Operater operater;
 
     public static boolean isAdmin() {

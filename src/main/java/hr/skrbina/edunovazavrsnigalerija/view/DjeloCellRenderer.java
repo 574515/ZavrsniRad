@@ -5,7 +5,7 @@
  */
 package hr.skrbina.edunovazavrsnigalerija.view;
 
-import hr.skrbina.edunovazavrsnigalerija.model.Osoba;
+import hr.skrbina.edunovazavrsnigalerija.model.Djelo;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JLabel;
@@ -14,13 +14,13 @@ import javax.swing.ListCellRenderer;
 
 /**
  *
- * @author Hrvoje
+ * @author User
  */
-public class OsobaCellRenderer extends JLabel implements ListCellRenderer<Osoba> {
+public class DjeloCellRenderer extends JLabel implements ListCellRenderer<Djelo> {
 
     @Override
-    public Component getListCellRendererComponent(JList<? extends Osoba> list, Osoba value, int index, boolean isSelected, boolean cellHasFocus) {
-        setText(value.getIme() + " " + value.getPrezime());
+    public Component getListCellRendererComponent(JList<? extends Djelo> list, Djelo value, int index, boolean isSelected, boolean cellHasFocus) {
+        setText(value.getNaziv());
         if (isSelected) {
             setBackground(Color.BLUE);
             setForeground(Color.RED);

@@ -7,30 +7,39 @@ package hr.skrbina.edunovazavrsnigalerija.view;
 
 import hr.skrbina.edunovazavrsnigalerija.controller.ObradaOperater;
 import hr.skrbina.edunovazavrsnigalerija.model.Operater;
+import hr.skrbina.edunovazavrsnigalerija.utility.Oib;
 import hr.skrbina.edunovazavrsnigalerija.utility.SkrbinaException;
-import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.DefaultListModel;
+import javax.swing.Timer;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
- * @author User
+ * @author Hrvoje
  */
 public class Operateri extends javax.swing.JFrame {
-    
+
     private final ObradaOperater obrada;
     private Operater entitet;
+
     /**
      * Creates new form Operater
      */
     public Operateri() {
         initComponents();
         clearFields();
-        obrada = new ObradaOperater();        
-        setTitle("Gallery Exclusive - Operateri");
+        obrada = new ObradaOperater();
+        setTitle(Aplikacija.NASLOV_APP + " - Operateri");
         ucitajPodatke();
-        ulogaCmb.setModel(new DefaultComboBoxModel());
-        ulogaCmb.setSelectedIndex(-1);
+
+        SimpleDateFormat myTime = new SimpleDateFormat("HH:mm:ss" + "    " + "dd.MM.YYYY.");
+        Timer SimpleTimer = new Timer(1000, (ActionEvent e) -> {
+            vrijemeLbl.setText(myTime.format(new Date()));
+        });
+        SimpleTimer.start();
     }
 
     /**
@@ -58,11 +67,24 @@ public class Operateri extends javax.swing.JFrame {
         prezimeTxt = new javax.swing.JTextField();
         oibTxt = new javax.swing.JTextField();
         kontaktTxt = new javax.swing.JTextField();
-        ulogaCmb = new javax.swing.JComboBox<>();
         pwdTxt = new javax.swing.JPasswordField();
         porukaLbl = new javax.swing.JLabel();
+        traziTxt = new javax.swing.JTextField();
+        traziBttn = new javax.swing.JButton();
+        ocistiBttn = new javax.swing.JButton();
+        vrijemeLbl = new javax.swing.JLabel();
+        generirajOib = new javax.swing.JButton();
+        ulogaTxt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(800, 320));
+        setMinimumSize(new java.awt.Dimension(800, 320));
+        setResizable(false);
+        setSize(new java.awt.Dimension(800, 320));
+
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(258, 210));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(258, 210));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(258, 210));
 
         operLst.setFont(new java.awt.Font("Georgia", 2, 14)); // NOI18N
         operLst.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -75,6 +97,9 @@ public class Operateri extends javax.swing.JFrame {
 
         dodajBttn.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         dodajBttn.setText("Dodaj");
+        dodajBttn.setMaximumSize(new java.awt.Dimension(95, 30));
+        dodajBttn.setMinimumSize(new java.awt.Dimension(95, 30));
+        dodajBttn.setPreferredSize(new java.awt.Dimension(95, 30));
         dodajBttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dodajBttnActionPerformed(evt);
@@ -83,6 +108,9 @@ public class Operateri extends javax.swing.JFrame {
 
         izmijeniBttn.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         izmijeniBttn.setText("Izmijeni");
+        izmijeniBttn.setMaximumSize(new java.awt.Dimension(95, 30));
+        izmijeniBttn.setMinimumSize(new java.awt.Dimension(95, 30));
+        izmijeniBttn.setPreferredSize(new java.awt.Dimension(95, 30));
         izmijeniBttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 izmijeniBttnActionPerformed(evt);
@@ -91,6 +119,9 @@ public class Operateri extends javax.swing.JFrame {
 
         obrisiBttn.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         obrisiBttn.setText("Obriši");
+        obrisiBttn.setMaximumSize(new java.awt.Dimension(95, 30));
+        obrisiBttn.setMinimumSize(new java.awt.Dimension(95, 30));
+        obrisiBttn.setPreferredSize(new java.awt.Dimension(95, 30));
         obrisiBttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 obrisiBttnActionPerformed(evt);
@@ -99,6 +130,9 @@ public class Operateri extends javax.swing.JFrame {
 
         povratakBttn.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
         povratakBttn.setText("Povratak");
+        povratakBttn.setMaximumSize(new java.awt.Dimension(95, 30));
+        povratakBttn.setMinimumSize(new java.awt.Dimension(95, 30));
+        povratakBttn.setPreferredSize(new java.awt.Dimension(95, 30));
         povratakBttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 povratakBttnActionPerformed(evt);
@@ -123,20 +157,82 @@ public class Operateri extends javax.swing.JFrame {
         pwd.setFont(new java.awt.Font("Georgia", 3, 14)); // NOI18N
         pwd.setText("Lozinka:");
 
+        imeTxt.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         imeTxt.setText("jTextField1");
+        imeTxt.setMaximumSize(new java.awt.Dimension(428, 30));
+        imeTxt.setMinimumSize(new java.awt.Dimension(428, 30));
+        imeTxt.setPreferredSize(new java.awt.Dimension(428, 30));
 
+        prezimeTxt.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         prezimeTxt.setText("jTextField2");
+        prezimeTxt.setMaximumSize(new java.awt.Dimension(428, 30));
+        prezimeTxt.setMinimumSize(new java.awt.Dimension(428, 30));
+        prezimeTxt.setPreferredSize(new java.awt.Dimension(428, 30));
 
+        oibTxt.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         oibTxt.setText("jTextField3");
+        oibTxt.setMaximumSize(new java.awt.Dimension(291, 30));
+        oibTxt.setMinimumSize(new java.awt.Dimension(291, 30));
+        oibTxt.setPreferredSize(new java.awt.Dimension(291, 30));
 
+        kontaktTxt.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         kontaktTxt.setText("jTextField4");
+        kontaktTxt.setMaximumSize(new java.awt.Dimension(428, 30));
+        kontaktTxt.setMinimumSize(new java.awt.Dimension(428, 30));
+        kontaktTxt.setPreferredSize(new java.awt.Dimension(428, 30));
 
-        ulogaCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(none)", "Operater", "Administrator" }));
-
+        pwdTxt.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
         pwdTxt.setText("jPasswordField1");
+        pwdTxt.setMaximumSize(new java.awt.Dimension(350, 30));
+        pwdTxt.setMinimumSize(new java.awt.Dimension(350, 30));
+        pwdTxt.setPreferredSize(new java.awt.Dimension(350, 30));
 
         porukaLbl.setFont(new java.awt.Font("Georgia", 2, 14)); // NOI18N
         porukaLbl.setText("jLabel1");
+
+        traziTxt.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        traziTxt.setText("jTextField1");
+        traziTxt.setMaximumSize(new java.awt.Dimension(180, 30));
+        traziTxt.setMinimumSize(new java.awt.Dimension(180, 30));
+        traziTxt.setPreferredSize(new java.awt.Dimension(180, 30));
+
+        traziBttn.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        traziBttn.setText("Traži");
+        traziBttn.setMaximumSize(new java.awt.Dimension(72, 30));
+        traziBttn.setMinimumSize(new java.awt.Dimension(72, 30));
+        traziBttn.setPreferredSize(new java.awt.Dimension(72, 30));
+        traziBttn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                traziBttnActionPerformed(evt);
+            }
+        });
+
+        ocistiBttn.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        ocistiBttn.setText("Očisti");
+        ocistiBttn.setMaximumSize(new java.awt.Dimension(95, 30));
+        ocistiBttn.setMinimumSize(new java.awt.Dimension(95, 30));
+        ocistiBttn.setPreferredSize(new java.awt.Dimension(95, 30));
+        ocistiBttn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ocistiBttnActionPerformed(evt);
+            }
+        });
+
+        vrijemeLbl.setFont(new java.awt.Font("Georgia", 2, 14)); // NOI18N
+
+        generirajOib.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        generirajOib.setText("Generiraj OIB");
+        generirajOib.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generirajOibActionPerformed(evt);
+            }
+        });
+
+        ulogaTxt.setFont(new java.awt.Font("Georgia", 0, 12)); // NOI18N
+        ulogaTxt.setText("jTextField1");
+        ulogaTxt.setMaximumSize(new java.awt.Dimension(350, 30));
+        ulogaTxt.setMinimumSize(new java.awt.Dimension(350, 30));
+        ulogaTxt.setPreferredSize(new java.awt.Dimension(350, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -144,77 +240,110 @@ public class Operateri extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(traziTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(traziBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(vrijemeLbl)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(prezime)
+                            .addComponent(ime))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(7, 7, 7)
+                                .addComponent(imeTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(prezimeTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(porukaLbl)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(pwd)
-                                .addComponent(oib)
-                                .addComponent(prezime)
-                                .addComponent(kontakt)
-                                .addComponent(uloga)
-                                .addComponent(ime))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(pwdTxt)
-                                .addComponent(ulogaCmb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(oibTxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
-                                    .addComponent(prezimeTxt)
-                                    .addComponent(imeTxt))
-                                .addComponent(kontaktTxt)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(dodajBttn)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(izmijeniBttn)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(obrisiBttn)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(povratakBttn))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(kontakt)
+                            .addComponent(oib)
+                            .addComponent(pwd)
+                            .addComponent(uloga))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(oibTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(generirajOib))
+                                .addComponent(kontaktTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(ulogaTxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+                                .addComponent(pwdTxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(dodajBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(izmijeniBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(obrisiBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ocistiBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(povratakBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(imeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ime))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(ime)
+                                    .addComponent(imeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(prezime)
+                                    .addComponent(prezimeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(oib)
+                                    .addComponent(oibTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(generirajOib, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(kontakt)
+                                    .addComponent(kontaktTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(ulogaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(uloga))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(pwd)
+                                    .addComponent(pwdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(dodajBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(izmijeniBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(obrisiBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ocistiBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(povratakBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(traziTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(traziBttn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(prezimeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(prezime))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(oibTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(oib))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(kontaktTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(kontakt))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ulogaCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(uloga))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(pwdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pwd))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(dodajBttn)
-                            .addComponent(izmijeniBttn)
-                            .addComponent(obrisiBttn)
-                            .addComponent(povratakBttn))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(porukaLbl))
-                    .addComponent(jScrollPane1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(vrijemeLbl)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(252, 252, 252)
+                        .addComponent(porukaLbl)
+                        .addContainerGap(45, Short.MAX_VALUE))))
         );
 
         pack();
@@ -228,26 +357,31 @@ public class Operateri extends javax.swing.JFrame {
         if (evt.getValueIsAdjusting()) {
             return;
         }
-        
+
         entitet = operLst.getSelectedValue();
         if (entitet == null) {
             return;
         }
-        
+
+        if (!operLst.isSelectionEmpty()) {
+            obrisiBttn.setEnabled(true);
+            izmijeniBttn.setEnabled(true);
+        }
+
         imeTxt.setText(entitet.getIme());
         prezimeTxt.setText(entitet.getPrezime());
         oibTxt.setText(entitet.getOib());
         kontaktTxt.setText(entitet.getKontakt());
-        ulogaCmb.setSelectedItem(entitet.getUloga());
+        ulogaTxt.setText(entitet.getUloga());
         pwdTxt.setText(entitet.getLozinka());
     }//GEN-LAST:event_operLstValueChanged
 
     private void dodajBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dodajBttnActionPerformed
         porukaLbl.setText("");
         entitet = new Operater();
-        
+
         postaviVrijednostiUEntitet();
-        
+
         obrada.setEntitet(entitet);
         try {
             obrada.create();
@@ -264,7 +398,7 @@ public class Operateri extends javax.swing.JFrame {
             return;
         }
         postaviVrijednostiUEntitet();
-        
+
         try {
             obrada.update();
             ucitajPodatke();
@@ -279,9 +413,9 @@ public class Operateri extends javax.swing.JFrame {
         if (entitet == null) {
             return;
         }
-        
+
         obrada.setEntitet(entitet);
-        
+
         try {
             obrada.delete();
             ucitajPodatke();
@@ -290,6 +424,37 @@ public class Operateri extends javax.swing.JFrame {
             porukaLbl.setText(e.getPoruka());
         }
     }//GEN-LAST:event_obrisiBttnActionPerformed
+
+    private void generirajOibActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generirajOibActionPerformed
+        oibTxt.setText(Oib.getOibIiCentrala());
+    }//GEN-LAST:event_generirajOibActionPerformed
+
+    private void ocistiBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ocistiBttnActionPerformed
+        ucitajPodatke();
+        operLst.clearSelection();
+        traziTxt.setText("");
+        imeTxt.setText("");
+        prezimeTxt.setText("");
+        oibTxt.setText("");
+        kontaktTxt.setText("");
+        pwdTxt.setText("");
+        porukaLbl.setText("");
+        ulogaTxt.setText("");
+        traziTxt.requestFocus();
+        if (operLst.isSelectionEmpty()) {
+            izmijeniBttn.setEnabled(false);
+            obrisiBttn.setEnabled(false);
+        }
+    }//GEN-LAST:event_ocistiBttnActionPerformed
+
+    private void traziBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_traziBttnActionPerformed
+        if (traziTxt.getText().isEmpty()) {
+            ucitajPodatke();
+            clearFields();
+        } else {
+            ucitajZaTrazi();
+        }
+    }//GEN-LAST:event_traziBttnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -320,15 +485,14 @@ public class Operateri extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Operateri().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Operateri().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton dodajBttn;
+    private javax.swing.JButton generirajOib;
     private javax.swing.JLabel ime;
     private javax.swing.JTextField imeTxt;
     private javax.swing.JButton izmijeniBttn;
@@ -336,6 +500,7 @@ public class Operateri extends javax.swing.JFrame {
     private javax.swing.JLabel kontakt;
     private javax.swing.JTextField kontaktTxt;
     private javax.swing.JButton obrisiBttn;
+    private javax.swing.JButton ocistiBttn;
     private javax.swing.JLabel oib;
     private javax.swing.JTextField oibTxt;
     private javax.swing.JList<Operater> operLst;
@@ -345,33 +510,49 @@ public class Operateri extends javax.swing.JFrame {
     private javax.swing.JTextField prezimeTxt;
     private javax.swing.JLabel pwd;
     private javax.swing.JPasswordField pwdTxt;
+    private javax.swing.JButton traziBttn;
+    private javax.swing.JTextField traziTxt;
     private javax.swing.JLabel uloga;
-    private javax.swing.JComboBox<String> ulogaCmb;
+    private javax.swing.JTextField ulogaTxt;
+    private javax.swing.JLabel vrijemeLbl;
     // End of variables declaration//GEN-END:variables
+
+    private void ucitajZaTrazi() {
+        DefaultListModel<Operater> m = new DefaultListModel<>();
+        obrada.getPodaci(traziTxt.getText()).forEach(k -> m.addElement(k));
+        operLst.setModel(m);
+    }
 
     private void ucitajPodatke() {
         DefaultListModel<Operater> m = new DefaultListModel<>();
-        obrada.getPodaci().forEach(o -> m.addElement(o));        
-        operLst.setModel(m);        
+        obrada.getPodaci().forEach(o -> m.addElement(o));
+        operLst.setModel(m);
     }
-    
+
     private void clearFields() {
+        operLst.setCellRenderer(new OsobaCellRenderer());
+        operLst.clearSelection();
         imeTxt.setText("");
         prezimeTxt.setText("");
         oibTxt.setText("");
         kontaktTxt.setText("");
-        ulogaCmb.setSelectedIndex(-1);
         pwdTxt.setText("");
-        porukaLbl.setText("");        
+        porukaLbl.setText("");
+        traziTxt.setText("");
+        ulogaTxt.setText("");
+        if (operLst.isSelectionEmpty()) {
+            izmijeniBttn.setEnabled(false);
+            obrisiBttn.setEnabled(false);
+        }
     }
-    
+
     private void postaviVrijednostiUEntitet() {
         entitet.setIme(imeTxt.getText());
         entitet.setPrezime(prezimeTxt.getText());
         entitet.setOib(oibTxt.getText());
         entitet.setKontakt(kontaktTxt.getText());
-        entitet.setUloga(ulogaCmb.getSelectedItem().toString());
-        entitet.setLozinka(BCrypt.hashpw(pwdTxt.getText(), BCrypt.gensalt()));        
+        entitet.setUloga(ulogaTxt.getText());
+        entitet.setLozinka(BCrypt.hashpw(pwdTxt.getText(), BCrypt.gensalt()));
         obrada.setEntitet(entitet);
-    }    
+    }
 }
