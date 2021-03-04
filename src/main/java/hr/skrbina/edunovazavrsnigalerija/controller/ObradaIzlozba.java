@@ -6,6 +6,7 @@
 package hr.skrbina.edunovazavrsnigalerija.controller;
 
 import hr.skrbina.edunovazavrsnigalerija.model.Izlozba;
+import hr.skrbina.edunovazavrsnigalerija.model.Kustos;
 import hr.skrbina.edunovazavrsnigalerija.utility.SkrbinaException;
 import java.util.List;
 
@@ -15,6 +16,8 @@ import java.util.List;
  */
 public class ObradaIzlozba extends Obrada<Izlozba> {
 
+    Kustos kus = new Kustos();
+    
     public ObradaIzlozba(Izlozba izlozba) {
         super(izlozba);
     }
@@ -27,9 +30,19 @@ public class ObradaIzlozba extends Obrada<Izlozba> {
     public List<Izlozba> getPodaci() {
         return session.createQuery("from Izlozba").list();
     }
+    
+    public List<Izlozba> getPodaci(String uvjet) {
+        return session.createQuery("from Izlozba i "
+              + " where concat(i.naziv) "
+              + " like :uvjet ")
+              .setParameter("uvjet", "%"+uvjet+"%")
+              .setMaxResults(20)
+              .list();
+    }
 
     @Override
     protected void kontrolaCreate() throws SkrbinaException {
+        kontrolaNaziv();
         kontrolaDatumPocetka();
         kontrolaDatumZavrsetka();
         kontrolaTema();
@@ -38,6 +51,7 @@ public class ObradaIzlozba extends Obrada<Izlozba> {
 
     @Override
     protected void kontrolaUpdate() throws SkrbinaException {
+        kontrolaNaziv();
         kontrolaDatumPocetka();
         kontrolaDatumZavrsetka();
         kontrolaTema();
@@ -48,21 +62,30 @@ public class ObradaIzlozba extends Obrada<Izlozba> {
     protected void kontrolaDelete() throws SkrbinaException {
     }
 
+    private void kontrolaNaziv() throws SkrbinaException {
+        if (entitet.getNaziv().isEmpty()) {
+            throw new SkrbinaException("Naziv nije postavljen!");
+        }
+        if (entitet.getNaziv() == null) {
+            throw new SkrbinaException("Naziv nije definiran!");
+        }
+    }
+    
     private void kontrolaDatumPocetka() throws SkrbinaException {
         if (entitet.getDatum_Pocetka() == null) {
-            throw new SkrbinaException("Datum početka nije definiran! ");
+            throw new SkrbinaException("Datum početka nije definiran!");
         }
         if (entitet.getDatum_Pocetka().isEmpty()) {
-            throw new SkrbinaException("Morate unijeti datum početka!");
+            throw new SkrbinaException("Datum početka ne smije biti prazan!");
         }
     }
 
     private void kontrolaDatumZavrsetka() throws SkrbinaException {
-        if (entitet.getDatum_Pocetka() == null) {
+        if (entitet.getDatum_Zavrsetka()== null) {
             throw new SkrbinaException("Datum završetka nije definiran!");
         }
-        if (entitet.getDatum_Pocetka().isEmpty()) {
-            throw new SkrbinaException("Morate unijeti datum završetka!");
+        if (entitet.getDatum_Zavrsetka().isEmpty()) {
+            throw new SkrbinaException("Datum završetka ne smije biti prazan!");
         }
     }
 
@@ -78,6 +101,9 @@ public class ObradaIzlozba extends Obrada<Izlozba> {
     private void kontrolaKustos() throws SkrbinaException {
         if (entitet.getKustos() == null) {
             throw new SkrbinaException("Kustos nije definiran / dodijeljen!");
+        } 
+        if (entitet.getKustos().getIzlozba() != null) {
+            throw new SkrbinaException("Ne možete dodijeliti kustosu više od 1 izložbe.");
         }
     }
 }

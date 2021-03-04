@@ -28,6 +28,14 @@ public class ObradaDjelo extends Obrada<Djelo> {
         return session.createQuery("from Djelo").list();
     }
 
+    public List<Djelo> getPodaci(String uvjet) {
+        return session.createQuery("from Djelo d "
+              + " where concat(d.naziv, ' ', d.autor) "
+              + " like :uvjet ")
+              .setParameter("uvjet", "%"+uvjet+"%")
+              .setMaxResults(20)
+              .list();
+    }
     @Override
     protected void kontrolaCreate() throws SkrbinaException {
         kontrolaNaziv();

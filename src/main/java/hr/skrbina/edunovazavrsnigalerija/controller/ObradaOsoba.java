@@ -17,55 +17,45 @@ import hr.skrbina.edunovazavrsnigalerija.utility.Oib;
 public abstract class ObradaOsoba<T extends Osoba> extends Obrada<T> {
 
     @Override
-    protected void kontrolaCreate() throws SkrbinaException {
+    protected void kontrolaCreate() throws SkrbinaException {        
         kontrolaIme();
         kontrolaPrezime();
-        kontrolaRodjendan();
         kontrolaOib();
         kontrolaKontakt();
-        kontrolUloge();
     }
 
     @Override
-    protected void kontrolaUpdate() throws SkrbinaException {
+    protected void kontrolaUpdate() throws SkrbinaException {        
         kontrolaIme();
         kontrolaPrezime();
-        kontrolaRodjendan();
         kontrolaOib();
         kontrolaKontakt();
-        kontrolUloge();
     }
 
     @Override
     protected void kontrolaDelete() throws SkrbinaException {}
 
     protected void kontrolaIme() throws SkrbinaException {
-        if (entitet.getIme().isEmpty() || entitet.getIme() == null) {
-            throw new SkrbinaException("Ime je obavezno, ne može biti prazno!");
+        if (entitet.getIme() == null) {
+            throw new SkrbinaException("Ime nije definirano!");
         }
-        if (!entitet.getIme().matches(("^[a-zA-ZÆÐƎƏƐƔĲŊŒẞÞǷȜæðǝəɛɣĳŋœĸſßþƿȝĄƁÇĐƊĘĦĮƘŁØƠŞȘŢȚŦŲƯY̨Ƴąɓçđɗęħįƙłøơşșţțŧųưy̨ƴÁÀÂÄǍĂĀÃÅǺĄÆǼǢƁĆĊĈČÇĎḌĐƊÐÉÈĖÊËĚĔĒĘẸƎƏƐĠĜǦĞĢƔáàâäǎăāãåǻąæǽǣɓćċĉčçďḍđɗðéèėêëěĕēęẹǝəɛġĝǧğģɣĤḤĦIÍÌİÎÏǏĬĪĨĮỊĲĴĶƘĹĻŁĽĿʼNŃN̈ŇÑŅŊÓÒÔÖǑŎŌÕŐỌØǾƠŒĥḥħıíìiîïǐĭīĩįịĳĵķƙĸĺļłľŀŉńn̈ňñņŋóòôöǒŏōõőọøǿơœŔŘŖŚŜŠŞȘṢẞŤŢṬŦÞÚÙÛÜǓŬŪŨŰŮŲỤƯẂẀŴẄǷÝỲŶŸȲỸƳŹŻŽẒŕřŗſśŝšşșṣßťţṭŧþúùûüǔŭūũűůųụưẃẁŵẅƿýỳŷÿȳỹƴźżžẓ\\s-,.\\']+$"))) {
-            throw new SkrbinaException("Ime nije ispravno! Dozvoljen je unos samo slova.");
+        if (entitet.getIme().isEmpty()) {
+            throw new SkrbinaException("Ime je obvezno, ne smije biti prazno!");
         }
     }
 
     protected void kontrolaPrezime() throws SkrbinaException {
-        if (entitet.getPrezime().isEmpty() || entitet.getPrezime() == null) {
-            throw new SkrbinaException("Prezime je obavezno, ne može biti prazno!");
+        if (entitet.getPrezime() == null) {
+            throw new SkrbinaException("Prezime nije definirano!");
         }
-        if (!entitet.getPrezime().matches(("^[a-zA-ZÆÐƎƏƐƔĲŊŒẞÞǷȜæðǝəɛɣĳŋœĸſßþƿȝĄƁÇĐƊĘĦĮƘŁØƠŞȘŢȚŦŲƯY̨Ƴąɓçđɗęħįƙłøơşșţțŧųưy̨ƴÁÀÂÄǍĂĀÃÅǺĄÆǼǢƁĆĊĈČÇĎḌĐƊÐÉÈĖÊËĚĔĒĘẸƎƏƐĠĜǦĞĢƔáàâäǎăāãåǻąæǽǣɓćċĉčçďḍđɗðéèėêëěĕēęẹǝəɛġĝǧğģɣĤḤĦIÍÌİÎÏǏĬĪĨĮỊĲĴĶƘĹĻŁĽĿʼNŃN̈ŇÑŅŊÓÒÔÖǑŎŌÕŐỌØǾƠŒĥḥħıíìiîïǐĭīĩįịĳĵķƙĸĺļłľŀŉńn̈ňñņŋóòôöǒŏōõőọøǿơœŔŘŖŚŜŠŞȘṢẞŤŢṬŦÞÚÙÛÜǓŬŪŨŰŮŲỤƯẂẀŴẄǷÝỲŶŸȲỸƳŹŻŽẒŕřŗſśŝšşșṣßťţṭŧþúùûüǔŭūũűůųụưẃẁŵẅƿýỳŷÿȳỹƴźżžẓ\\s-,.\\']+$"))) {
-            throw new SkrbinaException("Prezime nije ispravno! Dozvoljen je unos samo slova.");
-        }
-    }
-    
-    protected void kontrolaRodjendan() throws SkrbinaException {
-        if (entitet.getRodjendan() == null) {
-            throw new SkrbinaException("Datum rođenja ne smije biti prazan!");
+        if (entitet.getPrezime().isEmpty()) {
+            throw new SkrbinaException("Prezime je obvezno, ne smije biti prazno!");
         }
     }
 
     protected void kontrolaOib() throws SkrbinaException {
         if (entitet.getOib() == null) {
-            throw new SkrbinaException ("OIB ne može biti prazan!");
+            throw new SkrbinaException ("OIB ne smije biti prazan!");
 
         } else if (!Oib.isValjan(entitet.getOib())) {
             throw new SkrbinaException("Neispravan unos OIB-a!");
@@ -78,16 +68,6 @@ public abstract class ObradaOsoba<T extends Osoba> extends Obrada<T> {
         }
         if (entitet.getKontakt().length() >= 100) {
             throw new SkrbinaException("Kontakt je predugačak!");
-        }
-    }
-    
-    protected void kontrolUloge() throws SkrbinaException {
-        if (entitet.getUlogaGalerija().isEmpty()) {
-            throw new SkrbinaException("Uloga mora biti postavljena");
-        }
-        if (entitet.getUlogaGalerija().contains("autor") == false || !entitet.getUlogaGalerija().contains("korisnik") == false
-                || entitet.getUlogaGalerija().contains("kustos") == false) {
-            throw new SkrbinaException("Nepoznata uloga. Dozvoljene uloge: \"autor\", \"korisnik\", \"kustos\".");
         }
     }
 }

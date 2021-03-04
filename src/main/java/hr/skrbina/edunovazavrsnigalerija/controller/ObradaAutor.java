@@ -14,7 +14,7 @@ import java.util.List;
  * @author Hrvoje
  */
 public class ObradaAutor extends ObradaOsoba<Autor> {
-
+    
     public ObradaAutor() {
         super();
     }
@@ -22,23 +22,18 @@ public class ObradaAutor extends ObradaOsoba<Autor> {
     @Override
     protected void kontrolaCreate() throws SkrbinaException {
         super.kontrolaCreate();
-        kontrolaIme();
-        kontrolaPrezime();
-        kontrolaRodjendan();
-        kontrolUloge();
+        kontrolaMjestoRodjenja();
     }
 
     @Override
     protected void kontrolaUpdate() throws SkrbinaException {
         super.kontrolaUpdate();
-        kontrolaIme();
-        kontrolaPrezime();
-        kontrolaRodjendan();
-        kontrolUloge();
+        kontrolaMjestoRodjenja();
     }
 
     @Override
     protected void kontrolaDelete() throws SkrbinaException {
+        kontrolaDjela();
     }
 
     @Override
@@ -47,10 +42,27 @@ public class ObradaAutor extends ObradaOsoba<Autor> {
     }
 
     public List<Autor> getPodaci(String uvjet) {
-        return session.createQuery("from Autor a where author(a.ime, ' '  , a.prezime, ' ', a.oib) "
-                + " like :uvjet ")
-                .setParameter("uvjet", "%" + uvjet + "%")
-                .setMaxResults(20)
-                .list();
+        return session.createQuery("from Autor a "
+              + " where concat(a.ime, ' ', a.prezime, ' ', a.oib) "
+              + " like :uvjet ")
+              .setParameter("uvjet", "%"+uvjet+"%")
+              .setMaxResults(20)
+              .list();
     }
+    
+    protected void kontrolaDjela() throws SkrbinaException {
+        if(entitet.getDjela().size() > 0) {
+            throw new SkrbinaException("Autor sa djelima se ne može obrisati!");
+        }
+    }
+    
+    protected void kontrolaMjestoRodjenja() throws SkrbinaException {
+        if(entitet.getMjesto_Rodjenja() == null) {
+            throw new SkrbinaException("Mjesto rođenja je obvezno, ne smije biti prazno!");
+        }
+        if (!entitet.getMjesto_Rodjenja().matches(("^[a-zA-ZÆÐƎƏƐƔĲŊŒẞÞǷȜæðǝəɛɣĳŋœĸſßþƿȝĄƁÇĐƊĘĦĮƘŁØƠŞȘŢȚŦŲƯY̨Ƴąɓçđɗęħįƙłøơşșţțŧųưy̨ƴÁÀÂÄǍĂĀÃÅǺĄÆǼǢƁĆĊĈČÇĎḌĐƊÐÉÈĖÊËĚĔĒĘẸƎƏƐĠĜǦĞĢƔáàâäǎăāãåǻąæǽǣɓćċĉčçďḍđɗðéèėêëěĕēęẹǝəɛġĝǧğģɣĤḤĦIÍÌİÎÏǏĬĪĨĮỊĲĴĶƘĹĻŁĽĿʼNŃN̈ŇÑŅŊÓÒÔÖǑŎŌÕŐỌØǾƠŒĥḥħıíìiîïǐĭīĩįịĳĵķƙĸĺļłľŀŉńn̈ňñņŋóòôöǒŏōõőọøǿơœŔŘŖŚŜŠŞȘṢẞŤŢṬŦÞÚÙÛÜǓŬŪŨŰŮŲỤƯẂẀŴẄǷÝỲŶŸȲỸƳŹŻŽẒŕřŗſśŝšşșṣßťţṭŧþúùûüǔŭūũűůųụưẃẁŵẅƿýỳŷÿȳỹƴźżžẓ\\s-,.\\']+$"))) {
+            throw new SkrbinaException("Prezime nije ispravno! Dozvoljen je unos samo slova.");
+        }
+    }
+
 }

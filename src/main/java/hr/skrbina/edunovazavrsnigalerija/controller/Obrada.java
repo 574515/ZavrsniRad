@@ -19,18 +19,18 @@ public abstract class Obrada<T> {
 
     protected T entitet;
     protected Session session;
-
+    
     public abstract List<T> getPodaci();
-
     protected abstract void kontrolaCreate() throws SkrbinaException;
     protected abstract void kontrolaUpdate() throws SkrbinaException;
     protected abstract void kontrolaDelete() throws SkrbinaException;
+    
 
     public Obrada(T entitet) {
         this();
         this.entitet = entitet;
-    }
-
+    }  
+    
     public Obrada() {
         this.session = HibernateUtil.getSessionFactory().openSession();
     }
@@ -40,7 +40,7 @@ public abstract class Obrada<T> {
         save();
         return entitet;
     }
-
+    
     public T createAll(List<T> lista) throws SkrbinaException {
         session.beginTransaction();
         for (T t : lista) {
@@ -49,6 +49,8 @@ public abstract class Obrada<T> {
             session.save(t);
         }
         session.getTransaction().commit();
+       
+      
         return entitet;
     }
 
@@ -79,4 +81,6 @@ public abstract class Obrada<T> {
     public void setEntitet(T entitet) {
         this.entitet = entitet;
     }
+
+    
 }

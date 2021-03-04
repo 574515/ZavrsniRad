@@ -20,27 +20,21 @@ public class ObradaKorisnik extends ObradaOsoba<Korisnik> {
     @Override
     protected void kontrolaCreate() throws SkrbinaException {
         super.kontrolaCreate();
-        kontrolaIme();
-        kontrolaPrezime();
-        kontrolaRodjendan();
-        kontrolUloge();
+        kontrolaMjestoRodjenja();
     }
 
     @Override
     protected void kontrolaUpdate() throws SkrbinaException {
         super.kontrolaUpdate();
-        kontrolaIme();
-        kontrolaPrezime();
-        kontrolaRodjendan();
-        kontrolUloge();
+        kontrolaMjestoRodjenja();
     }
 
-    @Override
+    /*@Override
     protected void kontrolaDelete() throws SkrbinaException {
         if (entitet.getKup_Djelo().length() > 0 || entitet.getProd_Djelo().length() > 0) {
             throw new SkrbinaException("Korisnik se ne može obrisati jer ima jedno ili više kupljenih / prodanih djela!");
         }
-    }
+    }*/
 
     @Override
     public List<Korisnik> getPodaci() {
@@ -48,10 +42,20 @@ public class ObradaKorisnik extends ObradaOsoba<Korisnik> {
     }
 
     public List<Korisnik> getPodaci(String uvjet) {
-        return session.createQuery("from Korisnik k where user(k.ime, ' ', k.prezime, ' ', k.oib) "
+        return session.createQuery("from Korisnik k where concat(k.ime, ' ', k.prezime, ' ', k.oib) "
                 + " like :uvjet ")
                 .setParameter("uvjet", "%" + uvjet + "%")
                 .setMaxResults(20)
                 .list();
+    }
+    
+    
+    protected void kontrolaMjestoRodjenja() throws SkrbinaException {
+        if(entitet.getMjesto_Rodjenja() == null) {
+            throw new SkrbinaException("Mjesto rođenja je obvezno, ne smije biti prazno!");
+        }
+        if (!entitet.getMjesto_Rodjenja().matches(("^[a-zA-ZÆÐƎƏƐƔĲŊŒẞÞǷȜæðǝəɛɣĳŋœĸſßþƿȝĄƁÇĐƊĘĦĮƘŁØƠŞȘŢȚŦŲƯY̨Ƴąɓçđɗęħįƙłøơşșţțŧųưy̨ƴÁÀÂÄǍĂĀÃÅǺĄÆǼǢƁĆĊĈČÇĎḌĐƊÐÉÈĖÊËĚĔĒĘẸƎƏƐĠĜǦĞĢƔáàâäǎăāãåǻąæǽǣɓćċĉčçďḍđɗðéèėêëěĕēęẹǝəɛġĝǧğģɣĤḤĦIÍÌİÎÏǏĬĪĨĮỊĲĴĶƘĹĻŁĽĿʼNŃN̈ŇÑŅŊÓÒÔÖǑŎŌÕŐỌØǾƠŒĥḥħıíìiîïǐĭīĩįịĳĵķƙĸĺļłľŀŉńn̈ňñņŋóòôöǒŏōõőọøǿơœŔŘŖŚŜŠŞȘṢẞŤŢṬŦÞÚÙÛÜǓŬŪŨŰŮŲỤƯẂẀŴẄǷÝỲŶŸȲỸƳŹŻŽẒŕřŗſśŝšşșṣßťţṭŧþúùûüǔŭūũűůųụưẃẁŵẅƿýỳŷÿȳỹƴźżžẓ\\s-,.\\']+$"))) {
+            throw new SkrbinaException("Prezime nije ispravno! Dozvoljen je unos samo slova.");
+        }
     }
 }

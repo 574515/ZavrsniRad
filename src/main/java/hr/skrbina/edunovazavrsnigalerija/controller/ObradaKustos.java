@@ -21,23 +21,18 @@ public class ObradaKustos extends ObradaOsoba<Kustos> {
     @Override
     protected void kontrolaCreate() throws SkrbinaException {
         super.kontrolaCreate();
-        kontrolaIme();
-        kontrolaPrezime();
-        kontrolaRodjendan();
-        kontrolUloge();
+        kontrolaMjestoRodjenja();
     }
 
     @Override
     protected void kontrolaUpdate() throws SkrbinaException {
         super.kontrolaUpdate();
-        kontrolaIme();
-        kontrolaPrezime();
-        kontrolaRodjendan();
-        kontrolUloge();
+        kontrolaMjestoRodjenja();
     }
 
     @Override
     protected void kontrolaDelete() throws SkrbinaException {
+        kontrolaIzlozba();
     }
 
     @Override
@@ -46,10 +41,25 @@ public class ObradaKustos extends ObradaOsoba<Kustos> {
     }
 
     public List<Kustos> getPodaci(String uvjet) {
-        return session.createQuery("from Kustos k where custos(k.ime, ' ', k.prezime, ' ', k.oib) "
+        return session.createQuery("from Kustos k where concat(k.ime, ' ', k.prezime, ' ', k.oib) "
                 + " like :uvjet ")
                 .setParameter("uvjet", "%" + uvjet + "%")
                 .setMaxResults(20)
                 .list();
+    }
+    
+    private void kontrolaIzlozba() throws SkrbinaException {
+        if(entitet.getIzlozba() != null) {
+            throw new SkrbinaException("Ne može se obrisati kustos sa izložbom!");
+        }
+    }
+    
+    protected void kontrolaMjestoRodjenja() throws SkrbinaException {
+        if(entitet.getMjesto_Rodjenja() == null) {
+            throw new SkrbinaException("Mjesto rođenja je obvezno, ne smije biti prazno!");
+        }
+        if (!entitet.getMjesto_Rodjenja().matches(("^[a-zA-ZÆÐƎƏƐƔĲŊŒẞÞǷȜæðǝəɛɣĳŋœĸſßþƿȝĄƁÇĐƊĘĦĮƘŁØƠŞȘŢȚŦŲƯY̨Ƴąɓçđɗęħįƙłøơşșţțŧųưy̨ƴÁÀÂÄǍĂĀÃÅǺĄÆǼǢƁĆĊĈČÇĎḌĐƊÐÉÈĖÊËĚĔĒĘẸƎƏƐĠĜǦĞĢƔáàâäǎăāãåǻąæǽǣɓćċĉčçďḍđɗðéèėêëěĕēęẹǝəɛġĝǧğģɣĤḤĦIÍÌİÎÏǏĬĪĨĮỊĲĴĶƘĹĻŁĽĿʼNŃN̈ŇÑŅŊÓÒÔÖǑŎŌÕŐỌØǾƠŒĥḥħıíìiîïǐĭīĩįịĳĵķƙĸĺļłľŀŉńn̈ňñņŋóòôöǒŏōõőọøǿơœŔŘŖŚŜŠŞȘṢẞŤŢṬŦÞÚÙÛÜǓŬŪŨŰŮŲỤƯẂẀŴẄǷÝỲŶŸȲỸƳŹŻŽẒŕřŗſśŝšşșṣßťţṭŧþúùûüǔŭūũűůųụưẃẁŵẅƿýỳŷÿȳỹƴźżžẓ\\s-,.\\']+$"))) {
+            throw new SkrbinaException("Prezime nije ispravno! Dozvoljen je unos samo slova.");
+        }
     }
 }
