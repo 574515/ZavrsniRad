@@ -7,6 +7,7 @@ package hr.skrbina.edunovazavrsnigalerija;
 
 import hr.skrbina.edunovazavrsnigalerija.utility.HibernateUtil;
 import hr.skrbina.edunovazavrsnigalerija.utility.PocetniInsert;
+import hr.skrbina.edunovazavrsnigalerija.utility.SkrbinaException;
 import hr.skrbina.edunovazavrsnigalerija.view.SplashScreen;
 
 /**
@@ -15,13 +16,13 @@ import hr.skrbina.edunovazavrsnigalerija.view.SplashScreen;
  */
 public class Start {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SkrbinaException {
         SplashScreen s = new SplashScreen();
         s.setVisible(true);
         s.setLocationRelativeTo(null);
 
         HibernateUtil.getSessionFactory().openSession();
         PocetniInsert.izvedi();
-        PocetniInsert.adminOperater();
+        PocetniInsert.adminOperater();        
     }
 }
