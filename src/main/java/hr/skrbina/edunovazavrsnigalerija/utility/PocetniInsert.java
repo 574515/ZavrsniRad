@@ -41,7 +41,7 @@ public class PocetniInsert {
             oo.create();
         } catch (SkrbinaException ex) {
         }
-        
+
         Autor autor1 = kreirajAutora("Vincent", "van Gogh", "Zundert, Netherlands", "30 March 1853", "vvg@gallery.hr");
         Autor autor2 = kreirajAutora("Pablo", "Picasso", "Malaga, Spain", "25 October 1881", "pp@gallery.hr");
         Autor autor3 = kreirajAutora("Tiziano", "Vecelli / Vecellio", "Pieve di Cadore, Republic of Venice", "c.  1488/1490", "tizi@gallery.hr");
@@ -60,12 +60,33 @@ public class PocetniInsert {
                 + "Saint Lawrence in Palermo. Investigators believe the painting changed hands among the Sicilian Mafia in the decades following the robbery and may "
                 + "still be hidden.", 19818416.19, autor5);
 
-        autor1.setDodajDjela(poppyFlowers);
-        autor2.setDodajDjela(pigeon);
-        autor3.setDodajDjela(dAC);
-        autor4.setDodajDjela(georgeDragon);
-        autor5.setDodajDjela(nativity);
+        /*List<Djelo> djela1 = new ArrayList<>();
+        djela1.add(0, poppyFlowers);
+        autor1.setDjela(djela1);
+
+        List<Djelo> djela2 = new ArrayList<>();
+        djela2.add(0, pigeon);
+        autor2.setDjela(djela2);
+
+        List<Djelo> djela3 = new ArrayList<>();
+        djela3.add(0, dAC);
+        autor3.setDjela(djela3);
+
+        List<Djelo> djela4 = new ArrayList<>();
+        djela4.add(0, georgeDragon);
+        autor4.setDjela(djela4);
+
+        List<Djelo> djela5 = new ArrayList<>();
+        djela5.add(0, nativity);
+        autor5.setDjela(djela5);
         
+        ne razumijem na koji način postaviti da se updatea*/
+
+        autor1.setDjelo(poppyFlowers);
+        autor2.setDjelo(pigeon);
+        autor3.setDjelo(dAC);
+        autor4.setDjelo(georgeDragon);
+        autor5.setDjelo(nativity);
         session.beginTransaction();
         session.save(poppyFlowers);
         session.save(pigeon);
@@ -96,7 +117,7 @@ public class PocetniInsert {
             session.save(korisnik);
             prviKorisnici.add(korisnik);
         }
-        
+
         session.getTransaction().commit();
 
         session.beginTransaction();
