@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 /**
  *
@@ -17,37 +16,15 @@ import javax.persistence.OneToOne;
  */
 @Entity
 public class Korisnik extends Osoba {
-
-    @OneToOne
-    private Transakcija trans;
-
+    
     @OneToMany
-    private final List<Djelo> kup_Djela = new ArrayList<>();
-
-    @OneToMany
-    private final List<Djelo> prod_Djelo = new ArrayList<>();
-
-    public List<Djelo> getKupDjela() {
-        return kup_Djela;
-    }
-        
-    public void setKupDjelo(Djelo djelo) {
-        this.kup_Djela.add(djelo);
-    }
-
-    public void setProdDjelo(Djelo djelo) {
-        this.prod_Djelo.add(djelo);
+    private List<Transakcija> transakcija = new ArrayList<>();
+    
+    public void setTransakcija(List<Transakcija> transakcija) {
+        this.transakcija = transakcija;
     }
     
-    public List<Djelo> getProdDjela() {
-        return prod_Djelo;
-    }
-
-    public Transakcija getTrans() {
-        return trans;
-    }
-
-    public void setTrans(Transakcija trans) {
-        this.trans = trans;
+    public List<Transakcija> getTransakcija() {
+        return transakcija;
     }
 }

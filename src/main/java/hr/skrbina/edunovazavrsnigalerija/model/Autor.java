@@ -19,28 +19,23 @@ import javax.persistence.OneToOne;
 public class Autor extends Osoba {
 
     @OneToMany(mappedBy = "autor")
-    private final List<Djelo> djela = new ArrayList<>();
+    private List<Djelo> djela = new ArrayList<>();
+        @OneToOne(mappedBy = "autor")
+        private Djelo djelo = new Djelo();
     
-    @OneToOne(mappedBy = "autor")
-    private Djelo dj = new Djelo();
-        
     public List<Djelo> getDjela() {
         return djela;
     }
 
-    public void setDjelo(Djelo dj) {
-        this.dj = dj;
+    public void setDjela(List<Djelo> djela) {
+        this.djela = djela;
     }
     
     public Djelo getDjelo() {
-        return dj;
+        return djelo;
     }
     
-    public void setDodajDjela(Djelo djelo) {
-        this.djela.add(djelo);
-    }    
-    
-    public void setMakniDjela(Djelo djelo) {
-        this.djela.remove(djelo);
+    public void setDjelo(Djelo djelo) {
+        this.djelo = djelo;
     }
 }

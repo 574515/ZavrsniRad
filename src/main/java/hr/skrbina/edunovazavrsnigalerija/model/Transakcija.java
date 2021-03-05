@@ -6,6 +6,7 @@
 package hr.skrbina.edunovazavrsnigalerija.model;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -15,9 +16,14 @@ import javax.persistence.Entity;
 public class Transakcija extends Entitet {
     
     private Integer cijena;
-    private String status;
-    private String djelo;
+    private char status;
+    
+    @OneToOne(mappedBy = "transakcija")
+    private Djelo djelo;
 
+    @OneToOne
+    private Korisnik korisnik;
+    
     public Integer getCijena() {
         return cijena;
     }
@@ -26,19 +32,27 @@ public class Transakcija extends Entitet {
         this.cijena = cijena;
     }
 
-    public String getStatus() {
+    public char getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(char status) {
         this.status = status;
     }
-
-    public String getDjelo() {
+    
+    public Djelo getDjelo() {
         return djelo;
     }
-
-    public void setDjelo(String djelo) {
+    
+    public void setDjelo(Djelo djelo) {
         this.djelo = djelo;
-    }    
+    }
+    
+    public Korisnik getKorisnik() {
+        return korisnik;
+    }
+    
+    public void setKorisnik(Korisnik korisnik) {
+        this.korisnik = korisnik;
+    }
 }

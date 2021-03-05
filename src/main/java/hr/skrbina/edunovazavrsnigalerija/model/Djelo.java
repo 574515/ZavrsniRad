@@ -25,7 +25,7 @@ public class Djelo extends Entitet {
     private Autor autor;
     
     @OneToOne
-    private Korisnik korisnik;
+    private Transakcija transakcija;
     
     public String getNaziv() {
         return naziv;
@@ -67,11 +67,11 @@ public class Djelo extends Entitet {
         this.autor = autor;
     }
     
-    public Korisnik getKorisnik() {
-        return korisnik;
+    public Transakcija getTransakcija() {
+        return transakcija;
     }
     
-    public void setKorisnik(Korisnik korisnik) {
-        this.korisnik = korisnik;
+    public void setTransakcija(Transakcija transakcija) {
+        this.transakcija = transakcija;
     }
 }
