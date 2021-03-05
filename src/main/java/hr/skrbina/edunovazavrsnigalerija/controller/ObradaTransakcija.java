@@ -30,23 +30,15 @@ public class ObradaTransakcija extends Obrada<Transakcija>  {
 
     @Override
     protected void kontrolaCreate() throws SkrbinaException {
-        kontrolaDjelo();
+        //kontrolaDjelo();
     }
 
     @Override
     protected void kontrolaUpdate() throws SkrbinaException {
-        kontrolaDjelo();
+        //kontrolaDjelo();
     }
 
     @Override
     protected void kontrolaDelete() throws SkrbinaException {}
     
-    protected void kontrolaDjelo() throws SkrbinaException {
-        if (entitet.getDjelo() == null) {
-            throw new SkrbinaException("Djelo nije definirano!");
-        }
-        if (entitet.getDjelo().isEmpty()) {
-            throw new SkrbinaException("Djelo ne smije biti prazno!");
-        }
-    }
 }
