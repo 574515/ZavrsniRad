@@ -12,7 +12,9 @@ import hr.skrbina.edunovazavrsnigalerija.model.Djelo;
 import hr.skrbina.edunovazavrsnigalerija.utility.SkrbinaException;
 import java.awt.event.ActionEvent;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.ImageIcon;
@@ -27,6 +29,8 @@ public class Djela extends javax.swing.JFrame {
 
     private final ObradaDjelo obrada;
     private Djelo entitet;
+    private final ObradaAutor obradaA;
+    private Autor entitetA;
     private ImageIcon img;
     private final ImageIcon dfltImg = new ImageIcon(getClass().getResource("/default.jpg"));
 
@@ -36,6 +40,7 @@ public class Djela extends javax.swing.JFrame {
     public Djela() {
         initComponents();
         obrada = new ObradaDjelo();
+        obradaA = new ObradaAutor();
         setTitle(Aplikacija.NASLOV_APP + " - Djela");
         ucitajPodatke();
         djelaLst.setCellRenderer(new DjeloCellRenderer());
@@ -44,7 +49,7 @@ public class Djela extends javax.swing.JFrame {
         Timer SimpleTimer = new Timer(1000, (ActionEvent e) -> {
             vrijemeLbl.setText(myTime.format(new Date()));
         });
-        SimpleTimer.start(); 
+        SimpleTimer.start();
         cijena.setToolTipText("Procijenjena cijena u €.");
         opisTxt.setWrapStyleWord(true);
         opisTxt.setLineWrap(true);
@@ -297,6 +302,7 @@ public class Djela extends javax.swing.JFrame {
         postaviVrijednostiUEntitet();
 
         obrada.setEntitet(entitet);
+        
         try {
             obrada.create();
             ucitajPodatke();
@@ -330,7 +336,7 @@ public class Djela extends javax.swing.JFrame {
         }
 
         obrada.setEntitet(entitet);
-
+        
         try {
             obrada.delete();
             ucitajPodatke();
@@ -445,10 +451,10 @@ public class Djela extends javax.swing.JFrame {
 
     private void postaviVrijednostiUEntitet() {
         entitet.setNaziv(nazivTxt.getText());
-        entitet.setAutor((Autor) autorCmb.getSelectedItem());
+        entitet.setAutor((Autor) autorCmb.getSelectedItem());    
         entitet.setDatum(datumTxt.getText());
         entitet.setOpis(opisTxt.getText());
-        entitet.setCijena(Double.parseDouble(cijenaTxt.getText()));
+        entitet.setCijena(Double.parseDouble(cijenaTxt.getText()));        
         obrada.setEntitet(entitet);
     }
 

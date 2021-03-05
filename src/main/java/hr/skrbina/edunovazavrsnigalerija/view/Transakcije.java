@@ -106,6 +106,15 @@ public class Transakcije extends javax.swing.JFrame {
         cijenaPTxt = new javax.swing.JTextField();
         cijenaP = new javax.swing.JLabel();
         xx1 = new javax.swing.JLabel();
+        a1 = new javax.swing.JLabel();
+        a2 = new javax.swing.JLabel();
+        a3 = new javax.swing.JLabel();
+        a4 = new javax.swing.JLabel();
+        a5 = new javax.swing.JLabel();
+        a6 = new javax.swing.JLabel();
+        a7 = new javax.swing.JLabel();
+        a8 = new javax.swing.JLabel();
+        a9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(759, 709));
@@ -475,27 +484,59 @@ public class Transakcije extends javax.swing.JFrame {
 
         xx1.setText("jLabel2");
 
+        a1.setText("jLabel2");
+
+        a2.setText("jLabel2");
+
+        a3.setText("jLabel2");
+
+        a4.setText("jLabel2");
+
+        a5.setText("jLabel2");
+
+        a6.setText("jLabel2");
+
+        a7.setText("jLabel2");
+
+        a8.setText("jLabel2");
+
+        a9.setText("jLabel2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(transakcijaTabs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(45, 45, 45)
-                        .addComponent(xx1))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(transakcijaTabs, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(45, 45, 45)
+                                .addComponent(xx1))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(kupljena))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(prodana)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(kupljena))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(prodana)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(a1)
+                    .addComponent(a9)
+                    .addComponent(a8)
+                    .addComponent(a7)
+                    .addComponent(a6)
+                    .addComponent(a5)
+                    .addComponent(a4)
+                    .addComponent(a3)
+                    .addComponent(a2))
+                .addContainerGap(379, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -511,8 +552,29 @@ public class Transakcije extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(transakcijaTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(transakcijaTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(a1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(a2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(a3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(a4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(a5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(a6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(a7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(a8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(a9))))
         );
 
         pack();
@@ -536,7 +598,7 @@ public class Transakcije extends javax.swing.JFrame {
     }//GEN-LAST:event_povratakKBttnActionPerformed
 
     private void korisniciLstValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_korisniciLstValueChanged
-        try {
+        /*try {
             DefaultListModel<Djelo> m = new DefaultListModel<>();
             new ObradaKorisnik().getEntitet().getKupDjela().forEach(p -> {
                 m.addElement(p);
@@ -551,7 +613,7 @@ public class Transakcije extends javax.swing.JFrame {
             });
         } catch (java.lang.NullPointerException ex) {
             porukaLbl.setText("Korisnik nema pordanih djela!");
-        }
+        }*/
 
     }//GEN-LAST:event_korisniciLstValueChanged
 
@@ -560,18 +622,16 @@ public class Transakcije extends javax.swing.JFrame {
         if (entitetK == null) {
             return;
         }
-        entitetD = djelaLst.getSelectedValue();
-        if (entitetD == null) {
-            return;
-        }
         
-        entitetK = postaviUEntKorisnik(entitetK, entitetD);
+        postaviVrijednostiUEntitet();
 
+        
         try {
             obradaK.update();
             ucitajKorisnike();
+            emptyFields();
         } catch (SkrbinaException e) {
-            porukaLbl.setText(e.getPoruka());
+            xx1.setText(e.getPoruka());
         }
     }//GEN-LAST:event_kupiBttnActionPerformed
 
@@ -679,6 +739,15 @@ public class Transakcije extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel a1;
+    private javax.swing.JLabel a2;
+    private javax.swing.JLabel a3;
+    private javax.swing.JLabel a4;
+    private javax.swing.JLabel a5;
+    private javax.swing.JLabel a6;
+    private javax.swing.JLabel a7;
+    private javax.swing.JLabel a8;
+    private javax.swing.JLabel a9;
     private javax.swing.JLabel autorK;
     private javax.swing.JComboBox<Autor> autorKCmb;
     private javax.swing.JLabel autorP;
@@ -799,7 +868,15 @@ public class Transakcije extends javax.swing.JFrame {
         obradaD.setEntitet(entitetD);
     }
 
-    private Korisnik postaviUEntKorisnik(Korisnik k, Djelo d) {
-        
+    private void postaviVrijednostiUEntitet() {
+        entitetK.setIme(entitetK.getIme());
+        entitetK.setPrezime(entitetK.getPrezime());
+        entitetK.setRodjendan(entitetK.getRodjendan());
+        entitetK.setOib(entitetK.getOib());
+        entitetK.setMjesto_Rodjenja(entitetK.getMjesto_Rodjenja());
+        entitetK.setIBAN(entitetK.getIBAN());
+        entitetK.setKontakt(entitetK.getKontakt());
+        entitetK.setUlogaGalerija("korisnik");
+        obradaK.setEntitet(entitetK);
     }
 }

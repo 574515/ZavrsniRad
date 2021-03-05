@@ -32,11 +32,10 @@ public class Autori extends javax.swing.JFrame {
         initComponents();
         obrada = new ObradaAutor();
         setTitle(Aplikacija.NASLOV_APP + " - Autori");
-        ucitajPodatke();
+        defaultStart();
         autoriLst.setCellRenderer(new OsobaCellRenderer());
         autoriLst.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION); 
         traziTxt.requestFocus();
-        defaultStart();
         SimpleDateFormat myTime = new SimpleDateFormat("HH:mm:ss" + "    " + "dd.MM.YYYY.");
         Timer SimpleTimer = new Timer(1000, (ActionEvent e) -> {
             vrijemeLbl.setText(myTime.format(new Date()));
@@ -443,7 +442,12 @@ public class Autori extends javax.swing.JFrame {
         mrTxt.setText(entitet.getMjesto_Rodjenja());
         ibanTxt.setText(entitet.getIBAN());
         kontaktTxt.setText(entitet.getKontakt());
-        brojDjelaTxt.setText("" + entitet.getDjela().size());
+        if(entitet.getDjela().isEmpty()) {
+            brojDjelaTxt.setText("0");
+        }
+        else {
+            brojDjelaTxt.setText("" + entitet.getDjela().size());
+        }
     }//GEN-LAST:event_autoriLstValueChanged
 
     private void generirajIBANActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generirajIBANActionPerformed
@@ -560,6 +564,7 @@ public class Autori extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void defaultStart() {
+        ucitajPodatke();
         traziTxt.setText("");
         imeTxt.setText("");
         prezimeTxt.setText("");
@@ -581,10 +586,6 @@ public class Autori extends javax.swing.JFrame {
         DefaultListModel<Autor> m = new DefaultListModel<>();
         obrada.getPodaci().forEach(r -> m.addElement(r));
         autoriLst.setModel(m);
-        if (autoriLst.isSelectionEmpty()) {
-            izmijeniBttn.setEnabled(false);
-            obrisiBttn.setEnabled(false);
-        }
     }
 
     private void ucitajZaTrazi() {
